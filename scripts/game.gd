@@ -30,7 +30,7 @@ class TileSetConfig:
 		var tile_id = layer.get_cell_atlas_coords(pos)
 		print("Tile ID at position ", pos, ": ", tile_id)
 		match tile_id:
-			0:
+			Vector2i(-1,-1):
 				return TileType.NONE
 			_:
 				return TileType.GROUND
