@@ -14,7 +14,7 @@ enum TileType{
 	NONE,
 	GROUND
 }
-var _tile_config : TileSetConfig
+var _tc : TileSetConfig
 class TileSetConfig:
 	var width : int
 	var height : int
@@ -58,16 +58,12 @@ class TileSetConfig:
 # Special func
 func _ready() -> void:
 	# setup
-	_tile_config = TileSetConfig.new(tile_size, Vector2i(canvas_width, canvas_height), target_tiles_wide)
-	tiles.scale = _tile_config.pixel_scale * Vector2(1,1)
+	_tc = TileSetConfig.new(tile_size, Vector2i(canvas_width, canvas_height), target_tiles_wide)
+	tiles.scale = _tc.pixel_scale * Vector2(1,1)
 	
-	print(_tile_config.pos_to_pixel(Vector2i(0,0)))
-	print(_tile_config.pixel_to_pos(_tile_config.pos_to_pixel(Vector2i(0,0))))
-	print(_tile_config.pos_to_pixel(Vector2i(5,6)))
-	print(_tile_config.pixel_to_pos(_tile_config.pos_to_pixel(Vector2i(5,6))))
-	for x in range(_tile_config.width):
-		for y in range(_tile_config.height):
-			var tile_type:TileType = _tile_config.get_tile_type(tiles, Vector2i(x,y))
+	for x in range(_tc.width):
+		for y in range(_tc.height):
+			var tile_type:TileType = _tc.get_tile_type(tiles, Vector2i(x,y))
 			if tile_type != TileType.NONE:
 				tiles.set_cell(Vector2i(x,y), 0, Vector2i(12,15))
 				pass
