@@ -5,10 +5,10 @@ enum TileType{
 }
 
 const DIRS := [
-	Vector2i.UP,
-	Vector2i.RIGHT,
 	Vector2i.DOWN,
-	Vector2i.LEFT
+	Vector2i.LEFT,
+	Vector2i.UP,
+	Vector2i.RIGHT
 ]
 
 static func rotate_clockwise(vec: Vector2i) -> Vector2i:

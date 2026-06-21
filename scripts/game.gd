@@ -37,20 +37,18 @@ class Player:
 
 	func _move_internal(move_vec: Vector2i) -> void:
 		if tile_config.get_tile_type(tiles, pos + move_vec) == Utils.TileType.NONE:
-			print("moving ", move_vec, " from position ", pos, " facing ", ground_dir, " to ", pos + move_vec)
 			pos = pos + move_vec
 			if tile_config.get_tile_type(tiles, pos + move_vec) != Utils.TileType.NONE:
-
-				ground_dir = posmod(-Utils.vec2_to_dir(move_vec) + ground_dir, 4)
+				ground_dir = Utils.vec2_to_dir(move_vec)
 
 	func update_graphics() -> void:
 		player_node.position = tile_config.pos_to_pixel(pos)
 		player_node.rotation_degrees = ground_dir * 90
 	func move_left() -> void:
-		var test_dir = posmod(ground_dir - 1, 4)
+		var test_dir = posmod(ground_dir + 1, 4)
 		_move_internal(Utils.dir_to_vec2(test_dir))
 	func move_right() -> void:
-		var test_dir = posmod(ground_dir + 1, 4)
+		var test_dir = posmod(ground_dir - 1, 4)
 		_move_internal(Utils.dir_to_vec2(test_dir))
 
 class PlayerSquare extends Player:
