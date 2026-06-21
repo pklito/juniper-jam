@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cgegfebooxtpk"]
+
+[ext_resource type="Texture2D" uid="uid://cgfmp0mbm6ndg" path="res://assets/triangle_body.png" id="1_h7xi0"]
+[ext_resource type="Script" uid="uid://bngll6a7v7v64" path="res://scripts/triangle.gd" id="1_u1wel"]
+[ext_resource type="Texture2D" uid="uid://dxxxuowllmv4q" path="res://assets/face_c.png" id="2_u1wel"]
+
+[node name="Node2D" type="Node2D" unique_id=349082606]
+script = ExtResource("1_u1wel")
+
+[node name="player2" type="Sprite2D" parent="." unique_id=2130344546]
+position = Vector2(0, 12)
+scale = Vector2(0.24499996, 0.25166667)
+texture = ExtResource("1_h7xi0")
+
+[node name="face" type="Sprite2D" parent="player2" unique_id=92277607]
+texture = ExtResource("2_u1wel")

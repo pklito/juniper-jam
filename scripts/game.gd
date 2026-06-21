@@ -2,6 +2,9 @@ extends Node2D
 
 @export_group("Connections")
 @export var tiles: TileMapLayer
+@export var player_sq: Node2D
+@export var player_tri: Node2D
+
 
 @export_group("Tile configs")
 @export var tile_size: int = 128
@@ -9,7 +12,7 @@ extends Node2D
 @export var canvas_height: int = 648
 @export var target_tiles_wide: int = 18
 
-
+# (0,11), (12, 15)
 enum TileType{
 	NONE,
 	GROUND
@@ -61,13 +64,8 @@ func _ready() -> void:
 	_tc = TileSetConfig.new(tile_size, Vector2i(canvas_width, canvas_height), target_tiles_wide)
 	tiles.scale = _tc.pixel_scale * Vector2(1,1)
 	
-	for x in range(_tc.width):
-		for y in range(_tc.height):
-			var tile_type:TileType = _tc.get_tile_type(tiles, Vector2i(x,y))
-			if tile_type != TileType.NONE:
-				tiles.set_cell(Vector2i(x,y), 0, Vector2i(12,15))
-				pass
-	
+	player_sq.position = _tc.pos_to_pixel(Vector2i(5,3))
+	player_tri.position = _tc.pos_to_pixel(Vector2i(8,5))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

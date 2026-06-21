@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddx8mid7ccic3"
-path="res://.godot/imported/pink_body_circle.png-2bb983d0142b4d71394b221844145a51.ctex"
+uid="uid://cgfmp0mbm6ndg"
+path="res://.godot/imported/triangle_body.png-7b4d92535e48f49bb50323d775630bc6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pink_body_circle.png"
-dest_files=["res://.godot/imported/pink_body_circle.png-2bb983d0142b4d71394b221844145a51.ctex"]
+source_file="res://assets/triangle_body.png"
+dest_files=["res://.godot/imported/triangle_body.png-7b4d92535e48f49bb50323d775630bc6.ctex"]
 
 [params]
 

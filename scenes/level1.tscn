@@ -2,10 +2,15 @@
 
 [ext_resource type="TileSet" uid="uid://bxraeyfwyfb56" path="res://scenes/world.tres" id="1_g2h75"]
 [ext_resource type="Script" uid="uid://dofe8bevlqgme" path="res://scripts/game.gd" id="1_wwpf4"]
+[ext_resource type="Texture2D" uid="uid://b4sb6vvj7kuog" path="res://assets/red_body_square.png" id="3_dwgg1"]
+[ext_resource type="Texture2D" uid="uid://c1t00sitjliu1" path="res://assets/face_h.png" id="4_ru4tf"]
+[ext_resource type="PackedScene" uid="uid://cgegfebooxtpk" path="res://scenes/triangle.tscn" id="5_ru4tf"]
 
-[node name="Node2D" type="Node2D" unique_id=1088653909 node_paths=PackedStringArray("tiles")]
+[node name="Node2D" type="Node2D" unique_id=1088653909 node_paths=PackedStringArray("tiles", "player_sq", "player_tri")]
 script = ExtResource("1_wwpf4")
 tiles = NodePath("TileMapLayer")
+player_sq = NodePath("player")
+player_tri = NodePath("player2")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=805806671]
 scale = Vector2(0.5, 0.5)
@@ -17,3 +22,13 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="player" type="Sprite2D" parent="." unique_id=285054587]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_dwgg1")
+
+[node name="face" type="Sprite2D" parent="player" unique_id=1063157309]
+texture = ExtResource("4_ru4tf")
+
+[node name="player2" parent="." unique_id=2130344546 instance=ExtResource("5_ru4tf")]
+position = Vector2(224, 225)
