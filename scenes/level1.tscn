@@ -11,6 +11,10 @@ script = ExtResource("1_wwpf4")
 tiles = NodePath("TileMapLayer")
 player_sq = NodePath("player")
 player_tri = NodePath("player2")
+tile_size = null
+canvas_width = null
+canvas_height = null
+target_tiles_wide = null
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=805806671]
 scale = Vector2(0.5, 0.5)
