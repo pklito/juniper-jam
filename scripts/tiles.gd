@@ -6,10 +6,6 @@ var tile_pixels : int
 var canvas_size : Vector2i
 var pixel_scale : float
 
-enum TileType{
-	NONE,
-	GROUND
-}
 
 func _init(_tile_pixels:int, _canvas_size:Vector2i, _target_width : int ) -> void:
 	width = _target_width
@@ -19,15 +15,15 @@ func _init(_tile_pixels:int, _canvas_size:Vector2i, _target_width : int ) -> voi
 	pixel_scale = float(_canvas_size.x) / (_target_width * _tile_pixels)
 	height = ceil(canvas_size.y / (pixel_scale * _tile_pixels))
 
-func get_tile_type(layer : TileMapLayer, pos: Vector2i) -> TileType:
+func get_tile_type(layer : TileMapLayer, pos: Vector2i) -> Utils.TileType:
 	var tile_id = layer.get_cell_atlas_coords(pos)
 	# print("Tile ID at position ", pos, ": ", tile_id)
 	# layer.draw_string(ThemeDB.fallback_font, 128*pos,"%d" % tile_id.x)
 	match tile_id:
 		Vector2i(-1,-1):
-			return TileType.NONE
+			return Utils.TileType.NONE
 		_:
-			return TileType.GROUND
+			return Utils.TileType.GROUND
 
 func pos_to_pixel(pos: Vector2i) -> Vector2:
 	return tile_pixels * pixel_scale * (Vector2(0.5 + pos.x,0.5 + pos.y))

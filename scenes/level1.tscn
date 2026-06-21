@@ -6,15 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://c1t00sitjliu1" path="res://assets/face_h.png" id="4_ru4tf"]
 [ext_resource type="PackedScene" uid="uid://cgegfebooxtpk" path="res://scenes/triangle.tscn" id="5_ru4tf"]
 
-[node name="Node2D" type="Node2D" unique_id=1088653909 node_paths=PackedStringArray("tiles", "player_sq", "player_tri")]
+[node name="Node2D" type="Node2D" unique_id=1088653909 node_paths=PackedStringArray("tiles", "player_sq_node", "player_tri_node")]
 script = ExtResource("1_wwpf4")
 tiles = NodePath("TileMapLayer")
-player_sq = NodePath("player")
-player_tri = NodePath("player2")
-tile_size = null
-canvas_width = null
-canvas_height = null
-target_tiles_wide = null
+player_sq_node = NodePath("player")
+player_tri_node = NodePath("player2")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=805806671]
 scale = Vector2(0.5, 0.5)

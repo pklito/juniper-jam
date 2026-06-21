@@ -2,8 +2,8 @@ extends Node2D
 
 @export_group("Connections")
 @export var tiles: TileMapLayer
-@export var player_sq: Node2D
-@export var player_tri: Node2D
+@export var player_sq_node: Node2D
+@export var player_tri_node: Node2D
 
 
 @export_group("Tile configs")
@@ -16,16 +16,68 @@ extends Node2D
 
 var _tc : TileSetConfig
 
+var square : Player
+var triangle : Player
+
+# Players
+
+
+class Player:
+	var pos : Vector2i
+	var ground_dir : int = 0
+	var player_node : Node2D
+	var tile_config : TileSetConfig
+	var tiles : TileMapLayer
+	func _init(_tile_config : TileSetConfig, _tiles : TileMapLayer, _player_node: Node2D, _pos: Vector2i, _ground_dir: int) -> void:
+		pos = _pos
+		ground_dir = _ground_dir
+		player_node = _player_node
+		tile_config = _tile_config
+		tiles = _tiles
+
+	func _move_internal(move_vec: Vector2i) -> void:
+		if tile_config.get_tile_type(tiles, pos + move_vec) == Utils.TileType.NONE:
+			print("moving ", move_vec, " from position ", pos, " facing ", ground_dir, " to ", pos + move_vec)
+			pos = pos + move_vec
+			if tile_config.get_tile_type(tiles, pos + move_vec) != Utils.TileType.NONE:
+
+				ground_dir = posmod(-Utils.vec2_to_dir(move_vec) + ground_dir, 4)
+
+	func update_graphics() -> void:
+		player_node.position = tile_config.pos_to_pixel(pos)
+		player_node.rotation_degrees = ground_dir * 90
+	func move_left() -> void:
+		var test_dir = posmod(ground_dir - 1, 4)
+		_move_internal(Utils.dir_to_vec2(test_dir))
+	func move_right() -> void:
+		var test_dir = posmod(ground_dir + 1, 4)
+		_move_internal(Utils.dir_to_vec2(test_dir))
+
+class PlayerSquare extends Player:
+	pass
+
+class PlayerTriangle extends Player:
+	pass
+
 # Special func
 func _ready() -> void:
 	# setup
 	_tc = TileSetConfig.new(tile_size, Vector2i(canvas_width, canvas_height), target_tiles_wide)
 	tiles.scale = _tc.pixel_scale * Vector2(1,1)
 	
-	player_sq.position = _tc.pos_to_pixel(Vector2i(5,3))
-	player_tri.position = _tc.pos_to_pixel(Vector2i(8,5))
-
-
+	square = PlayerSquare.new(_tc, tiles, player_sq_node, Vector2i(5,3), 0)
+	triangle = PlayerTriangle.new(_tc, tiles, player_tri_node, Vector2i(8,5), 0)
+	
+	square.update_graphics()
+	triangle.update_graphics()
+var time = 0.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	
+	square.update_graphics()
+	triangle.update_graphics()
+	time += delta
+	if time > 1:
+		time = 0
+		square.move_left()
+		# triangle.move_right()
