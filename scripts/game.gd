@@ -1,5 +1,9 @@
 extends Node2D
 
+@export var move_rule : Globals.MoveRules = Globals.MOVE_RULE
+@export var climb_rule : Globals.ClimbRules = Globals.CLIMB_RULE
+@export var allow_corner_turn : bool = Globals.ALLOW_CORNER_TURN
+
 @export_group("Connections")
 @export var tiles: TileMapLayer
 @export var player_sq_node: Node2D
@@ -20,9 +24,19 @@ var _tc : TileSetConfig
 var square : Player
 var triangle : Player
 
+func _update_locals():
+	move_rule = Globals.MOVE_RULE
+	climb_rule = Globals.CLIMB_RULE
+	allow_corner_turn = Globals.ALLOW_CORNER_TURN
+
+# Update globals
+func _update_globals():
+	Globals.MOVE_RULE = move_rule
+	Globals.CLIMB_RULE = climb_rule
+	Globals.ALLOW_CORNER_TURN = allow_corner_turn
+
+
 # Players
-
-
 class Player:
 	var pos : Vector2i
 	var ground_dir : int = 0
@@ -113,6 +127,7 @@ class PlayerTriangle extends Player:
 
 # Special func
 func _ready() -> void:
+	_update_locals()
 	# setup
 	_tc = TileSetConfig.new(tile_size, Vector2i(canvas_width, canvas_height), target_tiles_wide)
 	tiles.scale = _tc.pixel_scale * Vector2(1,1)
@@ -131,6 +146,7 @@ var move_count_sq : int = 0
 var move_count_tri : int = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	_update_globals()
 	time += delta
 	time2 += delta
 	square.update_graphics()
