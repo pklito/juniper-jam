@@ -62,7 +62,7 @@ class Player:
 		return false
 	
 	func _rotate_to_wall(_move_vec : Vector2i) -> bool:
-		if not _pos_open(pos + _move_vec):
+		if _pos_solid_tile(pos + _move_vec):
 			ground_dir = Utils.vec2_to_dir(_move_vec)
 			return true
 		return false
@@ -115,8 +115,8 @@ func _ready() -> void:
 	_tc = TileSetConfig.new(tile_size, Vector2i(canvas_width, canvas_height), target_tiles_wide)
 	tiles.scale = _tc.pixel_scale * Vector2(1,1)
 	
-	square = PlayerSquare.new(_tc, tiles, player_sq_node, Vector2i(5,3), 0)
-	triangle = PlayerTriangle.new(_tc, tiles, player_tri_node, Vector2i(8,5), 0)
+	square = PlayerSquare.new(_tc, tiles, player_sq_node, Vector2i(6,3), 0)
+	triangle = PlayerTriangle.new(_tc, tiles, player_tri_node, Vector2i(7,3), 0)
 	square.link(triangle)
 
 	square.update_graphics()
