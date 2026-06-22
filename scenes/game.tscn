@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://62yfwwiwcwao"]
+
+[ext_resource type="Script" uid="uid://dofe8bevlqgme" path="res://scripts/game.gd" id="1_u5sy4"]
+[ext_resource type="Script" uid="uid://dse7q81xgayki" path="res://scripts/inputs.gd" id="2_gee14"]
+[ext_resource type="Texture2D" uid="uid://b4sb6vvj7kuog" path="res://assets/red_body_square.png" id="3_0tnpc"]
+[ext_resource type="Texture2D" uid="uid://c1t00sitjliu1" path="res://assets/face_h.png" id="4_vtaks"]
+[ext_resource type="Script" uid="uid://bngll6a7v7v64" path="res://scripts/triangle.gd" id="5_kvpfn"]
+[ext_resource type="Texture2D" uid="uid://cgfmp0mbm6ndg" path="res://assets/triangle_body.png" id="6_dinhu"]
+[ext_resource type="Texture2D" uid="uid://dxxxuowllmv4q" path="res://assets/face_c.png" id="7_kvuet"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8w10v"]
+size = Vector2(160, 160)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bbk5w"]
+radius = 82.53787
+
+[node name="Game" type="Node2D" unique_id=1530119459 node_paths=PackedStringArray("tiles", "player_sq_node", "player_tri_node")]
+script = ExtResource("1_u5sy4")
+move_rule = 2
+climb_rule = 1
+tiles = NodePath("")
+player_sq_node = NodePath("pl_square")
+player_tri_node = NodePath("pl_triangle")
+
+[node name="SquareDrag" type="Node2D" parent="." unique_id=503876841]
+script = ExtResource("2_gee14")
+
+[node name="TriangleDrag" type="Node2D" parent="." unique_id=1597085605]
+script = ExtResource("2_gee14")
+
+[node name="pl_square" type="Marker2D" parent="." unique_id=508286169]
+scale = Vector2(0.4, 0.4)
+
+[node name="Area2D" type="Area2D" parent="pl_square" unique_id=1451123115]
+scale = Vector2(0.9999998, 0.9999998)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pl_square/Area2D" unique_id=1689217991]
+position = Vector2(-7.1525556e-06, -7.1525556e-06)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_8w10v")
+
+[node name="base" type="Sprite2D" parent="pl_square" unique_id=1977819106]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("3_0tnpc")
+
+[node name="face" type="Sprite2D" parent="pl_square/base" unique_id=1115629750]
+texture = ExtResource("4_vtaks")
+
+[node name="pl_triangle" type="Marker2D" parent="." unique_id=1896749010]
+position = Vector2(224, 225)
+script = ExtResource("5_kvpfn")
+
+[node name="Area2D" type="Area2D" parent="pl_triangle" unique_id=50127873]
+scale = Vector2(0.39999995, 0.39999995)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pl_triangle/Area2D" unique_id=781941694]
+position = Vector2(-7.1525556e-06, 27.499992)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("CircleShape2D_bbk5w")
+
+[node name="player2" type="Sprite2D" parent="pl_triangle" unique_id=1567448684]
+position = Vector2(0, 12)
+scale = Vector2(0.24499996, 0.25166667)
+texture = ExtResource("6_dinhu")
+
+[node name="face" type="Sprite2D" parent="pl_triangle/player2" unique_id=1376370533]
+texture = ExtResource("7_kvuet")
+
+[connection signal="dragged_successfully" from="SquareDrag" to="." method="_square_dragged"]
+[connection signal="dragged_successfully" from="TriangleDrag" to="." method="_triangle_dragged"]
+[connection signal="input_event" from="pl_square/Area2D" to="SquareDrag" method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="pl_square/Area2D" to="SquareDrag" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="pl_square/Area2D" to="SquareDrag" method="_on_area_2d_mouse_exited"]
+[connection signal="input_event" from="pl_triangle/Area2D" to="TriangleDrag" method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="pl_triangle/Area2D" to="TriangleDrag" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="pl_triangle/Area2D" to="TriangleDrag" method="_on_area_2d_mouse_exited"]

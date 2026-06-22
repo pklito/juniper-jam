@@ -1,8 +1,13 @@
 extends Node2D
-
+@export_group("Rules")
 @export var move_rule : Globals.MoveRules = Globals.MOVE_RULE
 @export var climb_rule : Globals.ClimbRules = Globals.CLIMB_RULE
 @export var allow_corner_turn : bool = Globals.ALLOW_CORNER_TURN
+
+@export_group("Level config")
+@export var square_start_pos : Vector2i = Vector2i(6,4)
+@export var triangle_start_pos : Vector2i = Vector2i(6,5)
+@export var target_tiles_wide: int = 18
 
 @export_group("Connections")
 @export var tiles: TileMapLayer
@@ -13,10 +18,7 @@ extends Node2D
 @export var tile_size: int = 128
 @export var canvas_width: int = 1152
 @export var canvas_height: int = 648
-@export var target_tiles_wide: int = 18
 
-var square_start_pos = Vector2i(6,4)
-var triangle_start_pos = Vector2i(7,4)
 # (0,11), (12, 15)
 
 var _tc : TileSetConfig
