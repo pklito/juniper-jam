@@ -35,11 +35,18 @@ class Player:
 		tile_config = _tile_config
 		tiles = _tiles
 
+	
+	func _pos_open(test_pos: Vector2i) -> bool:
+		return tile_config.get_tile_type(tiles, test_pos) == Utils.TileType.NONE
 	func _move_internal(move_vec: Vector2i) -> void:
-		if tile_config.get_tile_type(tiles, pos + move_vec) == Utils.TileType.NONE:
-			pos = pos + move_vec
-			if tile_config.get_tile_type(tiles, pos + move_vec) != Utils.TileType.NONE:
-				ground_dir = Utils.vec2_to_dir(move_vec)
+		if _pos_open(pos + move_vec):
+			if not _pos_open(pos + move_vec + Utils.dir_to_vec2(ground_dir)):
+				pos = pos + move_vec
+				# TODO: handle double turn
+			else:
+				pos = pos + move_vec + Utils.dir_to_vec2(ground_dir)
+				ground_dir = Utils.vec2_to_dir(-move_vec)# turn around
+				
 
 	func update_graphics() -> void:
 		player_node.position = tile_config.pos_to_pixel(pos)
@@ -52,10 +59,21 @@ class Player:
 		_move_internal(Utils.dir_to_vec2(test_dir))
 
 class PlayerSquare extends Player:
+	func update_rotation(going_left: bool):
+		var move_dir := posmod(ground_dir + 1, 4)
+		if not going_left:
+			move_dir = posmod(ground_dir - 1, 4)
+		var move_vec := Utils.dir_to_vec2(move_dir)
+		# print(move_vec, " ", pos + move_vec, " ", move_dir, " ", _pos_open(pos + move_vec))
+		if not _pos_open(pos + move_vec):
+			ground_dir = move_dir
 	pass
 
 class PlayerTriangle extends Player:
 	pass
+	
+		
+
 
 # Special func
 func _ready() -> void:
@@ -69,13 +87,18 @@ func _ready() -> void:
 	square.update_graphics()
 	triangle.update_graphics()
 var time = 0.0
+var time2 = 0.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
 	square.update_graphics()
 	triangle.update_graphics()
 	time += delta
+	time2 += delta
 	if time > 1:
 		time = 0
-		square.move_left()
+		square.move_right()
 		# triangle.move_right()
+	if time2 > 0.1:
+		time2 = 0
+		square.update_rotation(false)
