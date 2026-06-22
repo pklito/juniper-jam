@@ -61,8 +61,6 @@ class Player:
 			return true
 		return false
 
-	func _post_check(_a : Vector2i):
-		pass			
 
 	func update_graphics() -> void:
 		player_node.position = tile_config.pos_to_pixel(pos)
@@ -70,11 +68,9 @@ class Player:
 	func move_left() -> void:
 		var test_dir = posmod(ground_dir + 1, 4)
 		_move_internal(Utils.dir_to_vec2(test_dir))
-		_post_check(Utils.dir_to_vec2(test_dir))
 	func move_right() -> void:
 		var test_dir = posmod(ground_dir - 1, 4)
 		_move_internal(Utils.dir_to_vec2(test_dir))
-		_post_check(Utils.dir_to_vec2(test_dir))
 
 
 class PlayerSquare extends Player:
@@ -96,6 +92,15 @@ class PlayerTriangle extends Player:
 	func _post_check(_move_vec : Vector2i):
 		if not _pos_open(pos + _move_vec):
 			ground_dir = Utils.vec2_to_dir(_move_vec)
+	
+	func move_left() -> void:
+		var test_dir = posmod(ground_dir + 1, 4)
+		if not _move_internal(Utils.dir_to_vec2(test_dir)):
+			_post_check(Utils.dir_to_vec2(test_dir))
+	func move_right() -> void:
+		var test_dir = posmod(ground_dir - 1, 4)
+		if not _move_internal(Utils.dir_to_vec2(test_dir)):
+			_post_check(Utils.dir_to_vec2(test_dir))
 
 	
 		
