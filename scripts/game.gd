@@ -137,7 +137,6 @@ class PlayerTriangle extends Player:
 			return
 		ground_dir = 0
 		_drop_ground_dir() # recursive drop until we hit a solid tile
-			
 
 	func drop_if_floating():
 		if Globals.CLIMB_RULE == Globals.ClimbRules.FALL_DOWN:
@@ -152,7 +151,7 @@ class PlayerTriangle extends Player:
 
 # Special func
 func _ready() -> void:
-	_update_locals()
+	# _update_locals()
 	# setup
 	_tc = TileSetConfig.new(tile_size, Vector2i(canvas_width, canvas_height), target_tiles_wide)
 	tiles.scale = _tc.pixel_scale * Vector2(1,1)
@@ -169,6 +168,8 @@ var time = 0.0
 var time2 = 0.0
 var move_count_sq : int = 0
 var move_count_tri : int = 0
+var tri_wait_move : bool = false
+var sq_wait_move : bool = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	_update_globals()
@@ -179,28 +180,43 @@ func _physics_process(delta: float) -> void:
 	
 	if time < 0.3:
 		return
+
+	if move_count_sq == 0:
+		tri_wait_move = false
+	if move_count_tri == 0:
+		sq_wait_move = false
+	
+	if sq_wait_move and tri_wait_move:
+		push_error("MUTEX on waits")
+		sq_wait_move = false
+		tri_wait_move = false
 	
 	time = 0
-	if move_count_sq > 0:
+	if move_count_sq > 0 and not sq_wait_move:
 		square.move_right()
 		move_count_sq -= 1
 		triangle.drop_if_floating()
-	elif move_count_sq < 0:
+	elif move_count_sq < 0 and not sq_wait_move:
 		square.move_left()
 		move_count_sq += 1
 		triangle.drop_if_floating()
 	
-	if move_count_tri > 0:
+	if move_count_tri > 0 and not tri_wait_move:
 		triangle.move_right()
 		move_count_tri -= 1
-	elif move_count_tri < 0:
+	elif move_count_tri < 0 and not tri_wait_move:
 		triangle.move_left()
 		move_count_tri += 1
 	
 
 
 func _square_dragged(drag_vector: Vector2) -> void:
+	# Triangle on square rn and rule says lock
 	if Globals.CLIMB_RULE == Globals.ClimbRules.LOCK and triangle.pos + Utils.dir_to_vec2(triangle.ground_dir) == square.pos:
+		return
+
+	# Currently moving
+	if move_count_sq != 0:
 		return
 	
 	var drag_dir = Utils.vec2_to_dir(drag_vector)
@@ -211,12 +227,43 @@ func _square_dragged(drag_vector: Vector2) -> void:
 	if drag_dir == posmod(square.ground_dir + 1, 4):
 		move_count_sq = -4
 
+	if Globals.MOVE_RULE != Globals.MoveRules.FREE_COPY_MOVEMENT and \
+	Globals.MOVE_RULE != Globals.MoveRules.FREE_COPY_MOVEMENT_INVERSE:
+		return
+	var mult : int = 1
+	if Globals.MOVE_RULE == Globals.MoveRules.FREE_COPY_MOVEMENT_INVERSE:
+		mult = -1
+	tri_wait_move = true
+	if drag_dir == posmod(square.ground_dir - 1, 4):
+		move_count_tri = 3 * mult
+	if drag_dir == posmod(square.ground_dir + 1, 4):
+		move_count_tri = -3 * mult
+
 
 func _triangle_dragged(drag_vector: Vector2) -> void:
+	# Currently moving
+	if move_count_tri != 0:
+		return
+
 	var drag_dir = Utils.vec2_to_dir(drag_vector)
 	if triangle.ground_dir == drag_dir or triangle.ground_dir == posmod(drag_dir + 2, 4):
 		return
+
 	if drag_dir == posmod(triangle.ground_dir - 1, 4):
 		move_count_tri = 3
 	if drag_dir == posmod(triangle.ground_dir + 1, 4):
 		move_count_tri = -3
+
+	if Globals.MOVE_RULE != Globals.MoveRules.FREE_COPY_MOVEMENT and \
+	Globals.MOVE_RULE != Globals.MoveRules.FREE_COPY_MOVEMENT_INVERSE:
+		return
+	var mult : int = 1
+	if Globals.MOVE_RULE == Globals.MoveRules.FREE_COPY_MOVEMENT_INVERSE:
+		mult = -1
+	sq_wait_move = true
+	if drag_dir == posmod(triangle.ground_dir - 1, 4):
+		move_count_sq = 4 * mult
+	if drag_dir == posmod(triangle.ground_dir + 1, 4):
+		move_count_sq = -4 * mult
+
+	
