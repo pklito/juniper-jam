@@ -158,21 +158,7 @@ func _physics_process(delta: float) -> void:
 	
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed:
-		# Someones moving rn
-		if move_count != 0:
-			return
-		squares_turn = not squares_turn
+	pass
 
-		#Choose how much
-		var moves = 4
-		if not squares_turn:
-			moves = 3
-
-		# Move and start the move_count
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			move_count = -moves
-			time = 1000
-		elif event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
-			move_count  = moves
-			time = 1000
+func _player_input_dir(drag_vector : Vector2i, player: Node2D):
+	pass

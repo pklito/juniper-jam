@@ -3,8 +3,17 @@
 [ext_resource type="TileSet" uid="uid://bxraeyfwyfb56" path="res://scenes/world.tres" id="1_g2h75"]
 [ext_resource type="Script" uid="uid://dofe8bevlqgme" path="res://scripts/game.gd" id="1_wwpf4"]
 [ext_resource type="Script" uid="uid://dse7q81xgayki" path="res://scripts/inputs.gd" id="2_ru4tf"]
-[ext_resource type="PackedScene" uid="uid://bpk4xqguhtmbi" path="res://scenes/square.tscn" id="4_6sh32"]
-[ext_resource type="PackedScene" uid="uid://cgegfebooxtpk" path="res://scenes/triangle.tscn" id="5_ru4tf"]
+[ext_resource type="Texture2D" uid="uid://b4sb6vvj7kuog" path="res://assets/red_body_square.png" id="3_dwgg1"]
+[ext_resource type="Texture2D" uid="uid://c1t00sitjliu1" path="res://assets/face_h.png" id="4_ru4tf"]
+[ext_resource type="Script" uid="uid://bngll6a7v7v64" path="res://scripts/triangle.gd" id="6_bbk5w"]
+[ext_resource type="Texture2D" uid="uid://cgfmp0mbm6ndg" path="res://assets/triangle_body.png" id="7_conm7"]
+[ext_resource type="Texture2D" uid="uid://dxxxuowllmv4q" path="res://assets/face_c.png" id="8_d3jkd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8w10v"]
+size = Vector2(160, 160)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bbk5w"]
+radius = 82.53787
 
 [node name="Game" type="Node2D" unique_id=1088653909 node_paths=PackedStringArray("tiles", "player_sq_node", "player_tri_node")]
 script = ExtResource("1_wwpf4")
@@ -12,10 +21,11 @@ tiles = NodePath("TileMapLayer")
 player_sq_node = NodePath("pl_square")
 player_tri_node = NodePath("pl_triangle")
 
-[node name="Inputs" type="Node2D" parent="." unique_id=1975578509 node_paths=PackedStringArray("player_sq_node", "player_tri_node")]
+[node name="SquareDrag" type="Node2D" parent="." unique_id=1975578509]
 script = ExtResource("2_ru4tf")
-player_sq_node = NodePath("../pl_square")
-player_tri_node = NodePath("../pl_triangle")
+
+[node name="TriangleDrag" type="Node2D" parent="." unique_id=1828772683]
+script = ExtResource("2_ru4tf")
 
 [node name="cosmetics" type="TileMapLayer" parent="." unique_id=1005286185]
 self_modulate = Color(0.66218436, 0.5407247, 0.6722941, 1)
@@ -34,7 +44,47 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="pl_square" parent="." unique_id=157458765 instance=ExtResource("4_6sh32")]
+[node name="pl_square" type="Marker2D" parent="." unique_id=1539927054]
+scale = Vector2(0.4, 0.4)
 
-[node name="pl_triangle" parent="." unique_id=2130344546 instance=ExtResource("5_ru4tf")]
+[node name="Area2D" type="Area2D" parent="pl_square" unique_id=1765147555]
+scale = Vector2(0.9999998, 0.9999998)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pl_square/Area2D" unique_id=571363252]
+position = Vector2(-7.1525556e-06, -7.1525556e-06)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_8w10v")
+
+[node name="base" type="Sprite2D" parent="pl_square" unique_id=157458765]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("3_dwgg1")
+
+[node name="face" type="Sprite2D" parent="pl_square/base" unique_id=1184386898]
+texture = ExtResource("4_ru4tf")
+
+[node name="pl_triangle" type="Marker2D" parent="." unique_id=1164348643]
 position = Vector2(224, 225)
+script = ExtResource("6_bbk5w")
+
+[node name="Area2D" type="Area2D" parent="pl_triangle" unique_id=606890505]
+scale = Vector2(0.39999995, 0.39999995)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pl_triangle/Area2D" unique_id=1080786639]
+position = Vector2(-7.1525556e-06, 27.499992)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("CircleShape2D_bbk5w")
+
+[node name="player2" type="Sprite2D" parent="pl_triangle" unique_id=2130344546]
+position = Vector2(0, 12)
+scale = Vector2(0.24499996, 0.25166667)
+texture = ExtResource("7_conm7")
+
+[node name="face" type="Sprite2D" parent="pl_triangle/player2" unique_id=92277607]
+texture = ExtResource("8_d3jkd")
+
+[connection signal="input_event" from="pl_square/Area2D" to="SquareDrag" method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="pl_square/Area2D" to="SquareDrag" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="pl_square/Area2D" to="SquareDrag" method="_on_area_2d_mouse_exited"]
+[connection signal="input_event" from="pl_triangle/Area2D" to="TriangleDrag" method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="pl_triangle/Area2D" to="TriangleDrag" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="pl_triangle/Area2D" to="TriangleDrag" method="_on_area_2d_mouse_exited"]
