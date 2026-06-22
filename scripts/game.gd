@@ -11,6 +11,8 @@ extends Node2D
 @export var canvas_height: int = 648
 @export var target_tiles_wide: int = 18
 
+var square_start_pos = Vector2i(6,4)
+var triangle_start_pos = Vector2i(7,4)
 # (0,11), (12, 15)
 
 var _tc : TileSetConfig
@@ -115,8 +117,8 @@ func _ready() -> void:
 	_tc = TileSetConfig.new(tile_size, Vector2i(canvas_width, canvas_height), target_tiles_wide)
 	tiles.scale = _tc.pixel_scale * Vector2(1,1)
 	
-	square = PlayerSquare.new(_tc, tiles, player_sq_node, Vector2i(6,3), 0)
-	triangle = PlayerTriangle.new(_tc, tiles, player_tri_node, Vector2i(7,3), 0)
+	square = PlayerSquare.new(_tc, tiles, player_sq_node, square_start_pos, 0)
+	triangle = PlayerTriangle.new(_tc, tiles, player_tri_node, triangle_start_pos, 0)
 	square.link(triangle)
 
 	square.update_graphics()
