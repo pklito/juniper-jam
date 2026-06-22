@@ -50,7 +50,6 @@ class Player:
 		if _pos_open(pos + move_vec):
 			if _pos_solid_tile(pos + move_vec + Utils.dir_to_vec2(ground_dir)):
 				pos = pos + move_vec
-				# TODO: handle double turn
 			else:
 				pos = pos + move_vec + Utils.dir_to_vec2(ground_dir)
 				ground_dir = Utils.vec2_to_dir(-move_vec)# turn around
@@ -108,17 +107,24 @@ func _ready() -> void:
 	triangle.update_graphics()
 var time = 0.0
 var time2 = 0.0
+var move_count : int = 4
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	
 	square.update_graphics()
 	triangle.update_graphics()
 	time += delta
 	time2 += delta
-	if time > 1:
+	if time > 0.3:
 		time = 0
-		square.move_left()
-		triangle.move_right()
+		if move_count <= -3:
+			move_count = 4
+		move_count -= 1
+
+		if move_count >= 0:
+			square.move_left()
+		else:
+			triangle.move_right()
 	if time2 > 0.1:
 		time2 = 0
 		square.update_rotation(true)
