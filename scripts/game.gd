@@ -59,13 +59,13 @@ class Player:
 		# Corner turn
 		if _pos_open(pos + move_vec + Utils.dir_to_vec2(ground_dir)) and Globals.ALLOW_CORNER_TURN:
 			pos = pos + move_vec + Utils.dir_to_vec2(ground_dir)
-			ground_dir = Utils.vec2_to_dir(-move_vec)# turn around
+			ground_dir = Utils.vec2i_to_dir(-move_vec)# turn around
 			return true
 		return false
 	
 	func _rotate_to_wall(_move_vec : Vector2i) -> bool:
 		if _pos_solid_tile(pos + _move_vec):
-			ground_dir = Utils.vec2_to_dir(_move_vec)
+			ground_dir = Utils.vec2i_to_dir(_move_vec)
 			return true
 		return false
 
@@ -127,38 +127,50 @@ func _ready() -> void:
 
 var time = 0.0
 var time2 = 0.0
-var move_count : int = 0
-var squares_turn : bool = false
+var move_count_sq : int = 0
+var move_count_tri : int = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	time += delta
 	time2 += delta
 	square.update_graphics()
 	triangle.update_graphics()
-
-	if move_count == 0:
-		return
 	
-	var moving_player := square
-	var move_time := 0.3
-	if not squares_turn:
-		moving_player = triangle
-		move_time = 0.2
-
-	if time < move_time:
+	if time < 0.3:
 		return
 	
 	time = 0
-	if move_count > 0:
-		moving_player.move_right()
-		move_count -= 1
-	else:
-		moving_player.move_left()
-		move_count += 1
+	if move_count_sq > 0:
+		square.move_right()
+		move_count_sq -= 1
+	elif move_count_sq < 0:
+		square.move_left()
+		move_count_sq += 1
+	
+	if move_count_tri > 0:
+		triangle.move_right()
+		move_count_tri -= 1
+	elif move_count_tri < 0:
+		triangle.move_left()
+		move_count_tri += 1
 	
 
-func _input(event: InputEvent) -> void:
-	pass
 
-func _player_input_dir(drag_vector : Vector2i, player: Node2D):
-	pass
+func _square_dragged(drag_vector: Vector2) -> void:
+	var drag_dir = Utils.vec2_to_dir(drag_vector)
+	if square.ground_dir == drag_dir or square.ground_dir == posmod(drag_dir + 2, 4):
+		return
+	if drag_dir == posmod(square.ground_dir - 1, 4):
+		move_count_sq = 4
+	if drag_dir == posmod(square.ground_dir + 1, 4):
+		move_count_sq = -4
+
+
+func _triangle_dragged(drag_vector: Vector2) -> void:
+	var drag_dir = Utils.vec2_to_dir(drag_vector)
+	if triangle.ground_dir == drag_dir or triangle.ground_dir == posmod(drag_dir + 2, 4):
+		return
+	if drag_dir == posmod(triangle.ground_dir - 1, 4):
+		move_count_tri = 3
+	if drag_dir == posmod(triangle.ground_dir + 1, 4):
+		move_count_tri = -3
