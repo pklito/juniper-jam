@@ -17,6 +17,8 @@ radius = 82.53787
 
 [node name="Game" type="Node2D" unique_id=1088653909 node_paths=PackedStringArray("tiles", "player_sq_node", "player_tri_node")]
 script = ExtResource("1_wwpf4")
+move_rule = 0
+climb_rule = 2
 tiles = NodePath("TileMapLayer")
 player_sq_node = NodePath("pl_square")
 player_tri_node = NodePath("pl_triangle")

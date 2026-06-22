@@ -121,6 +121,31 @@ class PlayerTriangle extends Player:
 		if not _move_internal(Utils.dir_to_vec2(test_dir)):
 			_rotate_to_wall(Utils.dir_to_vec2(test_dir))
 
+	func _drop_ground_dir(loop: int = 20):
+		if loop <= 0:
+			push_error("drop_if_floating: too many recursions")
+			return
+		var test_pos = pos + Utils.dir_to_vec2(ground_dir)
+		if not _pos_solid_tile(test_pos):
+			pos = test_pos
+			_drop_ground_dir(loop - 1) # recursive drop until we hit a solid tile
+
+	func _drop_down():
+		var test_pos = pos + Utils.dir_to_vec2(ground_dir)
+		print("drop down test pos: ", _pos_solid_tile(test_pos))
+		if _pos_solid_tile(test_pos):
+			return
+		ground_dir = 0
+		_drop_ground_dir() # recursive drop until we hit a solid tile
+			
+
+	func drop_if_floating():
+		if Globals.CLIMB_RULE == Globals.ClimbRules.FALL_DOWN:
+			_drop_down()
+		if Globals.CLIMB_RULE == Globals.ClimbRules.FALL_GROUND_DIR:
+			_drop_ground_dir()
+		
+
 	
 		
 
@@ -159,9 +184,11 @@ func _physics_process(delta: float) -> void:
 	if move_count_sq > 0:
 		square.move_right()
 		move_count_sq -= 1
+		triangle.drop_if_floating()
 	elif move_count_sq < 0:
 		square.move_left()
 		move_count_sq += 1
+		triangle.drop_if_floating()
 	
 	if move_count_tri > 0:
 		triangle.move_right()
@@ -173,6 +200,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _square_dragged(drag_vector: Vector2) -> void:
+	if Globals.CLIMB_RULE == Globals.ClimbRules.LOCK and triangle.pos + Utils.dir_to_vec2(triangle.ground_dir) == square.pos:
+		return
+	
 	var drag_dir = Utils.vec2_to_dir(drag_vector)
 	if square.ground_dir == drag_dir or square.ground_dir == posmod(drag_dir + 2, 4):
 		return
