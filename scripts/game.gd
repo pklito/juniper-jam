@@ -5,7 +5,6 @@ extends Node2D
 @export var player_sq_node: Node2D
 @export var player_tri_node: Node2D
 
-
 @export_group("Tile configs")
 @export var tile_size: int = 128
 @export var canvas_width: int = 1152
@@ -46,13 +45,21 @@ class Player:
 	func _pos_open(test_pos: Vector2i) -> bool:
 		return not _pos_solid_tile(test_pos) and other_player.pos != test_pos
 
-	func _move_internal(move_vec: Vector2i) -> void:
-		if _pos_open(pos + move_vec):
-			if _pos_solid_tile(pos + move_vec + Utils.dir_to_vec2(ground_dir)):
-				pos = pos + move_vec
-			else:
-				pos = pos + move_vec + Utils.dir_to_vec2(ground_dir)
-				ground_dir = Utils.vec2_to_dir(-move_vec)# turn around
+	func _move_internal(move_vec: Vector2i) -> bool:
+		# spot on the left is open
+		if not _pos_open(pos + move_vec):
+			return false
+
+		# Walk left
+		if _pos_solid_tile(pos + move_vec + Utils.dir_to_vec2(ground_dir)):
+			pos = pos + move_vec
+			return true
+		# Corner turn
+		if _pos_open(pos + move_vec + Utils.dir_to_vec2(ground_dir)) and Globals.ALLOW_CORNER_TURN:
+			pos = pos + move_vec + Utils.dir_to_vec2(ground_dir)
+			ground_dir = Utils.vec2_to_dir(-move_vec)# turn around
+			return true
+		return false
 
 	func _post_check(_a : Vector2i):
 		pass			
@@ -68,6 +75,7 @@ class Player:
 		var test_dir = posmod(ground_dir - 1, 4)
 		_move_internal(Utils.dir_to_vec2(test_dir))
 		_post_check(Utils.dir_to_vec2(test_dir))
+
 
 class PlayerSquare extends Player:
 	func update_rotation(going_left: bool):
@@ -105,6 +113,8 @@ func _ready() -> void:
 
 	square.update_graphics()
 	triangle.update_graphics()
+
+
 var time = 0.0
 var time2 = 0.0
 var move_count : int = 4
