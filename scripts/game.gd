@@ -60,6 +60,12 @@ class Player:
 			ground_dir = Utils.vec2_to_dir(-move_vec)# turn around
 			return true
 		return false
+	
+	func _rotate_to_wall(_move_vec : Vector2i) -> bool:
+		if not _pos_open(pos + _move_vec):
+			ground_dir = Utils.vec2_to_dir(_move_vec)
+			return true
+		return false
 
 
 	func update_graphics() -> void:
@@ -74,33 +80,30 @@ class Player:
 
 
 class PlayerSquare extends Player:
-	func update_rotation(going_left: bool):
-		var move_dir := posmod(ground_dir + 1, 4)
-		if not going_left:
-			move_dir = posmod(ground_dir - 1, 4)
-		var move_vec := Utils.dir_to_vec2(move_dir)
-		# print(move_vec, " ", pos + move_vec, " ", move_dir, " ", _pos_open(pos + move_vec))
-		if _pos_solid_tile(pos + move_vec):
-			ground_dir = move_dir
-	pass
+	func move_left() -> void:
+		_rotate_to_wall(Utils.dir_to_vec2(posmod(ground_dir + 1, 4)))
+		_move_internal(Utils.dir_to_vec2(posmod(ground_dir + 1, 4)))
+		_rotate_to_wall(Utils.dir_to_vec2(posmod(ground_dir + 1, 4)))
+
+	func move_right() -> void:
+		_rotate_to_wall(Utils.dir_to_vec2(posmod(ground_dir - 1, 4)))
+		_move_internal(Utils.dir_to_vec2(posmod(ground_dir - 1, 4)))
+		_rotate_to_wall(Utils.dir_to_vec2(posmod(ground_dir - 1, 4)))
+
 
 
 class PlayerTriangle extends Player:
 	func _pos_solid_tile(test_pos: Vector2i) -> bool:
 		return super._pos_solid_tile(test_pos) or other_player.pos == test_pos
-
-	func _post_check(_move_vec : Vector2i):
-		if not _pos_open(pos + _move_vec):
-			ground_dir = Utils.vec2_to_dir(_move_vec)
 	
 	func move_left() -> void:
 		var test_dir = posmod(ground_dir + 1, 4)
 		if not _move_internal(Utils.dir_to_vec2(test_dir)):
-			_post_check(Utils.dir_to_vec2(test_dir))
+			_rotate_to_wall(Utils.dir_to_vec2(test_dir))
 	func move_right() -> void:
 		var test_dir = posmod(ground_dir - 1, 4)
 		if not _move_internal(Utils.dir_to_vec2(test_dir)):
-			_post_check(Utils.dir_to_vec2(test_dir))
+			_rotate_to_wall(Utils.dir_to_vec2(test_dir))
 
 	
 		
@@ -122,24 +125,52 @@ func _ready() -> void:
 
 var time = 0.0
 var time2 = 0.0
-var move_count : int = 4
+var move_count : int = 0
+var squares_turn : bool = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	
-	square.update_graphics()
-	triangle.update_graphics()
 	time += delta
 	time2 += delta
-	if time > 0.3:
-		time = 0
-		if move_count <= -3:
-			move_count = 4
-		move_count -= 1
+	square.update_graphics()
+	triangle.update_graphics()
 
-		if move_count >= 0:
-			square.move_left()
-		else:
-			triangle.move_right()
-	if time2 > 0.1:
-		time2 = 0
-		square.update_rotation(true)
+	if move_count == 0:
+		return
+	
+	var moving_player := square
+	var move_time := 0.3
+	if not squares_turn:
+		moving_player = triangle
+		move_time = 0.2
+
+	if time < move_time:
+		return
+	
+	time = 0
+	if move_count > 0:
+		moving_player.move_right()
+		move_count -= 1
+	else:
+		moving_player.move_left()
+		move_count += 1
+	
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		# Someones moving rn
+		if move_count != 0:
+			return
+		squares_turn = not squares_turn
+
+		#Choose how much
+		var moves = 4
+		if not squares_turn:
+			moves = 3
+
+		# Move and start the move_count
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			move_count = -moves
+			time = 1000
+		elif event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+			move_count  = moves
+			time = 1000
