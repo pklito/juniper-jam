@@ -11,6 +11,13 @@ const DIRS := [
 	Vector2i.RIGHT
 ]
 
+enum Dirs{
+	DOWN,
+	LEFT,
+	UP,
+	RIGHT
+}
+
 static func rotate_clockwise(vec: Vector2i) -> Vector2i:
 	return Vector2i(vec.y, -vec.x)
 

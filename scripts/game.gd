@@ -7,7 +7,10 @@ class_name Game
 
 @export_group("Level config")
 @export var square_start_pos : Vector2i = Vector2i(6,4)
+@export var square_start_dir : Utils.Dirs = Utils.Dirs.DOWN
+
 @export var triangle_start_pos : Vector2i = Vector2i(7,4)
+@export var triangle_start_dir : Utils.Dirs = Utils.Dirs.DOWN
 @export var target_tiles_wide: int = 18
 
 @export_group("Connections")
