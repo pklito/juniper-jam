@@ -14,11 +14,10 @@ size = Vector2(160, 160)
 [sub_resource type="CircleShape2D" id="CircleShape2D_bbk5w"]
 radius = 82.53787
 
-[node name="Game" type="Node2D" unique_id=1530119459 node_paths=PackedStringArray("tiles", "player_sq_node", "player_tri_node")]
+[node name="Game" type="Node2D" unique_id=1530119459 node_paths=PackedStringArray("player_sq_node", "player_tri_node")]
 script = ExtResource("1_u5sy4")
 move_rule = 2
 climb_rule = 1
-tiles = NodePath("")
 player_sq_node = NodePath("pl_square")
 player_tri_node = NodePath("pl_triangle")
 
@@ -29,10 +28,9 @@ script = ExtResource("2_gee14")
 script = ExtResource("2_gee14")
 
 [node name="pl_square" type="Marker2D" parent="." unique_id=508286169]
-scale = Vector2(0.4, 0.4)
 
 [node name="Area2D" type="Area2D" parent="pl_square" unique_id=1451123115]
-scale = Vector2(0.9999998, 0.9999998)
+scale = Vector2(0.8, 0.8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pl_square/Area2D" unique_id=1689217991]
 position = Vector2(-7.1525556e-06, -7.1525556e-06)
@@ -40,7 +38,7 @@ scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_8w10v")
 
 [node name="base" type="Sprite2D" parent="pl_square" unique_id=1977819106]
-scale = Vector2(0.99999994, 0.99999994)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_0tnpc")
 
 [node name="face" type="Sprite2D" parent="pl_square/base" unique_id=1115629750]
@@ -51,7 +49,7 @@ position = Vector2(224, 225)
 script = ExtResource("5_kvpfn")
 
 [node name="Area2D" type="Area2D" parent="pl_triangle" unique_id=50127873]
-scale = Vector2(0.39999995, 0.39999995)
+scale = Vector2(0.4, 0.4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pl_triangle/Area2D" unique_id=781941694]
 position = Vector2(-7.1525556e-06, 27.499992)
@@ -60,7 +58,7 @@ shape = SubResource("CircleShape2D_bbk5w")
 
 [node name="player2" type="Sprite2D" parent="pl_triangle" unique_id=1567448684]
 position = Vector2(0, 12)
-scale = Vector2(0.24499996, 0.25166667)
+scale = Vector2(0.243, 0.25)
 texture = ExtResource("6_dinhu")
 
 [node name="face" type="Sprite2D" parent="pl_triangle/player2" unique_id=1376370533]

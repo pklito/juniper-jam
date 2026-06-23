@@ -1,4 +1,5 @@
 extends Node2D
+class_name Game
 @export_group("Rules")
 @export var move_rule : Globals.MoveRules = Globals.MOVE_RULE
 @export var climb_rule : Globals.ClimbRules = Globals.CLIMB_RULE
@@ -13,6 +14,7 @@ extends Node2D
 @export var tiles: TileMapLayer
 @export var player_sq_node: Node2D
 @export var player_tri_node: Node2D
+@export var need_scaling: Array[Node2D]
 
 @export_group("Tile configs")
 @export var tile_size: int = 128
@@ -133,7 +135,6 @@ class PlayerTriangle extends Player:
 
 	func _drop_down():
 		var test_pos = pos + Utils.dir_to_vec2(ground_dir)
-		print("drop down test pos: ", _pos_solid_tile(test_pos))
 		if _pos_solid_tile(test_pos):
 			return
 		ground_dir = 0
@@ -151,6 +152,11 @@ func _ready() -> void:
 	# setup
 	_tc = TileSetConfig.new(tile_size, Vector2i(canvas_width, canvas_height), target_tiles_wide)
 	tiles.scale = _tc.pixel_scale * Vector2(1,1)
+	player_sq_node.scale = _tc.pixel_scale * Vector2(1,1)
+	player_tri_node.scale = 2 * _tc.pixel_scale * Vector2(1,1)
+
+	for node in need_scaling:
+		node.scale = _tc.pixel_scale * Vector2(1,1)
 	
 	square = PlayerSquare.new(_tc, tiles, player_sq_node, square_start_pos, 0)
 	triangle = PlayerTriangle.new(_tc, tiles, player_tri_node, triangle_start_pos, 0)
