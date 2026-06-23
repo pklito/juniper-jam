@@ -6,7 +6,7 @@ extends Node2D
 
 @export_group("Level config")
 @export var square_start_pos : Vector2i = Vector2i(6,4)
-@export var triangle_start_pos : Vector2i = Vector2i(6,5)
+@export var triangle_start_pos : Vector2i = Vector2i(7,4)
 @export var target_tiles_wide: int = 18
 
 @export_group("Connections")
@@ -36,7 +36,6 @@ func _update_globals():
 	Globals.MOVE_RULE = move_rule
 	Globals.CLIMB_RULE = climb_rule
 	Globals.ALLOW_CORNER_TURN = allow_corner_turn
-
 
 # Players
 class Player:
@@ -145,12 +144,7 @@ class PlayerTriangle extends Player:
 			_drop_down()
 		if Globals.CLIMB_RULE == Globals.ClimbRules.FALL_GROUND_DIR:
 			_drop_ground_dir()
-		
-
 	
-		
-
-
 # Special func
 func _ready() -> void:
 	# _update_locals()

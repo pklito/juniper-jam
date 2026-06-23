@@ -6,13 +6,15 @@ var tile_pixels : int
 var canvas_size : Vector2i
 var pixel_scale : float
 
+static func calculate_pixel_scale(_tile_pixels:int, _canvas_size:Vector2i, _target_width : int ) -> float:
+	return float(_canvas_size.x) / (_target_width * _tile_pixels)
 
 func _init(_tile_pixels:int, _canvas_size:Vector2i, _target_width : int ) -> void:
 	width = _target_width
 	tile_pixels = _tile_pixels
 	canvas_size = _canvas_size
 	# How much are the tiles are scaled up
-	pixel_scale = float(_canvas_size.x) / (_target_width * _tile_pixels)
+	pixel_scale = calculate_pixel_scale(_tile_pixels, _canvas_size, _target_width)
 	height = ceil(canvas_size.y / (pixel_scale * _tile_pixels))
 
 func get_tile_type(layer : TileMapLayer, pos: Vector2i) -> Utils.TileType:
