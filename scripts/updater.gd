@@ -25,6 +25,14 @@ func _on_button_pressed():
 	game.player_sq_node.scale = _tc.pixel_scale * Vector2(1,1)
 	game.player_tri_node.scale = 2 * _tc.pixel_scale * Vector2(1,1)
 	
+	#var array := []
+	#for a in tiles.get_used_cells():
+		#var res = tiles.get_cell_atlas_coords(a)
+		#array.append(res)
+	#
+	#print(array)
+	
+	
 	for node in game.need_scaling:
 		if node:
 			node.scale = _tc.pixel_scale * Vector2(1,1)

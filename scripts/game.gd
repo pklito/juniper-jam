@@ -62,10 +62,11 @@ class Player:
 		_other_player.other_player = self
 
 	func _pos_solid_tile(test_pos: Vector2i) -> bool:
-		return tile_config.get_tile_type(tiles, test_pos) != Utils.TileType.NONE
+		return tile_config.get_tile_type(tiles, test_pos) == Utils.TileType.GROUND
 	
 	func _pos_open(test_pos: Vector2i) -> bool:
-		return not _pos_solid_tile(test_pos) and other_player.pos != test_pos
+		return tile_config.get_tile_type(tiles, test_pos) == Utils.TileType.NONE \
+		 and other_player.pos != test_pos
 
 	func _move_internal(move_vec: Vector2i) -> bool:
 		# spot on the left is open
@@ -161,8 +162,8 @@ func _ready() -> void:
 	for node in need_scaling:
 		node.scale = _tc.pixel_scale * Vector2(1,1)
 	
-	square = PlayerSquare.new(_tc, tiles, player_sq_node, square_start_pos, 0)
-	triangle = PlayerTriangle.new(_tc, tiles, player_tri_node, triangle_start_pos, 0)
+	square = PlayerSquare.new(_tc, tiles, player_sq_node, square_start_pos, square_start_dir)
+	triangle = PlayerTriangle.new(_tc, tiles, player_tri_node, triangle_start_pos, triangle_start_dir)
 	square.link(triangle)
 
 	square.update_graphics()

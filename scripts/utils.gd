@@ -1,7 +1,8 @@
 class_name Utils
 enum TileType{
 	NONE,
-	GROUND
+	GROUND,
+	OBSTACLE
 }
 
 const DIRS := [

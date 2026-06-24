@@ -21,11 +21,16 @@ func get_tile_type(layer : TileMapLayer, pos: Vector2i) -> Utils.TileType:
 	var tile_id = layer.get_cell_atlas_coords(pos)
 	# print("Tile ID at position ", pos, ": ", tile_id)
 	# layer.draw_string(ThemeDB.fallback_font, 128*pos,"%d" % tile_id.x)
-	match tile_id:
-		Vector2i(-1,-1):
-			return Utils.TileType.NONE
-		_:
-			return Utils.TileType.GROUND
+	var slanted_floors := [[0, 9], [0, 15], [1, 15], [2, 12], [4, 15], [6, 10], [7, 10], [8, 13], [9, 13], [10, 10], [10, 16], [11, 16], [12, 13], [14, 16], [14, 8], [15, 8], [16, 11], [17, 11]]
+	for fl in slanted_floors:
+		if tile_id.x == fl[0] and tile_id.y == fl[1]:
+			return Utils.TileType.OBSTACLE
+	if tile_id == Vector2i(-1,-1):
+		return Utils.TileType.NONE
+	elif range(8,16).has(tile_id.y) or (tile_id.x >= 12 and tile_id.y == 7):
+		return Utils.TileType.GROUND
+	else:
+		return Utils.TileType.OBSTACLE
 
 func pos_to_pixel(pos: Vector2i) -> Vector2:
 	return tile_pixels * pixel_scale * (Vector2(0.5 + pos.x,0.5 + pos.y))
