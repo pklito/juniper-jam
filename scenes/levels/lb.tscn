@@ -1,8 +1,8 @@
-[gd_scene format=4 uid="uid://c3ehspogjpphq"]
+[gd_scene format=4 uid="uid://b21fflypbvcsg"]
 
-[ext_resource type="TileSet" uid="uid://bxraeyfwyfb56" path="res://scenes/world.tres" id="1_m1cai"]
-[ext_resource type="PackedScene" uid="uid://62yfwwiwcwao" path="res://scenes/game.tscn" id="2_nfqst"]
-[ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/updater.gd" id="3_6jxht"]
+[ext_resource type="TileSet" uid="uid://bxraeyfwyfb56" path="res://scenes/world.tres" id="1_w6h2s"]
+[ext_resource type="PackedScene" uid="uid://62yfwwiwcwao" path="res://scenes/game.tscn" id="2_ogj6a"]
+[ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/updater.gd" id="3_anwe6"]
 
 [node name="level" type="Node2D" unique_id=2085040009]
 
@@ -10,14 +10,14 @@
 self_modulate = Color(0.66218436, 0.5407247, 0.6722941, 1)
 scale = Vector2(0.75, 0.75)
 tile_map_data = PackedByteArray("AAAHAAMAAAAMAAIAAAABAAMAAAARAAIAAAA=")
-tile_set = ExtResource("1_m1cai")
+tile_set = ExtResource("1_w6h2s")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=805806671]
 scale = Vector2(0.75, 0.75)
 tile_map_data = PackedByteArray("AAAAAAQAAAACAAgAAAABAAQAAAABAAgAAAACAAQAAAABAAgAAAADAAQAAAABAAgAAAAEAAQAAAABAAgAAAAFAAQAAAADAAgAAAAHAAQAAAABAAgAAAAIAAQAAAABAAgAAAAJAAQAAAABAAgAAAAKAAQAAAABAAgAAAALAAQAAAABAAgAAAAMAAQAAAABAAgAAAAAAAMAAAAKAAMAAAAAAAIAAAAKAAMAAAAAAAEAAAAMAAMAAAAGAAQAAAAFABEAAAAGAAUAAAADABEAAAAGAAYAAAADABEAAAD//wQAAAAPAAUAAAAAAAUAAAARAAcAAAABAAUAAAAQAAcAAAACAAUAAAAQAAcAAAADAAUAAAAQAAcAAAAEAAUAAAAQAAcAAAAFAAUAAAAAAAgAAAAFAAYAAAAAAAgAAAAEAAYAAAAQAAcAAAADAAYAAAAQAAcAAAACAAYAAAAQAAcAAAABAAYAAAAQAAcAAAAAAAYAAAARAAcAAAAFAAcAAAAAAAgAAAAEAAcAAAAQAAcAAAADAAcAAAAQAAcAAAACAAcAAAAQAAcAAAABAAcAAAAQAAcAAAAAAAcAAAARAAcAAAD//wUAAAAOAAUAAAD//wYAAAAOAAUAAAD//wcAAAAOAAUAAAD+/wUAAAAOAAUAAAD+/wYAAAAOAAUAAAD+/wcAAAAOAAUAAAD+/wQAAAAPAAUAAAAHAAUAAAAQAAcAAAAIAAUAAAAQAAcAAAAJAAUAAAAQAAcAAAAKAAUAAAAQAAcAAAALAAUAAAAQAAcAAAAMAAUAAAAQAAcAAAAMAAYAAAAQAAcAAAALAAYAAAAQAAcAAAAKAAYAAAAQAAcAAAAJAAYAAAAQAAcAAAAIAAYAAAAQAAcAAAAHAAYAAAAQAAcAAAAHAAcAAAAQAAcAAAAIAAcAAAAQAAcAAAAJAAcAAAAQAAcAAAAKAAcAAAAQAAcAAAALAAcAAAAQAAcAAAAMAAcAAAAQAAcAAAALAAMAAAAJAAYAAAALAAEAAAAMAAcAAAALAAAAAAAOAAYAAAA=")
-tile_set = ExtResource("1_m1cai")
+tile_set = ExtResource("1_w6h2s")
 
-[node name="Game" parent="." unique_id=1530119459 node_paths=PackedStringArray("tiles", "need_scaling") instance=ExtResource("2_nfqst")]
+[node name="Game" parent="." unique_id=1530119459 node_paths=PackedStringArray("tiles", "need_scaling") instance=ExtResource("2_ogj6a")]
 move_rule = 0
 square_start_pos = Vector2i(5, 3)
 triangle_start_pos = Vector2i(10, 3)
@@ -26,5 +26,5 @@ tiles = NodePath("../TileMapLayer")
 need_scaling = [NodePath("../cosmetics"), NodePath("../TileMapLayer")]
 
 [node name="updater" type="Node2D" parent="." unique_id=1571433443 node_paths=PackedStringArray("game")]
-script = ExtResource("3_6jxht")
+script = ExtResource("3_anwe6")
 game = NodePath("../Game")

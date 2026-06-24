@@ -1,0 +1,30 @@
+[gd_scene format=4 uid="uid://c3qn87m5enitx"]
+
+[ext_resource type="TileSet" uid="uid://bxraeyfwyfb56" path="res://scenes/world.tres" id="1_dswqx"]
+[ext_resource type="PackedScene" uid="uid://62yfwwiwcwao" path="res://scenes/game.tscn" id="2_laj7o"]
+[ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/updater.gd" id="3_fi56y"]
+
+[node name="level" type="Node2D" unique_id=2085040009]
+
+[node name="cosmetics" type="TileMapLayer" parent="." unique_id=1005286185]
+self_modulate = Color(0.66218436, 0.5407247, 0.6722941, 1)
+scale = Vector2(0.64285713, 0.64285713)
+tile_map_data = PackedByteArray("AAABAAMAAAAMAAIAAAAMAAMAAAARAAIAAAA=")
+tile_set = ExtResource("1_dswqx")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=805806671]
+scale = Vector2(0.64285713, 0.64285713)
+tile_map_data = PackedByteArray("AAAAAAQAAAABAAgAAAABAAQAAAABAAgAAAACAAQAAAABAAgAAAADAAUAAAABAAgAAAAEAAUAAAABAAgAAAAFAAUAAAABAAgAAAAGAAUAAAABAAgAAAAHAAUAAAABAAgAAAAIAAUAAAABAAgAAAAJAAUAAAABAAgAAAAKAAUAAAABAAgAAAALAAUAAAAAAAsAAAALAAQAAAABAAgAAAAMAAQAAAABAAgAAAANAAQAAAABAAgAAAANAAUAAAAAAAsAAAAMAAUAAAAAAAsAAAANAAYAAAAAAAsAAAAMAAYAAAAAAAsAAAALAAYAAAAAAAsAAAAKAAYAAAAAAAsAAAAJAAYAAAAAAAsAAAAIAAYAAAAAAAsAAAAHAAYAAAAAAAsAAAAGAAYAAAAAAAsAAAAFAAYAAAAAAAsAAAAEAAYAAAAAAAsAAAADAAYAAAAAAAsAAAACAAYAAAAAAAsAAAABAAYAAAAAAAsAAAACAAUAAAAAAAsAAAABAAUAAAAAAAsAAAAAAAUAAAAAAAsAAAAAAAYAAAAAAAsAAAD//wMAAAAIAAYAAAAOAAMAAAAIAAYAAAAAAAMAAAAIAAYAAAA=")
+tile_set = ExtResource("1_dswqx")
+
+[node name="Game" parent="." unique_id=1530119459 node_paths=PackedStringArray("tiles", "need_scaling") instance=ExtResource("2_laj7o")]
+move_rule = 0
+square_start_pos = Vector2i(2, 3)
+triangle_start_pos = Vector2i(9, 4)
+target_tiles_wide = 14
+tiles = NodePath("../TileMapLayer")
+need_scaling = [NodePath("../cosmetics"), NodePath("../TileMapLayer")]
+
+[node name="updater" type="Node2D" parent="." unique_id=1571433443 node_paths=PackedStringArray("game")]
+script = ExtResource("3_fi56y")
+game = NodePath("../Game")
