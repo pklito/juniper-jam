@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dofe8bevlqgme" path="res://scripts/game.gd" id="1_u5sy4"]
 [ext_resource type="Script" uid="uid://dse7q81xgayki" path="res://scripts/inputs.gd" id="2_gee14"]
-[ext_resource type="Texture2D" uid="uid://b4sb6vvj7kuog" path="res://assets/red_body_square.png" id="3_0tnpc"]
-[ext_resource type="Texture2D" uid="uid://c1t00sitjliu1" path="res://assets/face_h.png" id="4_vtaks"]
+[ext_resource type="Texture2D" uid="uid://c6aktakdm85lp" path="res://assets/players/red_body_pixelated.png" id="3_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://b5hxg5eodoaj8" path="res://assets/players/p_smug.png" id="4_gee14"]
 [ext_resource type="Script" uid="uid://bngll6a7v7v64" path="res://scripts/triangle.gd" id="5_kvpfn"]
-[ext_resource type="Texture2D" uid="uid://cgfmp0mbm6ndg" path="res://assets/triangle_body.png" id="6_dinhu"]
-[ext_resource type="Texture2D" uid="uid://dxxxuowllmv4q" path="res://assets/face_c.png" id="7_kvuet"]
+[ext_resource type="Texture2D" uid="uid://cgfmp0mbm6ndg" path="res://assets/players/triangle_body.png" id="6_dinhu"]
+[ext_resource type="Texture2D" uid="uid://dxxxuowllmv4q" path="res://assets/players/face_c.png" id="7_kvuet"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w10v"]
 size = Vector2(160, 160)
@@ -33,11 +33,13 @@ script = ExtResource("2_gee14")
 
 [node name="base" type="Sprite2D" parent="pl_square/pivot" unique_id=1977819106]
 z_index = -1
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("3_0tnpc")
+texture_filter = 1
+scale = Vector2(7.2, 7.2)
+texture = ExtResource("3_u5sy4")
 
 [node name="face" type="Sprite2D" parent="pl_square/pivot/base" unique_id=1115629750]
-texture = ExtResource("4_vtaks")
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_gee14")
 
 [node name="Area2D" type="Area2D" parent="pl_square/pivot" unique_id=1451123115]
 scale = Vector2(0.8, 0.8)

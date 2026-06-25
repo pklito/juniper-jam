@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cgegfebooxtpk"]
 
-[ext_resource type="Texture2D" uid="uid://cgfmp0mbm6ndg" path="res://assets/triangle_body.png" id="1_h7xi0"]
+[ext_resource type="Texture2D" uid="uid://cgfmp0mbm6ndg" path="res://assets/players/triangle_body.png" id="1_h7xi0"]
 [ext_resource type="Script" uid="uid://bngll6a7v7v64" path="res://scripts/triangle.gd" id="1_u1wel"]
-[ext_resource type="Texture2D" uid="uid://dxxxuowllmv4q" path="res://assets/face_c.png" id="2_u1wel"]
+[ext_resource type="Texture2D" uid="uid://dxxxuowllmv4q" path="res://assets/players/face_c.png" id="2_u1wel"]
 
 [node name="Node2D" type="Node2D" unique_id=349082606]
 script = ExtResource("1_u1wel")

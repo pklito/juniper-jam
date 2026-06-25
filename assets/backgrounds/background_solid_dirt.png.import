@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgfmp0mbm6ndg"
-path="res://.godot/imported/triangle_body.png-7b4d92535e48f49bb50323d775630bc6.ctex"
+uid="uid://ijey64pcnirw"
+path="res://.godot/imported/background_solid_dirt.png-bbf1d45ce251550de10e6b7357f2d161.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/triangle_body.png"
-dest_files=["res://.godot/imported/triangle_body.png-7b4d92535e48f49bb50323d775630bc6.ctex"]
+source_file="res://assets/backgrounds/background_solid_dirt.png"
+dest_files=["res://.godot/imported/background_solid_dirt.png-bbf1d45ce251550de10e6b7357f2d161.ctex"]
 
 [params]
 

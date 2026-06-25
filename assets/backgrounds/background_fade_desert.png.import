@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6s4rrt7qxv3q"
-path="res://.godot/imported/face_j.png-d5bcb3cb1f409bd6895e0057e9ee0e33.ctex"
+uid="uid://bc4ptk0vkum0p"
+path="res://.godot/imported/background_fade_desert.png-d8e763828ebfba6d03e50ddb192ba663.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/face_j.png"
-dest_files=["res://.godot/imported/face_j.png-d5bcb3cb1f409bd6895e0057e9ee0e33.ctex"]
+source_file="res://assets/backgrounds/background_fade_desert.png"
+dest_files=["res://.godot/imported/background_fade_desert.png-d8e763828ebfba6d03e50ddb192ba663.ctex"]
 
 [params]
 

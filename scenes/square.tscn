@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bpk4xqguhtmbi"]
 
-[ext_resource type="Texture2D" uid="uid://b4sb6vvj7kuog" path="res://assets/red_body_square.png" id="1_qmd2u"]
-[ext_resource type="Texture2D" uid="uid://c1t00sitjliu1" path="res://assets/face_h.png" id="2_0thag"]
+[ext_resource type="Texture2D" uid="uid://b4sb6vvj7kuog" path="res://assets/players/red_body_square.png" id="1_qmd2u"]
+[ext_resource type="Texture2D" uid="uid://c1t00sitjliu1" path="res://assets/players/face_h.png" id="2_0thag"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w10v"]
 size = Vector2(160, 160)
