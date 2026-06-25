@@ -292,12 +292,18 @@ class PlayerTriangle extends Player:
 		if fall < 0 or (a_dir == b_dir and fall == 0):
 			return
 		anim_floor_angle = Utils.near_mod(b_dir, a_dir, 4) * 90
-		print(a_dir," ",b_dir, " ", Utils.near_mod(b_dir, a_dir, 4) * 90)
+		var rotate_delay := 0.05
+		var rotate_time := sqrt(fall)/2 - rotate_delay
+		if fall == 0:
+			rotate_delay = 0
+			rotate_time = 0.3
+		
 		reset_tween()
 		tween.set_ease(Tween.EASE_OUT)
 		tween.set_trans(Tween.TRANS_BOUNCE)
 		tween.tween_property(player_node, "global_position", tile_config.pos_to_pixel(b_pos), sqrt(fall)/2)
-		tween.parallel().tween_property(player_node, "rotation_degrees", anim_floor_angle, 0.3).from(a_dir * 90)
+		tween.set_trans(Tween.TRANS_SPRING)
+		tween.parallel().tween_property(player_node, "rotation_degrees", anim_floor_angle, rotate_time).from(a_dir * 90).set_delay(rotate_delay)
 
 
 	
