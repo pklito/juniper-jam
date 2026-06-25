@@ -29,21 +29,23 @@ script = ExtResource("2_gee14")
 
 [node name="pl_square" type="Marker2D" parent="." unique_id=508286169]
 
-[node name="Area2D" type="Area2D" parent="pl_square" unique_id=1451123115]
-scale = Vector2(0.8, 0.8)
+[node name="pivot" type="Marker2D" parent="pl_square" unique_id=705792692]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="pl_square/Area2D" unique_id=1689217991]
-position = Vector2(-7.1525556e-06, -7.1525556e-06)
-scale = Vector2(0.99999976, 0.99999976)
-shape = SubResource("RectangleShape2D_8w10v")
-
-[node name="base" type="Sprite2D" parent="pl_square" unique_id=1977819106]
+[node name="base" type="Sprite2D" parent="pl_square/pivot" unique_id=1977819106]
 z_index = -1
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_0tnpc")
 
-[node name="face" type="Sprite2D" parent="pl_square/base" unique_id=1115629750]
+[node name="face" type="Sprite2D" parent="pl_square/pivot/base" unique_id=1115629750]
 texture = ExtResource("4_vtaks")
+
+[node name="Area2D" type="Area2D" parent="pl_square/pivot" unique_id=1451123115]
+scale = Vector2(0.8, 0.8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pl_square/pivot/Area2D" unique_id=1689217991]
+position = Vector2(-7.1525556e-06, -7.1525556e-06)
+scale = Vector2(0.99999976, 0.99999976)
+shape = SubResource("RectangleShape2D_8w10v")
 
 [node name="pl_triangle" type="Marker2D" parent="." unique_id=1896749010]
 position = Vector2(224, 225)
@@ -70,9 +72,9 @@ texture = ExtResource("7_kvuet")
 
 [connection signal="dragged_successfully" from="SquareDrag" to="." method="_square_dragged"]
 [connection signal="dragged_successfully" from="TriangleDrag" to="." method="_triangle_dragged"]
-[connection signal="input_event" from="pl_square/Area2D" to="SquareDrag" method="_on_area_2d_input_event"]
-[connection signal="mouse_entered" from="pl_square/Area2D" to="SquareDrag" method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="pl_square/Area2D" to="SquareDrag" method="_on_area_2d_mouse_exited"]
+[connection signal="input_event" from="pl_square/pivot/Area2D" to="SquareDrag" method="_on_area_2d_input_event"]
+[connection signal="mouse_entered" from="pl_square/pivot/Area2D" to="SquareDrag" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="pl_square/pivot/Area2D" to="SquareDrag" method="_on_area_2d_mouse_exited"]
 [connection signal="input_event" from="pl_triangle/Area2D" to="TriangleDrag" method="_on_area_2d_input_event"]
 [connection signal="mouse_entered" from="pl_triangle/Area2D" to="TriangleDrag" method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="pl_triangle/Area2D" to="TriangleDrag" method="_on_area_2d_mouse_exited"]

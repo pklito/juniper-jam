@@ -53,3 +53,7 @@ static func vec2_to_dir(vec: Vector2) -> int:
 			max = dot_prod
 			max_dir = i
 	return max_dir
+
+static func near_mod(val: int, around :int, m :int) -> int:
+	# print("in near mod: %d, %d, %d" % [m/2, posmod(val + m/2 - around, m)])
+	return posmod(val + m/2 - around, m) + around - m/2

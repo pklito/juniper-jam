@@ -45,7 +45,8 @@ func _update_globals():
 # Players
 class Player:
 	var SPIN_DEGREES : float
-	var current_angle: float = 0.0
+	var anim_angle: float = 0.0
+	var anim_floor_angle: float = 0.0
 	var tween : Tween
 	var pos : Vector2i
 	var prev_pos : Vector2i
@@ -65,7 +66,8 @@ class Player:
 		player_node = _player_node
 		tile_config = _tile_config
 		tiles = _tiles
-		pivot_node = player_node
+		pivot_node = player_node.get_node(str(player_node.get_path()) + "/pivot")
+
 		_post_init()
 
 	func link(_other_player: Player):
@@ -121,7 +123,8 @@ class Player:
 	func update_graphics() -> void:
 		prev_pos = pos
 		player_node.position = tile_config.pos_to_pixel(pos)
-		player_node.global_rotation_degrees = ground_dir * 90
+		player_node.rotation_degrees = ground_dir * 90
+		anim_floor_angle = ground_dir * 90
 	func move_left() -> void:
 		var test_dir = posmod(ground_dir + 1, 4)
 		_move_internal(Utils.dir_to_vec2(test_dir))
@@ -156,37 +159,43 @@ class Player:
 		var move_vec := Utils.dir_to_vec2(posmod(a_dir - 1, 4)) if moved_right \
 						else Utils.dir_to_vec2(posmod(a_dir + 1, 4))
 		if b_dir == a_dir:
-			current_angle += angle_increment
+			anim_angle += angle_increment
 			
 			tween.set_ease(Tween.EASE_IN_OUT)
 			tween.set_trans(Tween.TRANS_CUBIC)
 			tween.tween_property(player_node, "global_position", tile_config.pos_to_pixel(b_pos), duration)
 			tween.parallel()
-			tween.tween_property(pivot_node, "rotation_degrees", current_angle, duration)
+			tween.tween_property(pivot_node, "rotation_degrees", anim_angle, duration)
+			tween.parallel().tween_property(player_node, "rotation_degrees", anim_floor_angle, duration)
+
 			tween.tween_callback(self._finish_move)
 			return
 
 		# triangle only
 		if a_pos == b_pos:
-			current_angle += 30 if moved_right else -30
-			
+			anim_angle += 120 if moved_right else -120
+			anim_floor_angle += -90 if moved_right else 90
 			tween.set_ease(Tween.EASE_IN_OUT)
 			tween.set_trans(Tween.TRANS_CUBIC)
 			tween.tween_property(player_node, "global_position", tile_config.pos_to_pixel(b_pos), duration)
 			tween.parallel()
-			tween.tween_property(pivot_node, "rotation_degrees", current_angle, duration)
+			tween.tween_property(pivot_node, "rotation_degrees", anim_angle, duration)
+			tween.parallel().tween_property(player_node, "rotation_degrees", anim_floor_angle, duration)
 			tween.tween_callback(self._finish_move)
 			return
 
+		print(anim_floor_angle)
 		# big corner
-		current_angle += angle_increment
+		anim_angle += angle_increment
 		tween.set_ease(Tween.EASE_IN)
 		tween.set_trans(Tween.TRANS_LINEAR)
-		tween.tween_property(pivot_node, "rotation_degrees", current_angle, duration/2)
+		tween.tween_property(pivot_node, "rotation_degrees", anim_angle, duration/2)
+		tween.parallel().tween_property(player_node, "rotation_degrees", anim_floor_angle, duration/2)
 		tween.parallel().tween_property(player_node, "global_position", tile_config.pos_to_pixel(a_pos + move_vec), duration/2)
-		current_angle += 90 if moved_right else -90
+		anim_floor_angle += 90 if moved_right else -90
 		tween.set_ease(Tween.EASE_OUT)
-		tween.tween_property(pivot_node, "rotation_degrees", current_angle, duration/2)
+		tween.tween_property(pivot_node, "rotation_degrees", anim_angle, duration/2)
+		tween.parallel().tween_property(player_node, "rotation_degrees", anim_floor_angle, duration/2)
 		tween.parallel().tween_property(player_node, "global_position", tile_config.pos_to_pixel(b_pos), duration/2)
 
 		
@@ -227,7 +236,6 @@ class PlayerSquare extends Player:
 class PlayerTriangle extends Player:
 	func _post_init():
 		SPIN_DEGREES = 120
-		pivot_node = player_node.get_node(str(player_node.get_path()) + "/pivot")
 
 	func _pos_solid_tile(test_pos: Vector2i) -> bool:
 		return super._pos_solid_tile(test_pos) or other_player.pos == test_pos
@@ -252,27 +260,46 @@ class PlayerTriangle extends Player:
 		var post_dir := ground_dir
 		_do_animation(pre_pos, pre_dir, post_pos, post_dir, true)
 
-	func _drop_ground_dir(loop: int = 20):
+	func _drop_ground_dir(loop: int = 20) -> int:
 		if loop <= 0:
 			push_error("drop_if_floating: too many recursions")
-			return
+			return 0
 		var test_pos = pos + Utils.dir_to_vec2(ground_dir)
 		if not _pos_solid_tile(test_pos):
 			pos = test_pos
-			_drop_ground_dir(loop - 1) # recursive drop until we hit a solid tile
+			return 1 + _drop_ground_dir(loop - 1) # recursive drop until we hit a solid tile
+		return 0
 
-	func _drop_down():
+	func _drop_down() -> int:
 		var test_pos = pos + Utils.dir_to_vec2(ground_dir)
 		if _pos_solid_tile(test_pos):
-			return
+			return -1
 		ground_dir = 0
-		_drop_ground_dir() # recursive drop until we hit a solid tile
+		return _drop_ground_dir() # recursive drop until we hit a solid tile
 
 	func drop_if_floating():
+		var pre_pos := pos
+		var pre_dir := ground_dir
 		if Globals.CLIMB_RULE == Globals.ClimbRules.FALL_DOWN:
-			_drop_down()
+			var dist := _drop_down()
+			_do_fall_animation(pre_pos, pre_dir, pos, ground_dir, dist)
 		if Globals.CLIMB_RULE == Globals.ClimbRules.FALL_GROUND_DIR:
-			_drop_ground_dir()
+			var dist := _drop_ground_dir()
+			_do_fall_animation(pre_pos, pre_dir, pos, ground_dir, dist)
+
+	
+	func _do_fall_animation(a_pos : Vector2i, a_dir : Utils.Dirs, b_pos : Vector2i, b_dir : Utils.Dirs, fall : int):
+		if fall < 0 or (a_dir == b_dir and fall == 0):
+			return
+		anim_floor_angle = Utils.near_mod(b_dir, a_dir, 4) * 90
+		print(a_dir," ",b_dir, " ", Utils.near_mod(b_dir, a_dir, 4) * 90)
+		reset_tween()
+		tween.set_ease(Tween.EASE_OUT)
+		tween.set_trans(Tween.TRANS_BOUNCE)
+		tween.tween_property(player_node, "global_position", tile_config.pos_to_pixel(b_pos), sqrt(fall)/2)
+		tween.parallel().tween_property(player_node, "rotation_degrees", anim_floor_angle, 0.3).from(a_dir * 90)
+
+
 	
 # Special func
 func _ready() -> void:
