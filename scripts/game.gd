@@ -44,7 +44,10 @@ func _update_globals():
 
 # Players
 class Player:
+	var current_angle: float = 0.0
+	var tween : Tween
 	var pos : Vector2i
+	var prev_pos : Vector2i
 	var ground_dir : int = 0
 	var player_node : Node2D
 	var tile_config : TileSetConfig
@@ -90,10 +93,25 @@ class Player:
 			return true
 		return false
 
+	func reset_tween():
+		if tween != null:
+			tween.kill()
+		tween = player_node.create_tween()
+		tween.bind_node(player_node)
+		
+	func is_moving() -> bool:
+		return pos != prev_pos
+	
+	func update_graphics_animated():
+		pass
+	
+	func _finish_move():
+		update_graphics()
 
 	func update_graphics() -> void:
+		prev_pos = pos
 		player_node.position = tile_config.pos_to_pixel(pos)
-		player_node.rotation_degrees = ground_dir * 90
+		# player_node.global_rotation_degrees = ground_dir * 90
 	func move_left() -> void:
 		var test_dir = posmod(ground_dir + 1, 4)
 		_move_internal(Utils.dir_to_vec2(test_dir))
@@ -107,11 +125,64 @@ class PlayerSquare extends Player:
 		_rotate_to_wall(Utils.dir_to_vec2(posmod(ground_dir + 1, 4)))
 		_move_internal(Utils.dir_to_vec2(posmod(ground_dir + 1, 4)))
 		_rotate_to_wall(Utils.dir_to_vec2(posmod(ground_dir + 1, 4)))
+		reset_tween()
+		tween.bind_node(player_node)
+		tween.tween_property(player_node, "global_position", tile_config.pos_to_pixel(pos), 0.2)
+		tween.parallel()
+		current_angle -= 90
+		tween.tween_property(player_node, "rotation_degrees", current_angle, 0.2)
+		tween.tween_callback(self._finish_move)
 
 	func move_right() -> void:
 		_rotate_to_wall(Utils.dir_to_vec2(posmod(ground_dir - 1, 4)))
+		var pre_pos := pos
+		var pre_dir := ground_dir
 		_move_internal(Utils.dir_to_vec2(posmod(ground_dir - 1, 4)))
+		var post_pos := pos
+		var post_dir := ground_dir
 		_rotate_to_wall(Utils.dir_to_vec2(posmod(ground_dir - 1, 4)))
+		_do_animation(pre_pos, pre_dir, post_pos, post_dir, true)
+		
+	func _do_anim_stumble(duration : float = 0.2):
+		reset_tween()
+		var p_b := player_node.position
+		tween.set_trans(Tween.TRANS_BOUNCE)
+		tween.tween_property(player_node, "position", p_b + Vector2(-10,0), duration/4)
+		tween.parallel().tween_property(player_node, "rotation_degrees", player_node.rotation_degrees-20, duration/4)
+		
+		tween.tween_property(player_node, "position", p_b + Vector2(10,0), duration/4)
+		tween.parallel().tween_property(player_node, "rotation_degrees", player_node.rotation_degrees+20, duration/4)
+		
+		tween.tween_property(player_node, "position", p_b, duration/4)
+		tween.parallel().tween_property(player_node, "rotation_degrees", player_node.rotation_degrees, duration/4)
+		
+		tween.tween_callback(self._finish_move)
+
+		
+
+	func _do_animation(a_pos : Vector2i, a_dir : int, b_pos : Vector2i, b_dir : int, moved_right: bool, duration : float = 0.2):
+		reset_tween()
+		if a_pos == b_pos:
+			_do_anim_stumble(duration)
+			return
+		
+		if b_dir == a_dir:
+			current_angle += 90
+			
+			tween.tween_property(player_node, "global_position", tile_config.pos_to_pixel(b_pos), duration)
+			tween.parallel()
+			tween.tween_property(player_node, "rotation_degrees", current_angle, duration)
+			tween.tween_callback(self._finish_move)
+			return
+		
+		# big corner
+		current_angle += 90
+		tween.tween_property(player_node, "rotation_degrees", current_angle, duration)
+		tween.parallel()
+		tween.tween_property(player_node, "global_position", tile_config.pos_to_pixel(b_pos), duration)
+		
+		tween.tween_callback(self._finish_move)
+		return
 
 
 
@@ -181,8 +252,8 @@ func _physics_process(delta: float) -> void:
 	_update_globals()
 	time += delta
 	time2 += delta
-	square.update_graphics()
-	triangle.update_graphics()
+	square.update_graphics_animated()
+	triangle.update_graphics_animated()
 	
 	if time < 0.3:
 		return

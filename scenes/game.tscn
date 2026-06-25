@@ -38,6 +38,7 @@ scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_8w10v")
 
 [node name="base" type="Sprite2D" parent="pl_square" unique_id=1977819106]
+z_index = -1
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_0tnpc")
 
@@ -57,6 +58,7 @@ scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("CircleShape2D_bbk5w")
 
 [node name="player2" type="Sprite2D" parent="pl_triangle" unique_id=1567448684]
+z_index = -1
 position = Vector2(0, 12)
 scale = Vector2(0.243, 0.25)
 texture = ExtResource("6_dinhu")
