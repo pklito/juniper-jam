@@ -138,13 +138,13 @@ class Player:
 		tween.set_trans(Tween.TRANS_BOUNCE)
 		var shake_dir := Vector2(10, 0).rotated(90*ground_dir)
 		tween.tween_property(player_node, "position", p_b - shake_dir, duration/4)
-		tween.parallel().tween_property(pivot_node, "rotation_degrees", player_node.rotation_degrees-20, duration/4)
+		tween.parallel().tween_property(pivot_node, "rotation_degrees", anim_angle-20, duration/4)
 		
 		tween.tween_property(player_node, "position", p_b + shake_dir, duration/4)
-		tween.parallel().tween_property(pivot_node, "rotation_degrees", player_node.rotation_degrees+20, duration/4)
+		tween.parallel().tween_property(pivot_node, "rotation_degrees", anim_angle+20, duration/4)
 		
 		tween.tween_property(player_node, "position", p_b, duration/4)
-		tween.parallel().tween_property(pivot_node, "rotation_degrees", player_node.rotation_degrees, duration/4)
+		tween.parallel().tween_property(pivot_node, "rotation_degrees", anim_angle, duration/4)
 		
 		tween.tween_callback(self._finish_move)
 
@@ -288,7 +288,7 @@ class PlayerTriangle extends Player:
 			_do_fall_animation(pre_pos, pre_dir, pos, ground_dir, dist)
 
 	
-	func _do_fall_animation(a_pos : Vector2i, a_dir : Utils.Dirs, b_pos : Vector2i, b_dir : Utils.Dirs, fall : int):
+	func _do_fall_animation(_a_pos : Vector2i, a_dir : Utils.Dirs, b_pos : Vector2i, b_dir : Utils.Dirs, fall : int):
 		if fall < 0 or (a_dir == b_dir and fall == 0):
 			return
 		anim_floor_angle = Utils.near_mod(b_dir, a_dir, 4) * 90
