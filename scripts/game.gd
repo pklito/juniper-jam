@@ -66,10 +66,10 @@ class Player:
 	}
 
 	func getLeftDir() -> Utils.Dirs:
-		return posmod(ground_dir - 1, 4) as Utils.Dirs
+		return posmod(ground_dir + Utils.Dirs.LEFT, 4) as Utils.Dirs
 
 	func getRightDir() -> Utils.Dirs:
-		return posmod(ground_dir + 1, 4) as Utils.Dirs
+		return posmod(ground_dir + Utils.Dirs.RIGHT, 4) as Utils.Dirs
 
 	func checkWallState(pos : Vector2i, move_vec : Vector2i) -> WallState:
 		# spot on the left is not open (no movement can be done)
@@ -188,8 +188,8 @@ class Player:
 			_do_anim_stumble(duration)
 			return
 		var angle_increment = SPIN_DEGREES if moved_right else -SPIN_DEGREES
-		var move_vec := Utils.dir_to_vec2(posmod(a_dir - 1, 4)) if moved_right \
-						else Utils.dir_to_vec2(posmod(a_dir + 1, 4))
+		var move_vec := Utils.dir_to_vec2(posmod(a_dir + Utils.Dirs.RIGHT, 4)) if moved_right \
+						else Utils.dir_to_vec2(posmod(a_dir + Utils.Dirs.LEFT, 4))
 		if b_dir == a_dir:
 			anim_angle += angle_increment
 			
@@ -239,25 +239,25 @@ class PlayerSquare extends Player:
 		SPIN_DEGREES = 90
 		
 	func move_left() -> void:
-		_rotate_to_wall(Utils.dir_to_vec2(posmod(ground_dir + 1, 4)))
+		_rotate_to_wall(Utils.dir_to_vec2(posmod(ground_dir + Utils.Dirs.LEFT, 4)))
 		var pre_pos := pos
 		var pre_dir := ground_dir
-		_move_internal(Utils.dir_to_vec2(posmod(ground_dir + 1, 4)))
+		_move_internal(Utils.dir_to_vec2(posmod(ground_dir + Utils.Dirs.LEFT, 4)))
 		var post_pos := pos
 		var post_dir := ground_dir
-		_rotate_to_wall(Utils.dir_to_vec2(posmod(ground_dir + 1, 4)))
+		_rotate_to_wall(Utils.dir_to_vec2(posmod(ground_dir + Utils.Dirs.LEFT, 4)))
 
 		_do_animation(pre_pos, pre_dir, post_pos, post_dir, false)
 
 
 	func move_right() -> void:
-		_rotate_to_wall(Utils.dir_to_vec2(posmod(ground_dir - 1, 4)))
+		_rotate_to_wall(Utils.dir_to_vec2(posmod(ground_dir + Utils.Dirs.RIGHT, 4)))
 		var pre_pos := pos
 		var pre_dir := ground_dir
-		_move_internal(Utils.dir_to_vec2(posmod(ground_dir - 1, 4)))
+		_move_internal(Utils.dir_to_vec2(posmod(ground_dir + Utils.Dirs.RIGHT, 4)))
 		var post_pos := pos
 		var post_dir := ground_dir
-		_rotate_to_wall(Utils.dir_to_vec2(posmod(ground_dir - 1, 4)))
+		_rotate_to_wall(Utils.dir_to_vec2(posmod(ground_dir + Utils.Dirs.RIGHT, 4)))
 		_do_animation(pre_pos, pre_dir, post_pos, post_dir, true)
 		
 	
@@ -272,7 +272,7 @@ class PlayerTriangle extends Player:
 		return super._pos_solid_tile(test_pos) or other_player.pos == test_pos
 	
 	func move_left() -> void:
-		var test_dir = posmod(ground_dir + 1, 4)
+		var test_dir = posmod(ground_dir + Utils.Dirs.LEFT, 4)
 		var pre_pos := pos
 		var pre_dir := ground_dir
 		if not _move_internal(Utils.dir_to_vec2(test_dir)):
@@ -282,7 +282,7 @@ class PlayerTriangle extends Player:
 		_do_animation(pre_pos, pre_dir, post_pos, post_dir, false)
 
 	func move_right() -> void:
-		var test_dir = posmod(ground_dir - 1, 4)
+		var test_dir = posmod(ground_dir + Utils.Dirs.RIGHT, 4)
 		var pre_pos := pos
 		var pre_dir := ground_dir
 		if not _move_internal(Utils.dir_to_vec2(test_dir)):
@@ -415,11 +415,11 @@ func _square_dragged(drag_vector: Vector2) -> void:
 		return
 	
 	var drag_dir = Utils.vec2_to_dir(drag_vector)
-	if square.ground_dir == drag_dir or square.ground_dir == posmod(drag_dir + 2, 4):
+	if square.ground_dir == drag_dir or square.ground_dir == posmod(drag_dir + + Utils.Dirs.UP, 4):
 		return
-	if drag_dir == posmod(square.ground_dir - 1, 4):
+	if drag_dir == posmod(square.ground_dir + Utils.Dirs.RIGHT, 4):
 		move_count_sq = 4
-	if drag_dir == posmod(square.ground_dir + 1, 4):
+	if drag_dir == posmod(square.ground_dir + + Utils.Dirs.LEFT, 4):
 		move_count_sq = -4
 
 	if Globals.MOVE_RULE != Globals.MoveRules.FREE_COPY_MOVEMENT and \
@@ -429,9 +429,9 @@ func _square_dragged(drag_vector: Vector2) -> void:
 	if Globals.MOVE_RULE == Globals.MoveRules.FREE_COPY_MOVEMENT_INVERSE:
 		mult = -1
 	tri_wait_move = true
-	if drag_dir == posmod(square.ground_dir - 1, 4):
+	if drag_dir == posmod(square.ground_dir + Utils.Dirs.RIGHT, 4):
 		move_count_tri = 3 * mult
-	if drag_dir == posmod(square.ground_dir + 1, 4):
+	if drag_dir == posmod(square.ground_dir + + Utils.Dirs.LEFT, 4):
 		move_count_tri = -3 * mult
 
 
@@ -442,12 +442,12 @@ func _triangle_dragged(drag_vector: Vector2) -> void:
 
 	var drag_dir = Utils.vec2_to_dir(drag_vector)
 	# dragged up.
-	if triangle.ground_dir == drag_dir or triangle.ground_dir == posmod(drag_dir + 2, 4):
+	if triangle.ground_dir == drag_dir or triangle.ground_dir == posmod(drag_dir + + Utils.Dirs.UP, 4):
 		return
 
-	if drag_dir == posmod(triangle.ground_dir - 1, 4):
+	if drag_dir == posmod(triangle.ground_dir + Utils.Dirs.RIGHT, 4):
 		move_count_tri = 3
-	if drag_dir == posmod(triangle.ground_dir + 1, 4):
+	if drag_dir == posmod(triangle.ground_dir + Utils.Dirs.LEFT, 4):
 		move_count_tri = -3
 
 	if Globals.MOVE_RULE != Globals.MoveRules.FREE_COPY_MOVEMENT and \
@@ -457,7 +457,7 @@ func _triangle_dragged(drag_vector: Vector2) -> void:
 	if Globals.MOVE_RULE == Globals.MoveRules.FREE_COPY_MOVEMENT_INVERSE:
 		mult = -1
 	sq_wait_move = true
-	if drag_dir == posmod(triangle.ground_dir - 1, 4):
+	if drag_dir == posmod(triangle.ground_dir + Utils.Dirs.RIGHT, 4):
 		move_count_sq = 4 * mult
-	if drag_dir == posmod(triangle.ground_dir + 1, 4):
+	if drag_dir == posmod(triangle.ground_dir + Utils.Dirs.LEFT, 4):
 		move_count_sq = -4 * mult

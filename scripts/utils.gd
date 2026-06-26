@@ -19,6 +19,9 @@ enum Dirs{
 	RIGHT
 }
 
+static func dir_change(value : int, to : Dirs, from : Dirs = Dirs.DOWN) -> Dirs:
+	return posmod(value - from + to , 4) as Dirs
+
 static func rotate_clockwise(vec: Vector2i) -> Vector2i:
 	return Vector2i(vec.y, -vec.x)
 
