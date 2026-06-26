@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c6aktakdm85lp" path="res://assets/players/red_body_pixelated.png" id="3_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://b5hxg5eodoaj8" path="res://assets/players/p_smug.png" id="4_gee14"]
 [ext_resource type="Script" uid="uid://bngll6a7v7v64" path="res://scripts/triangle.gd" id="5_kvpfn"]
-[ext_resource type="Texture2D" uid="uid://cgfmp0mbm6ndg" path="res://assets/players/triangle_body.png" id="6_dinhu"]
+[ext_resource type="Texture2D" uid="uid://4jnqmvqbih3l" path="res://assets/players/triangle_body_pixel.png" id="6_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://dxxxuowllmv4q" path="res://assets/players/face_c.png" id="7_kvuet"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w10v"]
@@ -66,10 +66,12 @@ position = Vector2(0, 12)
 
 [node name="player2" type="Sprite2D" parent="pl_triangle/pivot" unique_id=1567448684]
 z_index = -1
-scale = Vector2(0.243, 0.25)
-texture = ExtResource("6_dinhu")
+texture_filter = 1
+scale = Vector2(3.207, 3.3)
+texture = ExtResource("6_u5sy4")
 
 [node name="face" type="Sprite2D" parent="pl_triangle/pivot/player2" unique_id=1376370533]
+scale = Vector2(0.08, 0.08)
 texture = ExtResource("7_kvuet")
 
 [connection signal="dragged_successfully" from="SquareDrag" to="." method="_square_dragged"]
