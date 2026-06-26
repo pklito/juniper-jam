@@ -1,13 +1,13 @@
 [gd_scene format=4 uid="uid://km2ps2htowwo"]
 
-[ext_resource type="TileSet" uid="uid://bxraeyfwyfb56" path="res://scenes/world.tres" id="1_1wdjn"]
+[ext_resource type="TileSet" uid="uid://bxraeyfwyfb56" path="res://assets/tilesets/world.tres" id="1_1wdjn"]
 [ext_resource type="PackedScene" uid="uid://62yfwwiwcwao" path="res://scenes/game.tscn" id="2_oqwun"]
-[ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/updater.gd" id="3_h117w"]
-[ext_resource type="Texture2D" uid="uid://cxded2mm1mfbl" path="res://assets/tiles/spritesheet-tiles-double.png" id="4_moqbf"]
-[ext_resource type="Texture2D" uid="uid://cun1ty7ws41co" path="res://assets/tiles/bg_tile.png" id="5_q27m3"]
-[ext_resource type="Texture2D" uid="uid://b8o0mumcjme5y" path="res://assets/tiles/pixel_platformer.png" id="5_salgv"]
-[ext_resource type="Texture2D" uid="uid://cqbduke81v1p" path="res://assets/tiles/spritesheet-backgrounds-double.png" id="6_2r1ee"]
-[ext_resource type="Texture2D" uid="uid://ccb0umm4ho7s8" path="res://assets/tiles/pixel_town.png" id="6_q27m3"]
+[ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/peripheral/updater.gd" id="3_h117w"]
+[ext_resource type="Texture2D" uid="uid://c1jgfqwh2pd8q" path="res://assets/tiles/spritesheet-tiles-double.png" id="4_moqbf"]
+[ext_resource type="Texture2D" uid="uid://bqxrxxxqyl3s8" path="res://assets/tiles/bg_tile.png" id="5_q27m3"]
+[ext_resource type="Texture2D" uid="uid://cdh7tbcmcndnq" path="res://assets/tiles/pixel_platformer.png" id="5_salgv"]
+[ext_resource type="Texture2D" uid="uid://df480pjt3wtcl" path="res://assets/tiles/spritesheet-backgrounds-double.png" id="6_2r1ee"]
+[ext_resource type="Texture2D" uid="uid://cpnbifx1sagxq" path="res://assets/tiles/pixel_town.png" id="6_q27m3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u3tdp"]
 resource_name = "big"

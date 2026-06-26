@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://c3qn87m5enitx"]
 
-[ext_resource type="TileSet" uid="uid://bxraeyfwyfb56" path="res://scenes/world.tres" id="1_dswqx"]
+[ext_resource type="TileSet" uid="uid://bxraeyfwyfb56" path="res://assets/tilesets/world.tres" id="1_dswqx"]
 [ext_resource type="PackedScene" uid="uid://62yfwwiwcwao" path="res://scenes/game.tscn" id="2_laj7o"]
-[ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/updater.gd" id="3_fi56y"]
+[ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/peripheral/updater.gd" id="3_fi56y"]
 
 [node name="level" type="Node2D" unique_id=2085040009]
 

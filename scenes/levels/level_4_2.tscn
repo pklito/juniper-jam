@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://bmq6wwhcmo1ju"]
 
 [ext_resource type="PackedScene" uid="uid://62yfwwiwcwao" path="res://scenes/game.tscn" id="2_0d4ob"]
-[ext_resource type="TileSet" uid="uid://b74258bt24i7j" path="res://scenes/world_18.tres" id="2_nbjh1"]
-[ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/updater.gd" id="3_nbjh1"]
-[ext_resource type="TileSet" uid="uid://hert11wmnp0r" path="res://scenes/bg.tres" id="5_otrkh"]
+[ext_resource type="TileSet" uid="uid://b74258bt24i7j" path="res://assets/tilesets/world_18.tres" id="2_nbjh1"]
+[ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/peripheral/updater.gd" id="3_nbjh1"]
+[ext_resource type="TileSet" uid="uid://hert11wmnp0r" path="res://assets/tilesets/bg.tres" id="5_otrkh"]
 
 [node name="level" type="Node2D" unique_id=2085040009]
 texture_filter = 1
