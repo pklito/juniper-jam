@@ -65,6 +65,12 @@ class Player:
 		NONE
 	}
 
+	func getLeftDir() -> Utils.Dirs:
+		return posmod(ground_dir - 1, 4) as Utils.Dirs
+
+	func getRightDir() -> Utils.Dirs:
+		return posmod(ground_dir + 1, 4) as Utils.Dirs
+
 	func checkWallState(pos : Vector2i, move_vec : Vector2i) -> WallState:
 		# spot on the left is not open (no movement can be done)
 		if not _pos_open(pos + move_vec):
@@ -152,10 +158,10 @@ class Player:
 		player_node.rotation_degrees = ground_dir * 90
 		anim_floor_angle = ground_dir * 90
 	func move_left() -> void:
-		var test_dir = posmod(ground_dir + 1, 4)
+		var test_dir = getLeftDir()
 		_move_internal(Utils.dir_to_vec2(test_dir))
 	func move_right() -> void:
-		var test_dir = posmod(ground_dir - 1, 4)
+		var test_dir = getRightDir()
 		_move_internal(Utils.dir_to_vec2(test_dir))
 
 	func _do_anim_stumble(duration : float = 0.2):
