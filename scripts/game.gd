@@ -58,6 +58,30 @@ class Player:
 	var other_player: Player
 	var pivot_node : Node2D
 
+	enum WallState{
+		FLAT,
+		CORNER,
+		WALL,
+		NONE
+	}
+
+	func checkWallState(pos : Vector2i, move_vec : Vector2i) -> WallState:
+		# spot on the left is not open (no movement can be done)
+		if not _pos_open(pos + move_vec):
+			if _pos_solid_tile(pos + move_vec):
+				return WallState.WALL
+			return WallState.NONE
+
+		# Walk left
+		if _pos_solid_tile(pos + move_vec + Utils.dir_to_vec2(ground_dir)):
+			return WallState.FLAT
+		# Corner turn
+		if _pos_open(pos + move_vec + Utils.dir_to_vec2(ground_dir)) and Globals.ALLOW_CORNER_TURN:
+			return WallState.CORNER
+		return WallState.NONE
+
+
+
 	func _post_init():
 		pass
 
@@ -83,20 +107,21 @@ class Player:
 		 and other_player.pos != test_pos
 
 	func _move_internal(move_vec: Vector2i) -> bool:
+		var wall_state := checkWallState(pos, move_vec)
 		# spot on the left is open
 		if not _pos_open(pos + move_vec):
 			return false
+		match wall_state:
+			WallState.FLAT:
+				pos = pos + move_vec
+				return true
+			WallState.CORNER:
+				pos = pos + move_vec + Utils.dir_to_vec2(ground_dir)
+				ground_dir = Utils.vec2i_to_dir(-move_vec)# turn around
+				return true
+			_: # WALL, NONE
+				return false
 
-		# Walk left
-		if _pos_solid_tile(pos + move_vec + Utils.dir_to_vec2(ground_dir)):
-			pos = pos + move_vec
-			return true
-		# Corner turn
-		if _pos_open(pos + move_vec + Utils.dir_to_vec2(ground_dir)) and Globals.ALLOW_CORNER_TURN:
-			pos = pos + move_vec + Utils.dir_to_vec2(ground_dir)
-			ground_dir = Utils.vec2i_to_dir(-move_vec)# turn around
-			return true
-		return false
 	
 	func _rotate_to_wall(_move_vec : Vector2i) -> bool:
 		if _pos_solid_tile(pos + _move_vec):
@@ -327,6 +352,9 @@ func _ready() -> void:
 	triangle.update_graphics()
 
 
+# # # # MOVE LOGIC # # # #
+# ====================== #
+
 var time = 0.0
 var time2 = 0.0
 var move_count_sq : int = 0
@@ -370,8 +398,6 @@ func _physics_process(delta: float) -> void:
 	elif move_count_tri < 0 and not tri_wait_move:
 		triangle.move_left()
 		move_count_tri += 1
-	
-
 
 func _square_dragged(drag_vector: Vector2) -> void:
 	# Triangle on square rn and rule says lock
@@ -409,6 +435,7 @@ func _triangle_dragged(drag_vector: Vector2) -> void:
 		return
 
 	var drag_dir = Utils.vec2_to_dir(drag_vector)
+	# dragged up.
 	if triangle.ground_dir == drag_dir or triangle.ground_dir == posmod(drag_dir + 2, 4):
 		return
 
