@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdbxu7uuqbtap"
-path="res://.godot/imported/pixel_tilemap_farm.png-dc75784f9c18779785e814ca0cb05e5f.ctex"
+uid="uid://cua6qxignc6q7"
+path="res://.godot/imported/marble_packed.png-3f30eb09068275c7c0b1b5acf31a4b4b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/pixel_tilemap_farm.png"
-dest_files=["res://.godot/imported/pixel_tilemap_farm.png-dc75784f9c18779785e814ca0cb05e5f.ctex"]
+source_file="res://assets/tiles/marble_packed.png"
+dest_files=["res://.godot/imported/marble_packed.png-3f30eb09068275c7c0b1b5acf31a4b4b.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdbxu7uuqbtap"
-path="res://.godot/imported/pixel_tilemap_farm.png-dc75784f9c18779785e814ca0cb05e5f.ctex"
+uid="uid://ccdm4baxnua4m"
+path="res://.godot/imported/rock_packed.png-494b379d2129b645206f9c8570c05aa9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/pixel_tilemap_farm.png"
-dest_files=["res://.godot/imported/pixel_tilemap_farm.png-dc75784f9c18779785e814ca0cb05e5f.ctex"]
+source_file="res://assets/tiles/rock_packed.png"
+dest_files=["res://.godot/imported/rock_packed.png-494b379d2129b645206f9c8570c05aa9.ctex"]
 
 [params]
 

@@ -1,13 +1,13 @@
 [gd_resource type="TileSet" format=3 uid="uid://bxraeyfwyfb56"]
 
-[ext_resource type="Texture2D" uid="uid://cxded2mm1mfbl" path="res://assets/tiles/spritesheet-tiles-double.png" id="1_qbas8"]
-[ext_resource type="Texture2D" uid="uid://b8o0mumcjme5y" path="res://assets/tiles/pixel_platformer.png" id="2_781po"]
-[ext_resource type="Texture2D" uid="uid://ccb0umm4ho7s8" path="res://assets/tiles/pixel_town.png" id="3_781po"]
-[ext_resource type="Texture2D" uid="uid://cun1ty7ws41co" path="res://assets/tiles/bg_tile.png" id="4_40l5v"]
-[ext_resource type="Texture2D" uid="uid://bhpsnbl6kvs3n" path="res://assets/tiles/pixel_tilemap_candy.png" id="5_axu28"]
-[ext_resource type="Texture2D" uid="uid://py2m6afvbf6l" path="res://assets/tiles/background_sprite_pixel.png" id="5_utuhk"]
-[ext_resource type="Texture2D" uid="uid://bkn6hqv36b53j" path="res://assets/tiles/pixel_tilemap_farm.png" id="7_pnw8a"]
-[ext_resource type="Texture2D" uid="uid://b8k3abvtj4avp" path="res://assets/tiles/pixel_tilemap_industrial.png" id="8_b2vbq"]
+[ext_resource type="Texture2D" uid="uid://c1jgfqwh2pd8q" path="res://assets/tiles/spritesheet-tiles-double.png" id="1_qbas8"]
+[ext_resource type="Texture2D" uid="uid://cdh7tbcmcndnq" path="res://assets/tiles/pixel_platformer.png" id="2_781po"]
+[ext_resource type="Texture2D" uid="uid://cpnbifx1sagxq" path="res://assets/tiles/pixel_town.png" id="3_781po"]
+[ext_resource type="Texture2D" uid="uid://bqxrxxxqyl3s8" path="res://assets/tiles/bg_tile.png" id="4_40l5v"]
+[ext_resource type="Texture2D" uid="uid://csl132wvbwwj6" path="res://assets/tiles/pixel_tilemap_candy.png" id="5_axu28"]
+[ext_resource type="Texture2D" uid="uid://oii28vse5ykd" path="res://assets/tiles/background_sprite_pixel.png" id="5_utuhk"]
+[ext_resource type="Texture2D" uid="uid://cdbxu7uuqbtap" path="res://assets/tiles/pixel_tilemap_farm.png" id="7_pnw8a"]
+[ext_resource type="Texture2D" uid="uid://cnaq3iqeqvil7" path="res://assets/tiles/pixel_tilemap_industrial.png" id="8_b2vbq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qbas8"]
 resource_name = "big"
@@ -1054,7 +1054,7 @@ texture_region_size = Vector2i(18, 18)
 15:5/0 = 0
 
 [resource]
-tile_size = Vector2i(128, 128)
+tile_size = Vector2i(18, 18)
 sources/0 = SubResource("TileSetAtlasSource_qbas8")
 sources/1 = SubResource("TileSetAtlasSource_40l5v")
 sources/2 = SubResource("TileSetAtlasSource_utuhk")
