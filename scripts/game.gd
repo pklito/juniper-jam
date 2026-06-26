@@ -406,10 +406,6 @@ func _physics_process(delta: float) -> void:
 		move_count_tri += 1
 
 func _square_dragged(drag_vector: Vector2) -> void:
-	# Triangle on square rn and rule says lock
-	if Globals.CLIMB_RULE == Globals.ClimbRules.LOCK and triangle.pos + Utils.dir_to_vec2(triangle.ground_dir) == square.pos:
-		return
-
 	# Currently moving
 	if move_count_sq != 0:
 		return
@@ -422,17 +418,6 @@ func _square_dragged(drag_vector: Vector2) -> void:
 	if drag_dir == posmod(square.ground_dir + + Utils.Dirs.LEFT, 4):
 		move_count_sq = -4
 
-	if Globals.MOVE_RULE != Globals.MoveRules.FREE_COPY_MOVEMENT and \
-	Globals.MOVE_RULE != Globals.MoveRules.FREE_COPY_MOVEMENT_INVERSE:
-		return
-	var mult : int = 1
-	if Globals.MOVE_RULE == Globals.MoveRules.FREE_COPY_MOVEMENT_INVERSE:
-		mult = -1
-	tri_wait_move = true
-	if drag_dir == posmod(square.ground_dir + Utils.Dirs.RIGHT, 4):
-		move_count_tri = 3 * mult
-	if drag_dir == posmod(square.ground_dir + + Utils.Dirs.LEFT, 4):
-		move_count_tri = -3 * mult
 
 
 func _triangle_dragged(drag_vector: Vector2) -> void:
@@ -449,15 +434,3 @@ func _triangle_dragged(drag_vector: Vector2) -> void:
 		move_count_tri = 3
 	if drag_dir == posmod(triangle.ground_dir + Utils.Dirs.LEFT, 4):
 		move_count_tri = -3
-
-	if Globals.MOVE_RULE != Globals.MoveRules.FREE_COPY_MOVEMENT and \
-	Globals.MOVE_RULE != Globals.MoveRules.FREE_COPY_MOVEMENT_INVERSE:
-		return
-	var mult : int = 1
-	if Globals.MOVE_RULE == Globals.MoveRules.FREE_COPY_MOVEMENT_INVERSE:
-		mult = -1
-	sq_wait_move = true
-	if drag_dir == posmod(triangle.ground_dir + Utils.Dirs.RIGHT, 4):
-		move_count_sq = 4 * mult
-	if drag_dir == posmod(triangle.ground_dir + Utils.Dirs.LEFT, 4):
-		move_count_sq = -4 * mult
