@@ -22,8 +22,8 @@ func _on_button_pressed():
 	
 	square = Game.PlayerSquare.new(_tc, tiles, game.player_sq_node, game.square_start_pos, game.square_start_dir)
 	triangle = Game.PlayerTriangle.new(_tc, tiles, game.player_tri_node, game.triangle_start_pos, game.triangle_start_dir)
-	game.player_sq_node.scale = _tc.pixel_scale * Vector2(1,1)
-	game.player_tri_node.scale = 2 * _tc.pixel_scale * Vector2(1,1)
+	game.player_sq_node.scale = 9 *  Vector2(1,1) / _tc.target_width
+	game.player_tri_node.scale = 9 * 2 *  Vector2(1,1) / _tc.target_width
 	
 	#var array := []
 	#for a in tiles.get_used_cells():

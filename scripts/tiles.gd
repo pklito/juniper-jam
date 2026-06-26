@@ -5,6 +5,7 @@ var height : int
 var tile_pixels : int
 var canvas_size : Vector2i
 var pixel_scale : float
+var target_width : int
 
 static func calculate_pixel_scale(_tile_pixels:int, _canvas_size:Vector2i, _target_width : int ) -> float:
 	return float(_canvas_size.x) / (_target_width * _tile_pixels)
@@ -16,6 +17,7 @@ func _init(_tile_pixels:int, _canvas_size:Vector2i, _target_width : int ) -> voi
 	# How much are the tiles are scaled up
 	pixel_scale = calculate_pixel_scale(_tile_pixels, _canvas_size, _target_width)
 	height = ceil(canvas_size.y / (pixel_scale * _tile_pixels))
+	target_width = _target_width
 
 func get_tile_type(layer : TileMapLayer, pos: Vector2i) -> Utils.TileType:
 	var tile_id = layer.get_cell_atlas_coords(pos)
