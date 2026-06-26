@@ -1,0 +1,77 @@
+[gd_resource type="TileSet" format=3 uid="uid://hert11wmnp0r"]
+
+[ext_resource type="Texture2D" uid="uid://oii28vse5ykd" path="res://assets/tiles/background_sprite_pixel.png" id="1_2i2wc"]
+[ext_resource type="Texture2D" uid="uid://bqxrxxxqyl3s8" path="res://assets/tiles/bg_tile.png" id="2_fcv6r"]
+[ext_resource type="Texture2D" uid="uid://df480pjt3wtcl" path="res://assets/tiles/spritesheet-backgrounds-double.png" id="3_8rtll"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbkul"]
+texture = ExtResource("1_2i2wc")
+texture_region_size = Vector2i(129, 129)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sjt7d"]
+texture = ExtResource("2_fcv6r")
+separation = Vector2i(1, 1)
+texture_region_size = Vector2i(24, 24)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y1tsq"]
+texture = ExtResource("3_8rtll")
+separation = Vector2i(1, 1)
+texture_region_size = Vector2i(512, 512)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+
+[resource]
+tile_size = Vector2i(512, 512)
+sources/0 = SubResource("TileSetAtlasSource_lbkul")
+sources/1 = SubResource("TileSetAtlasSource_sjt7d")
+sources/2 = SubResource("TileSetAtlasSource_y1tsq")

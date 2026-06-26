@@ -1,84 +1,9 @@
 [gd_scene format=4 uid="uid://bmq6wwhcmo1ju"]
 
-[ext_resource type="TileSet" uid="uid://bxraeyfwyfb56" path="res://scenes/world.tres" id="1_gofpn"]
 [ext_resource type="PackedScene" uid="uid://62yfwwiwcwao" path="res://scenes/game.tscn" id="2_0d4ob"]
 [ext_resource type="TileSet" uid="uid://b74258bt24i7j" path="res://scenes/world_18.tres" id="2_nbjh1"]
 [ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/updater.gd" id="3_nbjh1"]
-[ext_resource type="Texture2D" uid="uid://oii28vse5ykd" path="res://assets/tiles/background_sprite_pixel.png" id="5_otrkh"]
-[ext_resource type="Texture2D" uid="uid://bqxrxxxqyl3s8" path="res://assets/tiles/bg_tile.png" id="6_8twfn"]
-[ext_resource type="Texture2D" uid="uid://df480pjt3wtcl" path="res://assets/tiles/spritesheet-backgrounds-double.png" id="7_8twfn"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbkul"]
-texture = ExtResource("5_otrkh")
-texture_region_size = Vector2i(129, 129)
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sjt7d"]
-texture = ExtResource("6_8twfn")
-separation = Vector2i(1, 1)
-texture_region_size = Vector2i(24, 24)
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-4:0/0 = 0
-5:0/0 = 0
-6:0/0 = 0
-7:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-4:1/0 = 0
-5:1/0 = 0
-6:1/0 = 0
-7:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-4:2/0 = 0
-5:2/0 = 0
-6:2/0 = 0
-7:2/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y1tsq"]
-texture = ExtResource("7_8twfn")
-separation = Vector2i(1, 1)
-texture_region_size = Vector2i(512, 512)
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_8w10v"]
-tile_size = Vector2i(512, 512)
-sources/0 = SubResource("TileSetAtlasSource_lbkul")
-sources/1 = SubResource("TileSetAtlasSource_sjt7d")
-sources/2 = SubResource("TileSetAtlasSource_y1tsq")
+[ext_resource type="TileSet" uid="uid://hert11wmnp0r" path="res://scenes/bg.tres" id="5_otrkh"]
 
 [node name="level" type="Node2D" unique_id=2085040009]
 texture_filter = 1
@@ -87,20 +12,18 @@ texture_filter = 1
 self_modulate = Color(0.66218436, 0.5407247, 0.6722941, 1)
 scale = Vector2(4, 4)
 tile_map_data = PackedByteArray("AAAIAAMAAgAJAAcAAAAFAAcAAgAKAAgAAAA=")
-tile_set = ExtResource("1_gofpn")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=805806671]
 scale = Vector2(4, 4)
 tile_map_data = PackedByteArray("AAAAAAgACQABAAQAAAABAAgACQABAAQAAAACAAgACQABAAQAAAADAAgACQABAAQAAAAEAAgACQABAAQAAAAFAAgACQABAAYAAAADAAcACQABAAYAAAACAAcACQABAAQAAAABAAcACQABAAQAAAAHAAcACQABAAYAAAAHAAgACQAEAAcAAAAGAAgACQAEAAcAAAAIAAgACQABAAcAAAAJAAgACQABAAcAAAAKAAgACQABAAQAAAALAAgACQABAAQAAAALAAcACQABAAMAAAAKAAcACQABAAMAAAAJAAcACQABAAMAAAAIAAcACQABAAMAAAAMAAgACQAEAAcAAAANAAgACQABAAQAAAAOAAgACQABAAQAAAANAAcACQABAAYAAAAMAAcACQABAAYAAAAPAAgACQABAAQAAAAPAAcACQABAAcAAAAOAAcACQABAAQAAAAOAAYACQAAAAcAAAAPAAYACQABAAQAAAAPAAUACQABAAQAAAAOAAUACQAAAAcAAAAOAAQACQABAAQAAAANAAQACQAAAAgAAAAPAAQACQABAAQAAAAOAAMACQABAAQAAAANAAMACQAAAAQAAAAOAAIACQABAAQAAAAPAAIACQAEAAcAAAANAAIACQAAAAQAAAAPAAMACQAEAAcAAAAPAAEACQAEAAcAAAAOAAEACQABAAQAAAANAAEACQABAAQAAAAOAAAACQAEAAcAAAAPAAAACQABAAQAAAANAAAACQABAAQAAAAMAAAACQABAAQAAAALAAAACQABAAQAAAAKAAAACQABAAQAAAAJAAAACQABAAcAAAAIAAAACQABAAQAAAAHAAAACQABAAQAAAAGAAAACQABAAQAAAAFAAAACQABAAQAAAAEAAAACQABAAQAAAADAAAACQABAAQAAAACAAAACQAEAAcAAAABAAAACQABAAQAAAAAAAAACQABAAQAAAAAAAEACQABAAQAAAABAAEACQABAAQAAAABAAIACQABAAQAAAAAAAIACQABAAQAAAAAAAMACQABAAQAAAAAAAQACQABAAQAAAABAAQACQAEAAcAAAAAAAUACQABAAQAAAABAAUACQABAAQAAAAAAAYACQABAAQAAAABAAYACQABAAQAAAAAAAcACQABAAQAAAACAAYACQACAAcAAAAMAAEACQABAAgAAAALAAEACQABAAgAAAAKAAEACQABAAgAAAAJAAEACQABAAgAAAAIAAEACQABAAgAAAAHAAEACQABAAgAAAAGAAEACQABAAgAAAAFAAEACQABAAgAAAAEAAEACQABAAgAAAADAAEACQABAAQAAAACAAEACQABAAQAAAABAAMACQABAAQAAAAJAAQABwAHAAAAAAAIAAQABwAGAAAAAAAHAAQABwAGAAEAAAAGAAQABwAGAAAAAAAFAAQABwAFAAAAAAAHAAUABwAEAAMAAAAEAAcACQACAAYAAAAGAAcACQAAAAYAAAACAAUACQACAAcAAAACAAQACQACAAcAAAACAAMACQACAAcAAAACAAIACQABAAQAAAADAAIACQACAAgAAAA=")
 tile_set = ExtResource("2_nbjh1")
 
-[node name="Game" parent="." unique_id=1530119459 node_paths=PackedStringArray("tiles", "need_scaling") instance=ExtResource("2_0d4ob")]
+[node name="Game" parent="." unique_id=1530119459 node_paths=PackedStringArray("tiles") instance=ExtResource("2_0d4ob")]
 move_rule = 0
 square_start_pos = Vector2i(5, 3)
 triangle_start_pos = Vector2i(11, 6)
 target_tiles_wide = 16
 tiles = NodePath("../TileMapLayer")
-need_scaling = [NodePath("../cosmetics"), NodePath("../TileMapLayer")]
 tile_size = 18
 
 [node name="updater" type="Node2D" parent="." unique_id=1571433443 node_paths=PackedStringArray("game")]
@@ -111,4 +34,4 @@ game = NodePath("../Game")
 z_index = -10
 position = Vector2(0, 100)
 tile_map_data = PackedByteArray("AAAAAAAAAgACAAEAAAABAAAAAgADAAEAAAACAAAAAgACAAEAAAACAAEAAgABAAMAAAABAAEAAgABAAMAAAAAAAEAAgABAAMAAAACAP//AgAAAAAAAAABAP//AgAAAAAAAAAAAP//AgAAAAAAAAA=")
-tile_set = SubResource("TileSet_8w10v")
+tile_set = ExtResource("5_otrkh")

@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cnaq3iqeqvil7" path="res://assets/tiles/pixel_tilemap_industrial.png" id="8_6y0ir"]
 [ext_resource type="Texture2D" uid="uid://ccdm4baxnua4m" path="res://assets/tiles/rock_packed.png" id="8_u8pus"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vlxxb"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hbhk0"]
 resource_name = "legacy"
 texture = ExtResource("1_x1h6c")
 separation = Vector2i(1, 1)
@@ -284,52 +284,52 @@ texture_region_size = Vector2i(128, 128)
 15:14/0 = 0
 16:14/0 = 0
 17:14/0 = 0
+0:15/0 = 0
+1:15/0 = 0
 2:15/0 = 0
 3:15/0 = 0
 4:15/0 = 0
+5:15/0 = 0
+6:15/0 = 0
+7:15/0 = 0
+8:15/0 = 0
+9:15/0 = 0
 10:15/0 = 0
 11:15/0 = 0
+12:15/0 = 0
+13:15/0 = 0
+14:15/0 = 0
+15:15/0 = 0
+16:15/0 = 0
 17:15/0 = 0
+0:16/0 = 0
 1:16/0 = 0
 2:16/0 = 0
 3:16/0 = 0
 4:16/0 = 0
 5:16/0 = 0
+6:16/0 = 0
+7:16/0 = 0
+8:16/0 = 0
 9:16/0 = 0
 10:16/0 = 0
 11:16/0 = 0
+12:16/0 = 0
+13:16/0 = 0
+14:16/0 = 0
 15:16/0 = 0
 16:16/0 = 0
 17:16/0 = 0
+0:17/0 = 0
 1:17/0 = 0
 2:17/0 = 0
 3:17/0 = 0
 4:17/0 = 0
 5:17/0 = 0
-0:15/0 = 0
-0:16/0 = 0
-0:17/0 = 0
-1:15/0 = 0
-5:15/0 = 0
-6:15/0 = 0
-6:16/0 = 0
 6:17/0 = 0
-7:15/0 = 0
-7:16/0 = 0
 7:17/0 = 0
-8:15/0 = 0
-8:16/0 = 0
-9:15/0 = 0
-12:15/0 = 0
-12:16/0 = 0
-13:15/0 = 0
-13:16/0 = 0
-14:15/0 = 0
-14:16/0 = 0
-15:15/0 = 0
-16:15/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x1h6c"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ti2ow"]
 texture = ExtResource("7_u8pus")
 texture_region_size = Vector2i(18, 18)
 0:0/0 = 0
@@ -414,7 +414,7 @@ texture_region_size = Vector2i(18, 18)
 7:8/0 = 0
 8:8/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u8pus"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8lq1k"]
 texture = ExtResource("2_u8pus")
 texture_region_size = Vector2i(18, 18)
 0:0/0 = 0
@@ -598,7 +598,7 @@ texture_region_size = Vector2i(18, 18)
 18:8/0 = 0
 19:8/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7lxcw"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r78i1"]
 texture = ExtResource("8_6y0ir")
 texture_region_size = Vector2i(18, 18)
 0:0/0 = 0
@@ -714,7 +714,7 @@ texture_region_size = Vector2i(18, 18)
 14:6/0 = 0
 15:6/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lvq51"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_km60l"]
 texture = ExtResource("7_d2nl1")
 texture_region_size = Vector2i(18, 18)
 0:0/0 = 0
@@ -830,7 +830,7 @@ texture_region_size = Vector2i(18, 18)
 14:6/0 = 0
 15:6/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_35tgq"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nh3hi"]
 texture = ExtResource("5_35tgq")
 texture_region_size = Vector2i(18, 18)
 0:0/0 = 0
@@ -946,7 +946,7 @@ texture_region_size = Vector2i(18, 18)
 14:6/0 = 0
 15:6/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rqvfd"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0ycyl"]
 texture = ExtResource("8_u8pus")
 texture_region_size = Vector2i(18, 18)
 0:0/0 = 0
@@ -1031,7 +1031,7 @@ texture_region_size = Vector2i(18, 18)
 7:8/0 = 0
 8:8/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d2nl1"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_plglp"]
 texture = ExtResource("3_x1h6c")
 texture_region_size = Vector2i(18, 18)
 0:0/0 = 0
@@ -1118,11 +1118,11 @@ texture_region_size = Vector2i(18, 18)
 
 [resource]
 tile_size = Vector2i(18, 18)
-sources/0 = SubResource("TileSetAtlasSource_vlxxb")
-sources/4 = SubResource("TileSetAtlasSource_u8pus")
-sources/5 = SubResource("TileSetAtlasSource_7lxcw")
-sources/6 = SubResource("TileSetAtlasSource_lvq51")
-sources/7 = SubResource("TileSetAtlasSource_35tgq")
-sources/8 = SubResource("TileSetAtlasSource_rqvfd")
-sources/9 = SubResource("TileSetAtlasSource_d2nl1")
-sources/10 = SubResource("TileSetAtlasSource_x1h6c")
+sources/0 = SubResource("TileSetAtlasSource_hbhk0")
+sources/4 = SubResource("TileSetAtlasSource_8lq1k")
+sources/5 = SubResource("TileSetAtlasSource_r78i1")
+sources/6 = SubResource("TileSetAtlasSource_km60l")
+sources/7 = SubResource("TileSetAtlasSource_nh3hi")
+sources/8 = SubResource("TileSetAtlasSource_0ycyl")
+sources/9 = SubResource("TileSetAtlasSource_plglp")
+sources/10 = SubResource("TileSetAtlasSource_ti2ow")
