@@ -71,18 +71,18 @@ class Player:
 	func getRightDir() -> Utils.Dirs:
 		return posmod(ground_dir + Utils.Dirs.RIGHT, 4) as Utils.Dirs
 
-	func checkWallState(pos : Vector2i, move_vec : Vector2i) -> WallState:
+	func checkWallState(_pos : Vector2i, move_vec : Vector2i) -> WallState:
 		# spot on the left is not open (no movement can be done)
-		if not _pos_open(pos + move_vec):
-			if _pos_solid_tile(pos + move_vec):
+		if not _pos_open(_pos + move_vec):
+			if _pos_solid_tile(_pos + move_vec):
 				return WallState.WALL
 			return WallState.NONE
 
 		# Walk left
-		if _pos_solid_tile(pos + move_vec + Utils.dir_to_vec2(ground_dir)):
+		if _pos_solid_tile(_pos + move_vec + Utils.dir_to_vec2(ground_dir)):
 			return WallState.FLAT
 		# Corner turn
-		if _pos_open(pos + move_vec + Utils.dir_to_vec2(ground_dir)) and Globals.ALLOW_CORNER_TURN:
+		if _pos_open(_pos + move_vec + Utils.dir_to_vec2(ground_dir)) and Globals.ALLOW_CORNER_TURN:
 			return WallState.CORNER
 		return WallState.NONE
 
