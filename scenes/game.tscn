@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://dofe8bevlqgme" path="res://scripts/game.gd" id="1_u5sy4"]
 [ext_resource type="Script" uid="uid://dse7q81xgayki" path="res://scripts/inputs.gd" id="2_gee14"]
-[ext_resource type="Texture2D" uid="uid://c6aktakdm85lp" path="res://assets/players/red_body_pixelated.png" id="3_u5sy4"]
-[ext_resource type="Texture2D" uid="uid://b5hxg5eodoaj8" path="res://assets/players/p_smug.png" id="4_gee14"]
+[ext_resource type="Texture2D" uid="uid://b4sb6vvj7kuog" path="res://assets/players/red_body_square.png" id="3_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://c1t00sitjliu1" path="res://assets/players/face_h.png" id="4_gee14"]
 [ext_resource type="Script" uid="uid://bngll6a7v7v64" path="res://scripts/triangle.gd" id="5_kvpfn"]
-[ext_resource type="Texture2D" uid="uid://4jnqmvqbih3l" path="res://assets/players/triangle_body_pixel.png" id="6_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://cgfmp0mbm6ndg" path="res://assets/players/triangle_body.png" id="6_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://dxxxuowllmv4q" path="res://assets/players/face_c.png" id="7_kvuet"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w10v"]
@@ -30,19 +30,19 @@ script = ExtResource("2_gee14")
 [node name="pl_square" type="Marker2D" parent="." unique_id=508286169]
 
 [node name="pivot" type="Marker2D" parent="pl_square" unique_id=705792692]
+scale = Vector2(0.4, 0.4)
 
 [node name="base" type="Sprite2D" parent="pl_square/pivot" unique_id=1977819106]
 z_index = -1
 texture_filter = 1
-scale = Vector2(7.2, 7.2)
+scale = Vector2(2, 2)
 texture = ExtResource("3_u5sy4")
 
 [node name="face" type="Sprite2D" parent="pl_square/pivot/base" unique_id=1115629750]
-scale = Vector2(0.7, 0.7)
 texture = ExtResource("4_gee14")
 
 [node name="Area2D" type="Area2D" parent="pl_square/pivot" unique_id=1451123115]
-scale = Vector2(0.8, 0.8)
+scale = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pl_square/pivot/Area2D" unique_id=1689217991]
 position = Vector2(-7.1525556e-06, -7.1525556e-06)
@@ -63,15 +63,15 @@ shape = SubResource("CircleShape2D_bbk5w")
 
 [node name="pivot" type="Marker2D" parent="pl_triangle" unique_id=2093040774]
 position = Vector2(0, 12)
+scale = Vector2(0.125, 0.125)
 
 [node name="player2" type="Sprite2D" parent="pl_triangle/pivot" unique_id=1567448684]
 z_index = -1
 texture_filter = 1
-scale = Vector2(3.207, 3.3)
+scale = Vector2(2.05, 2.109)
 texture = ExtResource("6_u5sy4")
 
 [node name="face" type="Sprite2D" parent="pl_triangle/pivot/player2" unique_id=1376370533]
-scale = Vector2(0.08, 0.08)
 texture = ExtResource("7_kvuet")
 
 [connection signal="dragged_successfully" from="SquareDrag" to="." method="_square_dragged"]

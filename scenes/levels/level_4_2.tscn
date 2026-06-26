@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/updater.gd" id="3_nbjh1"]
 [ext_resource type="Texture2D" uid="uid://oii28vse5ykd" path="res://assets/tiles/background_sprite_pixel.png" id="5_otrkh"]
 [ext_resource type="Texture2D" uid="uid://bqxrxxxqyl3s8" path="res://assets/tiles/bg_tile.png" id="6_8twfn"]
+[ext_resource type="Texture2D" uid="uid://df480pjt3wtcl" path="res://assets/tiles/spritesheet-backgrounds-double.png" id="7_8twfn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbkul"]
 texture = ExtResource("5_otrkh")
@@ -54,10 +55,30 @@ texture_region_size = Vector2i(24, 24)
 6:2/0 = 0
 7:2/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y1tsq"]
+texture = ExtResource("7_8twfn")
+separation = Vector2i(1, 1)
+texture_region_size = Vector2i(512, 512)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_8w10v"]
-tile_size = Vector2i(24, 24)
+tile_size = Vector2i(512, 512)
 sources/0 = SubResource("TileSetAtlasSource_lbkul")
 sources/1 = SubResource("TileSetAtlasSource_sjt7d")
+sources/2 = SubResource("TileSetAtlasSource_y1tsq")
 
 [node name="level" type="Node2D" unique_id=2085040009]
 texture_filter = 1
@@ -88,5 +109,6 @@ game = NodePath("../Game")
 
 [node name="background" type="TileMapLayer" parent="." unique_id=1085033515]
 z_index = -10
-scale = Vector2(10, 10)
+position = Vector2(0, 100)
+tile_map_data = PackedByteArray("AAAAAAAAAgACAAEAAAABAAAAAgADAAEAAAACAAAAAgACAAEAAAACAAEAAgABAAMAAAABAAEAAgABAAMAAAAAAAEAAgABAAMAAAACAP//AgAAAAAAAAABAP//AgAAAAAAAAAAAP//AgAAAAAAAAA=")
 tile_set = SubResource("TileSet_8w10v")
