@@ -389,7 +389,9 @@ func _ready() -> void:
 	goal_sq_node.position = _tc.pos_to_pixel(square_goal_pos)
 	goal_tri_node.position = _tc.pos_to_pixel(triangle_goal_pos)
 
-
+	if Globals.curr_level != 0:
+		audio._test_music()
+		
 	for node in need_scaling:
 		node.scale = _tc.pixel_scale * Vector2(1,1)
 	
@@ -401,6 +403,7 @@ func _ready() -> void:
 
 	undo_stack.push_front([square.pos, square.ground_dir, triangle.pos, triangle.ground_dir])
 
+var skip_held : float = 0
 var reset_held : float = 0
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("undo"):
@@ -411,8 +414,13 @@ func _process(delta: float) -> void:
 	else:
 		reset_held = 0
 
-	if reset_held > 2:
-		Globals.reset_level()
+	if Input.is_action_pressed("skip"):
+		skip_held += delta
+	else:
+		skip_held = 0
+
+	if skip_held > 2:
+		win()
 
 	
 # # # # MOVE LOGIC # # # #
@@ -486,11 +494,12 @@ func _physics_process(delta: float) -> void:
 		audio.next_verse()
 		check_win()
 
+func win():
+	Globals.level_int_manual_update()
+	Globals.next_level()
 func check_win():
 	if square.pos == square_goal_pos and triangle.pos == triangle_goal_pos:
-		Globals.level_int_manual_update()
-		audio._test_music()
-		Globals.next_level()
+		win()
 	pass
 
 func _player_moved(player : Player, drag_dir : Utils.Dirs):
