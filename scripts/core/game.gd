@@ -5,6 +5,9 @@ class_name Game
 @export var climb_rule : Globals.ClimbRules = Globals.CLIMB_RULE
 @export var allow_corner_turn : bool = Globals.ALLOW_CORNER_TURN
 
+@export_group("Music")
+@export var tempo : float = 0.25
+
 @export_group("Level config")
 @export var square_start_pos : Vector2i = Vector2i(6,4)
 @export var square_start_dir : Utils.Dirs = Utils.Dirs.DOWN
@@ -161,12 +164,12 @@ class Player:
 		player_node.position = tile_config.pos_to_pixel(pos)
 		player_node.rotation_degrees = ground_dir * 90
 		anim_floor_angle = ground_dir * 90
-	func move_left() -> void:
+	func move_left(_duration : float) -> bool:
 		var test_dir = get_left_dir()
-		_move_internal(Utils.dir_to_vec2(test_dir))
-	func move_right() -> void:
+		return _move_internal(Utils.dir_to_vec2(test_dir))
+	func move_right(_duration : float) -> bool:
 		var test_dir = get_right_dir()
-		_move_internal(Utils.dir_to_vec2(test_dir))
+		return _move_internal(Utils.dir_to_vec2(test_dir))
 
 	func _do_anim_stumble(duration : float = 0.2):
 		reset_tween()
@@ -187,6 +190,7 @@ class Player:
 		
 
 	func _do_animation(a_pos : Vector2i, a_dir : int, b_pos : Vector2i, b_dir : Utils.Dirs, moved_right : bool, duration : float = 0.2):
+		## # PREVENT SHORT MOVEMENTS
 		reset_tween()
 		if a_pos == b_pos and a_dir == b_dir:
 			_do_anim_stumble(duration)
@@ -242,27 +246,29 @@ class PlayerSquare extends Player:
 	func _post_init():
 		SPIN_DEGREES = 90
 		
-	func move_left() -> void:
+	func move_left(duration : float = 0.2) -> bool:
 		_rotate_to_wall(Utils.dir_to_vec2(get_left_dir()))
 		var pre_pos := pos
 		var pre_dir := ground_dir
-		_move_internal(Utils.dir_to_vec2(get_left_dir()))
+		var ret = _move_internal(Utils.dir_to_vec2(get_left_dir()))
 		var post_pos := pos
 		var post_dir := ground_dir
 		_rotate_to_wall(Utils.dir_to_vec2(get_left_dir()))
 
-		_do_animation(pre_pos, pre_dir, post_pos, post_dir, false)
+		_do_animation(pre_pos, pre_dir, post_pos, post_dir, false, duration)
+		return ret
 
 
-	func move_right() -> void:
+	func move_right(duration : float = 0.2) -> bool:
 		_rotate_to_wall(Utils.dir_to_vec2(get_right_dir()))
 		var pre_pos := pos
 		var pre_dir := ground_dir
-		_move_internal(Utils.dir_to_vec2(get_right_dir()))
+		var ret = _move_internal(Utils.dir_to_vec2(get_right_dir()))
 		var post_pos := pos
 		var post_dir := ground_dir
 		_rotate_to_wall(Utils.dir_to_vec2(get_right_dir()))
-		_do_animation(pre_pos, pre_dir, post_pos, post_dir, true)
+		_do_animation(pre_pos, pre_dir, post_pos, post_dir, true, duration)
+		return ret
 		
 	
 
@@ -275,25 +281,29 @@ class PlayerTriangle extends Player:
 	func _pos_solid_tile(test_pos: Vector2i) -> bool:
 		return super._pos_solid_tile(test_pos) or other_player.pos == test_pos
 	
-	func move_left() -> void:
+	func move_left(duration : float = 0.2) -> bool:
 		var test_dir = get_left_dir()
 		var pre_pos := pos
 		var pre_dir := ground_dir
+		var ret = true
 		if not _move_internal(Utils.dir_to_vec2(test_dir)):
-			_rotate_to_wall(Utils.dir_to_vec2(test_dir))
+			ret = _rotate_to_wall(Utils.dir_to_vec2(test_dir))
 		var post_pos := pos
 		var post_dir := ground_dir
-		_do_animation(pre_pos, pre_dir, post_pos, post_dir, false)
+		_do_animation(pre_pos, pre_dir, post_pos, post_dir, false, duration)
+		return ret
 
-	func move_right() -> void:
+	func move_right(duration : float = 0.2) -> bool:
 		var test_dir = get_right_dir()
 		var pre_pos := pos
 		var pre_dir := ground_dir
+		var ret = true
 		if not _move_internal(Utils.dir_to_vec2(test_dir)):
-			_rotate_to_wall(Utils.dir_to_vec2(test_dir))
+			ret = _rotate_to_wall(Utils.dir_to_vec2(test_dir))
 		var post_pos := pos
 		var post_dir := ground_dir
-		_do_animation(pre_pos, pre_dir, post_pos, post_dir, true)
+		_do_animation(pre_pos, pre_dir, post_pos, post_dir, true, duration)
+		return ret
 
 	func _drop_ground_dir(loop: int = 20) -> int:
 		if loop <= 0:
@@ -370,9 +380,8 @@ func reset_inputs():
 	square.next_move = Utils.Dirs.DOWN
 
 
-
+var duration = 0.2
 var time = 0.0
-var time2 = 0.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	_update_globals()
@@ -383,7 +392,7 @@ func _physics_process(delta: float) -> void:
 	if square.next_move != Utils.Dirs.DOWN and triangle.next_move != Utils.Dirs.DOWN:
 		push_error("BOTH TRYING TO MOVE")
 	
-	if square.move_count == 0 and triangle.move_count == 0 and time >= 0.3:
+	if square.move_count == 0 and triangle.move_count == 0 and time >= duration:
 		if triangle.next_move != Utils.Dirs.DOWN:
 			triangle.move_count = 3 if triangle.next_move == Utils.Dirs.RIGHT else -3
 			reset_inputs()
@@ -391,25 +400,41 @@ func _physics_process(delta: float) -> void:
 			square.move_count = 4 if square.next_move == Utils.Dirs.RIGHT else -4
 			reset_inputs()
 
-	if time < 0.3 or (square.move_count == 0 and triangle.move_count == 0) :
+	if time < duration or (square.move_count == 0 and triangle.move_count == 0) :
 		return
 
 	time = 0
+	var note :int = 4 - absi(square.move_count)
 	if square.move_count > 0:
-		square.move_right()
+		duration = tempo * audio.get_note(note, true)
+		var hit_wall = not square.move_right(min(duration, tempo))
+		audio.play(note, true, hit_wall)
 		square.move_count -= 1
 		triangle.drop_if_floating()
 	elif square.move_count < 0:
-		square.move_left()
+		
+		duration = tempo * audio.get_note(note, true)
+		var hit_wall = not square.move_left(min(duration, tempo))
+		audio.play(note, true, hit_wall)
 		square.move_count += 1
 		triangle.drop_if_floating()
 	
+	note = 3 - abs(triangle.move_count)
 	if triangle.move_count > 0:
-		triangle.move_right()
+		duration = tempo * audio.get_note(note, true)
+		var hit_wall = not triangle.move_right(min(duration, tempo))
+		audio.play(note, false, hit_wall)
+		
 		triangle.move_count -= 1
 	elif triangle.move_count < 0:
-		triangle.move_left()
+		duration = tempo * audio.get_note(note, true)
+		var hit_wall = not triangle.move_left(min(duration, tempo))
+		audio.play(note, false, hit_wall)
+		
 		triangle.move_count += 1
+	
+	if square.move_count == 0 and triangle.move_count == 0:
+		audio.next_verse()
 
 
 func _player_moved(player : Player, drag_dir : Utils.Dirs):
