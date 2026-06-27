@@ -52,9 +52,12 @@ func undo_move():
 	square.update_graphics()
 	triangle.update_graphics()
 	audio.prev_verse()
-	triangle.drop_if_floating()
+	try_drop_and_audio()
 	# AUDIO
 
+func try_drop_and_audio():
+	if triangle.drop_if_floating() >= 0:
+		audio.play_blip()
 
 var _tc : TileSetConfig
 
@@ -348,11 +351,12 @@ class PlayerTriangle extends Player:
 		ground_dir = 0
 		return _drop_ground_dir() # recursive drop until we hit a solid tile
 
-	func drop_if_floating():
+	func drop_if_floating() -> int:
 		var pre_pos := pos
 		var pre_dir := ground_dir
 		var dist := _drop_down()
 		_do_fall_animation(pre_pos, pre_dir, pos, ground_dir, dist)
+		return dist
 
 	
 	func _do_fall_animation(_a_pos : Vector2i, a_dir : Utils.Dirs, b_pos : Vector2i, b_dir : Utils.Dirs, fall : int):
@@ -403,7 +407,7 @@ func _ready() -> void:
 	square.update_graphics()
 	triangle.update_graphics()
 
-	triangle.drop_if_floating()
+	try_drop_and_audio()
 	undo_stack.push_front([square.pos, square.ground_dir, triangle.pos, triangle.ground_dir])
 
 var skip_held : float = 0
@@ -473,14 +477,14 @@ func _physics_process(delta: float) -> void:
 		var hit_wall = not square.move_right(min(duration, tempo))
 		audio.play(note, true, hit_wall)
 		square.move_count -= 1
-		triangle.drop_if_floating()
+		try_drop_and_audio()
 	elif square.move_count < 0:
 		
 		duration = tempo * audio.get_note(note, true)
 		var hit_wall = not square.move_left(min(duration, tempo))
 		audio.play(note, true, hit_wall)
 		square.move_count += 1
-		triangle.drop_if_floating()
+		try_drop_and_audio()
 	
 	note = 3 - abs(triangle.move_count)
 	if triangle.move_count > 0:

@@ -32,7 +32,7 @@ func get_tile_type(layer : TileMapLayer, pos: Vector2i) -> Utils.TileType:
 			return Utils.TileType.OBSTACLE
 	if tile_id == Vector2i(-1,-1):
 		return Utils.TileType.NONE
-	elif layer.get_cell_source_id(pos) == 0 and ( range(8,16).has(tile_id.y) or (tile_id.x >= 12 and tile_id.y == 7)):
+	elif layer.get_cell_source_id(pos) == 0 and ( range(8,16).has(tile_id.y) or (tile_id.x >= 12 and tile_id.y == 7)) or (tile_id.y == 3 and range(10,13).has(tile_id.x)):
 		return Utils.TileType.GROUND
 	elif layer.get_cell_source_id(pos) != 0:
 		for t in triangles:

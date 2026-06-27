@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/peripheral/updater.gd" id="3_4id00"]
 [ext_resource type="Texture2D" uid="uid://cwf3fvk4xj12p" path="res://assets/backgrounds/background_clouds.png" id="4_0v4hy"]
 [ext_resource type="Texture2D" uid="uid://cn0otd6hw8tbh" path="res://assets/backgrounds/background_fade_hills.png" id="5_jiqe5"]
+[ext_resource type="FontFile" uid="uid://eo23eygiatd3" path="res://assets/pixelsport.ttf" id="6_jiqe5"]
 
 [node name="level" type="Node2D" unique_id=2085040009]
 
@@ -65,16 +66,12 @@ texture = ExtResource("5_jiqe5")
 [node name="RichTextLabel2" type="RichTextLabel" parent="." unique_id=1358024430]
 offset_left = 400.0
 offset_top = 582.0
-offset_right = 683.8488
-offset_bottom = 622.0
+offset_right = 756.70105
+offset_bottom = 663.787
 scale = Vector2(1.455, 1.455)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("6_jiqe5")
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[outline_color=#222][color=#000000][wave amp=1 freq=1]Drag the characters to move them[/wave][/color]"
-
-[node name="RichTextLabel" type="RichTextLabel" parent="RichTextLabel2" unique_id=424982782]
-layout_mode = 0
-offset_top = -1.0
-offset_right = 303.09277
-offset_bottom = 39.0
-bbcode_enabled = true
-text = "[outline_color=#222][color=#ffd700][wave amp=1 freq=1]Drag the characters to move them[/wave][/color]"
+text = "[outline_color=#222][color=#afbbff][pulse]Drag the characters to move them[/pulse][/color]"

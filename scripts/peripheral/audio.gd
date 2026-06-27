@@ -108,6 +108,18 @@ func play_note(semitones: float, notes : Array[Instrument] ,volume_db: float = 0
 	# Queue the player for deletion automatically once the sound finishes
 	temporary_player.finished.connect(func(): temporary_player.queue_free())
 
+func play_blip():
+	var temporary_player = AudioStreamPlayer.new()
+	add_child(temporary_player)
+	temporary_player.stream = preload("res://assets/audio/blip.wav")
+	temporary_player.volume_db = -40
+	
+	temporary_player.play()
+	
+	# Queue the player for deletion automatically once the sound finishes
+	temporary_player.finished.connect(func(): temporary_player.queue_free())
+
+
 ## Example wrapper to play a major triad chord (C, E, G) simultaneously
 func play_major_chord() -> void:
 	play_note(0, INSTRUMENTS.music_box)  # Root Instrument (e.g., C)

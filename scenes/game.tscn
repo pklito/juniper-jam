@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dofe8bevlqgme" path="res://scripts/core/game.gd" id="1_u5sy4"]
 [ext_resource type="Script" uid="uid://dse7q81xgayki" path="res://scripts/core/inputs.gd" id="2_gee14"]
+[ext_resource type="Script" uid="uid://coxnpq2w6gyp4" path="res://scenes/h_slider.gd" id="2_ir15t"]
 [ext_resource type="Script" uid="uid://6awxtoi4qaup" path="res://scripts/core/move_handler.gd" id="2_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://b4sb6vvj7kuog" path="res://assets/players/red_body_square.png" id="3_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://c1t00sitjliu1" path="res://assets/players/face_h.png" id="4_gee14"]
@@ -14,6 +15,7 @@
 [ext_resource type="Script" uid="uid://da6u4yyxk5mye" path="res://scenes/goal_effect.gd" id="12_dinhu"]
 [ext_resource type="Texture2D" uid="uid://bdhy1murq8mml" path="res://assets/door_square_128.png" id="13_trtic"]
 [ext_resource type="Texture2D" uid="uid://dyb5fmyl2k3x1" path="res://assets/door_triangle_128.png" id="14_trtic"]
+[ext_resource type="Texture2D" uid="uid://dykmddooq3342" path="res://assets/Speaker_Icon.svg" id="16_ca42v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w10v"]
 size = Vector2(160, 160)
@@ -30,6 +32,16 @@ player_tri_node = NodePath("pl_triangle")
 goal_sq_node = NodePath("goal_square")
 goal_tri_node = NodePath("goal_triangle")
 audio = NodePath("Audio")
+
+[node name="HSlider" type="HSlider" parent="." unique_id=1459741533]
+offset_left = 1013.0
+offset_top = 11.0
+offset_right = 1115.0
+offset_bottom = 62.0
+max_value = 1.0
+step = 0.01
+value = 0.8
+script = ExtResource("2_ir15t")
 
 [node name="MoveHandler" type="Node" parent="." unique_id=1599970169]
 script = ExtResource("2_kvpfn")
@@ -129,6 +141,11 @@ texture = ExtResource("14_trtic")
 z_index = -4
 texture_filter = 1
 scale = Vector2(7, 7)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1977751875]
+position = Vector2(993, 36.000004)
+scale = Vector2(0.046, 0.046)
+texture = ExtResource("16_ca42v")
 
 [connection signal="dragged_successfully" from="SquareDrag" to="." method="_square_dragged"]
 [connection signal="dragged_successfully" from="TriangleDrag" to="." method="_triangle_dragged"]
