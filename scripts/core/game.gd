@@ -39,6 +39,19 @@ class_name Game
 @export var canvas_height: int = 648
 
 # (0,11), (12, 15)
+var undo_stack = []
+
+func undo_move():
+	var move = undo_stack.pop_front()
+	square.pos = move[0]
+	square.ground_dir = move[1]
+	triangle.pos = move[2]
+	triangle.ground_dir = move[3]
+	square.update_graphics()
+	triangle.update_graphics()
+	audio.prev_verse()
+	# AUDIO
+
 
 var _tc : TileSetConfig
 
@@ -385,9 +398,23 @@ func _ready() -> void:
 	square.link(triangle)
 	square.update_graphics()
 	triangle.update_graphics()
+
+	undo_stack.push_front([square.pos, square.ground_dir, triangle.pos, triangle.ground_dir])
+
+var reset_held : float = 0
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("undo"):
+		undo_move()
 	
+	if Input.is_action_pressed("reset"):
+		reset_held += delta
+	else:
+		reset_held = 0
 
+	if reset_held > 2:
+		Globals.reset_level()
 
+	
 # # # # MOVE LOGIC # # # #
 # ====================== #
 
@@ -406,15 +433,21 @@ func _physics_process(delta: float) -> void:
 	triangle.update_graphics_animated()
 	
 	if square.next_move != Utils.Dirs.DOWN and triangle.next_move != Utils.Dirs.DOWN:
-		push_error("BOTH TRYING TO MOVE")
+		# push_error("BOTH TRYING TO MOVE")
+		square.move_count = 4 if square.next_move == Utils.Dirs.RIGHT else -4
+		square.next_move = Utils.Dirs.DOWN
 	
 	if square.move_count == 0 and triangle.move_count == 0 and time >= duration:
 		if triangle.next_move != Utils.Dirs.DOWN:
 			triangle.move_count = 3 if triangle.next_move == Utils.Dirs.RIGHT else -3
 			reset_inputs()
+			undo_stack.push_front([square.pos, square.ground_dir, triangle.pos, triangle.ground_dir])
+
 		if square.next_move != Utils.Dirs.DOWN:
 			square.move_count = 4 if square.next_move == Utils.Dirs.RIGHT else -4
 			reset_inputs()
+			undo_stack.push_front([square.pos, square.ground_dir, triangle.pos, triangle.ground_dir])
+			
 
 	if time < duration or (square.move_count == 0 and triangle.move_count == 0) :
 		return

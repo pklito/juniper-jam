@@ -33,6 +33,9 @@ func play(note : int, is_square: bool, hit_wall : bool = false) -> float:
 func next_verse():
 	verse = posmod(verse + 1, min(MOVES_NOTES_SQUARE.size(),MOVES_NOTES_TRIANGLE.size() ))
 
+func prev_verse():
+	verse = posmod(verse - 1, min(MOVES_NOTES_SQUARE.size(),MOVES_NOTES_TRIANGLE.size() ))
+
 var verse : int = 0
 var MOVES_NOTES_SQUARE = [[n(5,1),	 n(6,1), n(5,1), n(8,2)],
 						  [n(6,1), n(5,0.5), n(5,0.5), n(3,2)], 

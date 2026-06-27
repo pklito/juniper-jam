@@ -43,5 +43,5 @@ func level_int_manual_update():
 	print("FAILED")
 
 func reset_level():
-	get_tree().change_scene_to_file(LEVELS[curr_level])
+	get_tree().change_scene_to_file(current_level_path())
 	
