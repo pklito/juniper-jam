@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="juniper jam"
+run/main_scene="uid://df3gvfjdwr7ua"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

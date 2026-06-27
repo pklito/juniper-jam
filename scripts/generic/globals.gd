@@ -26,6 +26,7 @@ const LEVELS = [
 	"res://scenes/levels/level_3_1.tscn",
 	"res://scenes/levels/level_drop.tscn",
 	"res://scenes/levels/level_4_2.tscn",
+	"res://scenes/levels/level_last.tscn"
 
 ]
 

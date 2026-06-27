@@ -13,7 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://b5rtctiwnv8c6" path="res://assets/audio/mb_e6_1.wav" id="9_vtaks"]
 [ext_resource type="Script" uid="uid://da6u4yyxk5mye" path="res://scenes/goal_effect.gd" id="12_dinhu"]
 [ext_resource type="Texture2D" uid="uid://bdhy1murq8mml" path="res://assets/door_square_128.png" id="13_trtic"]
-[ext_resource type="Texture2D" uid="uid://250oaqryeab8" path="res://assets/door_triangle.png" id="14_ir15t"]
+[ext_resource type="Texture2D" uid="uid://dyb5fmyl2k3x1" path="res://assets/door_triangle_128.png" id="14_trtic"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w10v"]
 size = Vector2(160, 160)
@@ -123,8 +123,7 @@ player = NodePath("../pl_triangle")
 [node name="goal" type="Sprite2D" parent="goal_triangle" unique_id=1723000830]
 z_index = -4
 texture_filter = 1
-scale = Vector2(7, 7)
-texture = ExtResource("14_ir15t")
+texture = ExtResource("14_trtic")
 
 [node name="effect" type="Sprite2D" parent="goal_triangle" unique_id=721069415]
 z_index = -4

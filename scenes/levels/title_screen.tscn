@@ -3,6 +3,8 @@
 [ext_resource type="TileSet" uid="uid://cdhxw33mexips" path="res://assets/tilesets/big_set.tres" id="1_w8mqq"]
 [ext_resource type="PackedScene" uid="uid://62yfwwiwcwao" path="res://scenes/game.tscn" id="2_wwpf4"]
 [ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/peripheral/updater.gd" id="3_4id00"]
+[ext_resource type="Texture2D" uid="uid://cwf3fvk4xj12p" path="res://assets/backgrounds/background_clouds.png" id="4_0v4hy"]
+[ext_resource type="Texture2D" uid="uid://cn0otd6hw8tbh" path="res://assets/backgrounds/background_fade_hills.png" id="5_jiqe5"]
 
 [node name="level" type="Node2D" unique_id=2085040009]
 
@@ -31,3 +33,48 @@ need_scaling = [NodePath("../cosmetics"), NodePath("../TileMapLayer")]
 [node name="updater" type="Node2D" parent="." unique_id=1571433443 node_paths=PackedStringArray("game")]
 script = ExtResource("3_4id00")
 game = NodePath("../Game")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1308823651]
+z_index = -10
+texture_filter = 2
+position = Vector2(466, 74.000015)
+scale = Vector2(1.8964844, 1.8964844)
+texture = ExtResource("4_0v4hy")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1639795876]
+z_index = -10
+texture_filter = 2
+position = Vector2(466, 1035)
+scale = Vector2(1.8964844, 1.8964844)
+texture = ExtResource("5_jiqe5")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=234087198]
+z_index = -10
+texture_filter = 2
+position = Vector2(1432.5, 74.500015)
+scale = Vector2(1.8964844, 1.8964844)
+texture = ExtResource("4_0v4hy")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=164375386]
+z_index = -10
+texture_filter = 2
+position = Vector2(1432.5, 1035.5)
+scale = Vector2(1.8964844, 1.8964844)
+texture = ExtResource("5_jiqe5")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="." unique_id=1358024430]
+offset_left = 400.0
+offset_top = 582.0
+offset_right = 683.8488
+offset_bottom = 622.0
+scale = Vector2(1.455, 1.455)
+bbcode_enabled = true
+text = "[outline_color=#222][color=#000000][wave amp=1 freq=1]Drag the characters to move them[/wave][/color]"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="RichTextLabel2" unique_id=424982782]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 303.09277
+offset_bottom = 39.0
+bbcode_enabled = true
+text = "[outline_color=#222][color=#ffd700][wave amp=1 freq=1]Drag the characters to move them[/wave][/color]"
