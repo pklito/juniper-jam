@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/peripheral/updater.gd" id="3_jmkws"]
 [ext_resource type="TileSet" uid="uid://hert11wmnp0r" path="res://assets/tilesets/bg.tres" id="4_crrib"]
 [ext_resource type="FontFile" uid="uid://eo23eygiatd3" path="res://assets/pixelsport.ttf" id="5_hj5q1"]
+[ext_resource type="Script" uid="uid://32tbcv081ik5" path="res://scripts/peripheral/steps.gd" id="6_jmkws"]
 
 [node name="level" type="Node2D" unique_id=2085040009]
 texture_filter = 1
@@ -52,3 +53,18 @@ theme_override_font_sizes/bold_font_size = 16
 bbcode_enabled = true
 text = "[rainbow]YOU WIN[/rainbow]"
 tab_size = 10
+
+[node name="steps" type="RichTextLabel" parent="." unique_id=2059790641]
+offset_left = 19.0
+offset_top = -6.0
+offset_right = 515.9072
+offset_bottom = 67.53953
+scale = Vector2(1.455, 1.455)
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("5_hj5q1")
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+text = "total steps: 0"
+tab_size = 10
+script = ExtResource("6_jmkws")

@@ -62,6 +62,7 @@ func undo_move():
 	square.update_graphics()
 	triangle.update_graphics()
 	audio.prev_verse()
+	Globals.total_steps -= 1
 	try_drop_and_audio()
 	# AUDIO
 	audio.play_note(12, audio.INSTRUMENTS.b, -20)
@@ -400,9 +401,11 @@ class PlayerTriangle extends Player:
 		tween.parallel().tween_property(player_node, "rotation_degrees", anim_floor_angle, rotate_time).from(a_dir * 90).set_delay(rotate_delay)
 
 var init_drop : float = 0
-	
+
+var steps : int = 0
 # Special func
 func _ready() -> void:
+	steps = Globals.total_steps
 	# _update_locals()
 	# setup
 	_tc = TileSetConfig.new(tile_size, Vector2i(canvas_width, canvas_height), target_tiles_wide)
@@ -447,6 +450,7 @@ func _process(delta: float) -> void:
 
 	if reset_held > 2:
 		Globals.reset_level()
+		Globals.total_steps = steps
 
 	if Input.is_action_pressed("skip"):
 		skip_held += delta
@@ -484,11 +488,15 @@ func _physics_process(delta: float) -> void:
 			triangle.move_count = 3 if triangle.next_move == Utils.Dirs.RIGHT else -3
 			reset_inputs()
 			undo_stack.push_front([square.pos, square.ground_dir, triangle.pos, triangle.ground_dir])
+			Globals.total_steps += 1
+
 
 		if square.next_move != Utils.Dirs.DOWN:
 			square.move_count = 4 if square.next_move == Utils.Dirs.RIGHT else -4
 			reset_inputs()
 			undo_stack.push_front([square.pos, square.ground_dir, triangle.pos, triangle.ground_dir])
+			Globals.total_steps += 1
+
 			
 
 	if time < duration or (square.move_count == 0 and triangle.move_count == 0) :

@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cwf3fvk4xj12p" path="res://assets/backgrounds/background_clouds.png" id="4_0v4hy"]
 [ext_resource type="Texture2D" uid="uid://cn0otd6hw8tbh" path="res://assets/backgrounds/background_fade_hills.png" id="5_jiqe5"]
 [ext_resource type="FontFile" uid="uid://eo23eygiatd3" path="res://assets/pixelsport.ttf" id="6_jiqe5"]
+[ext_resource type="Texture2D" uid="uid://ecmbshbs66w8" path="res://assets/arrow.png" id="7_83e8j"]
 
 [node name="level" type="Node2D" unique_id=2085040009]
 
@@ -76,3 +77,17 @@ theme_override_fonts/normal_font = ExtResource("6_jiqe5")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[outline_color=#222][color=#afbbff][pulse]Drag the characters to move them[/pulse][/color]"
+
+[node name="Sprite2D5" type="Sprite2D" parent="." unique_id=1445921796]
+modulate = Color(0.8679762, 0.8758185, 0.88542324, 0.73333335)
+z_index = -3
+position = Vector2(909, 330)
+scale = Vector2(2, 2)
+texture = ExtResource("7_83e8j")
+
+[node name="Sprite2D6" type="Sprite2D" parent="." unique_id=812359127]
+modulate = Color(0.8661112, 0.86611134, 0.86611134, 0.73333335)
+z_index = -3
+position = Vector2(414, 340)
+scale = Vector2(2, 2)
+texture = ExtResource("7_83e8j")
