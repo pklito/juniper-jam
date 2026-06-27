@@ -415,7 +415,18 @@ func _physics_process(delta: float) -> void:
 func _player_moved(player : Player, drag_dir : Utils.Dirs):
 	reset_inputs()
 	if player.ground_dir == drag_dir:
-		return
+		var left_wall := player.checkWallState(Utils.dir_to_vec2(player.get_left_dir()))
+		var right_wall := player.checkWallState(Utils.dir_to_vec2(player.get_right_dir()))
+		match [left_wall, right_wall]:
+			[Player.WallState.CORNER, Player.WallState.CORNER]:
+				return
+			[Player.WallState.CORNER, _]:
+				drag_dir = player.get_left_dir()
+			[_, Player.WallState.CORNER]:
+				drag_dir = player.get_right_dir()
+			_:
+				return
+
 	if player.ground_dir == posmod(drag_dir + Utils.Dirs.UP, 4):
 		var left_wall := player.checkWallState(Utils.dir_to_vec2(player.get_left_dir()))
 		var right_wall := player.checkWallState(Utils.dir_to_vec2(player.get_right_dir()))
