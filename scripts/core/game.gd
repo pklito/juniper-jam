@@ -58,6 +58,10 @@ class Player:
 	var other_player: Player
 	var pivot_node : Node2D
 
+	# movement
+	var move_count : int
+	var next_move : Utils.Dirs
+
 	enum WallState{
 		FLAT,
 		CORNER,
@@ -361,104 +365,85 @@ func _ready() -> void:
 # # # # MOVE LOGIC # # # #
 # ====================== #
 
+func reset_inputs():
+	triangle.next_move = Utils.Dirs.DOWN
+	square.next_move = Utils.Dirs.DOWN
+
+
+
 var time = 0.0
 var time2 = 0.0
-var move_count_sq : int = 0
-var move_count_tri : int = 0
-var tri_wait_move : bool = false
-var sq_wait_move : bool = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	_update_globals()
 	time += delta
-	time2 += delta
 	square.update_graphics_animated()
 	triangle.update_graphics_animated()
 	
-	if time < 0.3:
+	if square.next_move != Utils.Dirs.DOWN and triangle.next_move != Utils.Dirs.DOWN:
+		push_error("BOTH TRYING TO MOVE")
+	
+	if square.move_count == 0 and triangle.move_count == 0 and time >= 0.3:
+		if triangle.next_move != Utils.Dirs.DOWN:
+			triangle.move_count = 3 if triangle.next_move == Utils.Dirs.RIGHT else -3
+			reset_inputs()
+		if square.next_move != Utils.Dirs.DOWN:
+			square.move_count = 4 if square.next_move == Utils.Dirs.RIGHT else -4
+			reset_inputs()
+
+	if time < 0.3 or (square.move_count == 0 and triangle.move_count == 0) :
 		return
 
-	if move_count_sq == 0:
-		tri_wait_move = false
-	if move_count_tri == 0:
-		sq_wait_move = false
-	
-	if sq_wait_move and tri_wait_move:
-		push_error("MUTEX on waits")
-		sq_wait_move = false
-		tri_wait_move = false
-	
 	time = 0
-	if move_count_sq > 0 and not sq_wait_move:
+	if square.move_count > 0:
 		square.move_right()
-		move_count_sq -= 1
+		square.move_count -= 1
 		triangle.drop_if_floating()
-	elif move_count_sq < 0 and not sq_wait_move:
+	elif square.move_count < 0:
 		square.move_left()
-		move_count_sq += 1
+		square.move_count += 1
 		triangle.drop_if_floating()
 	
-	if move_count_tri > 0 and not tri_wait_move:
+	if triangle.move_count > 0:
 		triangle.move_right()
-		move_count_tri -= 1
-	elif move_count_tri < 0 and not tri_wait_move:
+		triangle.move_count -= 1
+	elif triangle.move_count < 0:
 		triangle.move_left()
-		move_count_tri += 1
+		triangle.move_count += 1
 
-func _square_dragged(drag_vector: Vector2) -> void:
-	# Currently moving
-	if move_count_sq != 0:
-		return
-	
-	var drag_dir = Utils.vec2_to_dir(drag_vector)
-	if square.ground_dir == drag_dir:
-		return
 
-	if square.ground_dir == posmod(drag_dir + Utils.Dirs.UP, 4):
-		var left_wall := square.checkWallState(Utils.dir_to_vec2(square.get_left_dir()))
-		var right_wall := square.checkWallState(Utils.dir_to_vec2(square.get_right_dir()))
+func _player_moved(player : Player, drag_dir : Utils.Dirs):
+	reset_inputs()
+	if player.ground_dir == drag_dir:
+		return
+	if player.ground_dir == posmod(drag_dir + Utils.Dirs.UP, 4):
+		var left_wall := player.checkWallState(Utils.dir_to_vec2(player.get_left_dir()))
+		var right_wall := player.checkWallState(Utils.dir_to_vec2(player.get_right_dir()))
 		match [left_wall, right_wall]:
 			[Player.WallState.WALL, Player.WallState.WALL]:
 				return
 			[Player.WallState.WALL, _]:
-				drag_dir = square.get_left_dir()
+				drag_dir = player.get_left_dir()
 			[_, Player.WallState.WALL]:
-				drag_dir = square.get_right_dir()
+				drag_dir = player.get_right_dir()
 			_:
 				return
 
-	if drag_dir == square.get_right_dir():
-		move_count_sq = 4
-	if drag_dir == square.get_left_dir():
-		move_count_sq = -4
+	if drag_dir == player.get_right_dir():
+		player.next_move = Utils.Dirs.RIGHT
+	if drag_dir == player.get_left_dir():
+		player.next_move = Utils.Dirs.LEFT
+
+
+func _square_dragged(drag_vector: Vector2) -> void:
+	var drag_dir = Utils.vec2_to_dir(drag_vector)
+
+	_player_moved(square, drag_dir)
 
 
 
 func _triangle_dragged(drag_vector: Vector2) -> void:
-	# Currently moving
-	if move_count_tri != 0:
-		return
-
 	var drag_dir = Utils.vec2_to_dir(drag_vector)
-	# dragged up.
-	if triangle.ground_dir == drag_dir:
-		return
+	# dragged d
 	
-	if triangle.ground_dir == posmod(drag_dir + Utils.Dirs.UP, 4):
-		var left_wall := triangle.checkWallState(Utils.dir_to_vec2(triangle.get_left_dir()))
-		var right_wall := triangle.checkWallState(Utils.dir_to_vec2(triangle.get_right_dir()))
-		match [left_wall, right_wall]:
-			[Player.WallState.WALL, Player.WallState.WALL]:
-				return
-			[Player.WallState.WALL, _]:
-				drag_dir = triangle.get_left_dir()
-			[_, Player.WallState.WALL]:
-				drag_dir = triangle.get_right_dir()
-			_:
-				return
-
-
-	if drag_dir == posmod(triangle.ground_dir + Utils.Dirs.RIGHT, 4):
-		move_count_tri = 3
-	if drag_dir == posmod(triangle.ground_dir + Utils.Dirs.LEFT, 4):
-		move_count_tri = -3
+	_player_moved(triangle, drag_dir)
