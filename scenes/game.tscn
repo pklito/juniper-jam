@@ -7,11 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://b4sb6vvj7kuog" path="res://assets/players/red_body_square.png" id="3_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://c1t00sitjliu1" path="res://assets/players/face_h.png" id="4_gee14"]
 [ext_resource type="Script" uid="uid://bngll6a7v7v64" path="res://scripts/peripheral/triangle.gd" id="5_kvpfn"]
+[ext_resource type="Texture2D" uid="uid://c2fbggl765ov2" path="res://assets/players/face_b.png" id="6_ssvqc"]
 [ext_resource type="Texture2D" uid="uid://cgfmp0mbm6ndg" path="res://assets/players/triangle_body.png" id="6_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://dxxxuowllmv4q" path="res://assets/players/face_c.png" id="7_kvuet"]
 [ext_resource type="AudioStream" uid="uid://ds5ji7ik64ggv" path="res://assets/audio/blip.wav" id="8_0tnpc"]
+[ext_resource type="Texture2D" uid="uid://dkae7esu8sf5c" path="res://assets/players/face_l_k.png" id="8_1kice"]
 [ext_resource type="Script" uid="uid://bw0bjmadlnh81" path="res://scripts/peripheral/audio.gd" id="8_vtaks"]
 [ext_resource type="AudioStream" uid="uid://b5rtctiwnv8c6" path="res://assets/audio/mb_e6_1.wav" id="9_vtaks"]
+[ext_resource type="Texture2D" uid="uid://b4h31xnwr0h5i" path="res://assets/players/face_l_g.png" id="11_264po"]
+[ext_resource type="Texture2D" uid="uid://svlsy3728cov" path="res://assets/players/face_gr.png" id="12_5newe"]
 [ext_resource type="Script" uid="uid://da6u4yyxk5mye" path="res://scenes/goal_effect.gd" id="12_dinhu"]
 [ext_resource type="Texture2D" uid="uid://bdhy1murq8mml" path="res://assets/door_square_128.png" id="13_trtic"]
 [ext_resource type="Texture2D" uid="uid://dyb5fmyl2k3x1" path="res://assets/door_triangle_128.png" id="14_trtic"]
@@ -23,7 +27,7 @@ size = Vector2(160, 160)
 [sub_resource type="CircleShape2D" id="CircleShape2D_bbk5w"]
 radius = 82.53787
 
-[node name="Game" type="Node2D" unique_id=1530119459 node_paths=PackedStringArray("player_sq_node", "player_tri_node", "goal_sq_node", "goal_tri_node", "audio")]
+[node name="Game" type="Node2D" unique_id=1530119459 node_paths=PackedStringArray("player_sq_node", "player_tri_node", "goal_sq_node", "goal_tri_node", "face_sq_main", "face_sq_alt", "face_sq_goal", "face_tri_main", "face_tri_alt", "face_tri_goal", "audio")]
 script = ExtResource("1_u5sy4")
 move_rule = 2
 climb_rule = 1
@@ -31,6 +35,12 @@ player_sq_node = NodePath("pl_square")
 player_tri_node = NodePath("pl_triangle")
 goal_sq_node = NodePath("goal_square")
 goal_tri_node = NodePath("goal_triangle")
+face_sq_main = NodePath("pl_square/pivot/base/smug")
+face_sq_alt = NodePath("pl_square/pivot/base/bummed")
+face_sq_goal = NodePath("pl_square/pivot/base/happy")
+face_tri_main = NodePath("pl_triangle/pivot/player2/cheery")
+face_tri_alt = NodePath("pl_triangle/pivot/player2/gloat")
+face_tri_goal = NodePath("pl_triangle/pivot/player2/happy")
 audio = NodePath("Audio")
 
 [node name="HSlider" type="HSlider" parent="." unique_id=1459741533]
@@ -63,8 +73,20 @@ texture_filter = 1
 scale = Vector2(2, 2)
 texture = ExtResource("3_u5sy4")
 
-[node name="face" type="Sprite2D" parent="pl_square/pivot/base" unique_id=1115629750]
+[node name="bummed" type="Sprite2D" parent="pl_square/pivot/base" unique_id=351056123]
+position = Vector2(0, 11.249999)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("6_ssvqc")
+
+[node name="smug" type="Sprite2D" parent="pl_square/pivot/base" unique_id=1115629750]
+visible = false
+position = Vector2(0, -1.2499999)
 texture = ExtResource("4_gee14")
+
+[node name="happy" type="Sprite2D" parent="pl_square/pivot/base" unique_id=138272774]
+visible = false
+position = Vector2(0, -1.2499999)
+texture = ExtResource("8_1kice")
 
 [node name="Area2D" type="Area2D" parent="pl_square/pivot" unique_id=1451123115]
 scale = Vector2(2, 2)
@@ -96,8 +118,18 @@ texture_filter = 1
 scale = Vector2(2.05, 2.109)
 texture = ExtResource("6_u5sy4")
 
-[node name="face" type="Sprite2D" parent="pl_triangle/pivot/player2" unique_id=1376370533]
+[node name="cheery" type="Sprite2D" parent="pl_triangle/pivot/player2" unique_id=1376370533]
 texture = ExtResource("7_kvuet")
+
+[node name="gloat" type="Sprite2D" parent="pl_triangle/pivot/player2" unique_id=1963239825]
+visible = false
+position = Vector2(0, -6.565)
+texture = ExtResource("12_5newe")
+
+[node name="happy" type="Sprite2D" parent="pl_triangle/pivot/player2" unique_id=885127099]
+visible = false
+position = Vector2(0, -6.565)
+texture = ExtResource("11_264po")
 
 [node name="Audio" type="Node" parent="." unique_id=1031097757]
 script = ExtResource("8_vtaks")

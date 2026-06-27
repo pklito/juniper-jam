@@ -30,6 +30,16 @@ class_name Game
 @export var goal_sq_node: Node2D
 @export var goal_tri_node: Node2D
 
+@export_group("Faces")
+@export var face_sq_main : Sprite2D
+@export var face_sq_alt : Sprite2D
+@export var face_sq_goal : Sprite2D
+
+@export var face_tri_main : Sprite2D
+@export var face_tri_alt : Sprite2D
+@export var face_tri_goal : Sprite2D
+
+
 @export var audio: AudioScript
 @export var need_scaling: Array[Node2D]
 
@@ -75,6 +85,18 @@ func _update_globals():
 	Globals.MOVE_RULE = move_rule
 	Globals.CLIMB_RULE = climb_rule
 	Globals.ALLOW_CORNER_TURN = allow_corner_turn
+
+func update_faces():
+	face_sq_goal.visible = square.pos == square_goal_pos
+	face_tri_goal.visible = triangle.pos == triangle_goal_pos
+	var leaning_on := (triangle.pos + Utils.dir_to_vec2(triangle.ground_dir)) == square.pos
+	face_sq_alt.visible = not face_sq_goal.visible and leaning_on
+	face_sq_main. visible = not face_sq_goal.visible and not face_sq_alt.visible
+	face_tri_alt.visible = not face_tri_goal.visible and leaning_on
+	face_tri_main. visible = not face_tri_goal.visible and not face_tri_alt.visible
+	
+
+	pass
 
 # Players
 class Player:
@@ -414,6 +436,7 @@ func _ready() -> void:
 var skip_held : float = 0
 var reset_held : float = 0
 func _process(delta: float) -> void:
+	update_faces()
 	if Input.is_action_just_pressed("undo"):
 		undo_move()
 	
