@@ -21,6 +21,7 @@ var MOVE_RULE = MoveRules.FREE_MOVEMENT
 var curr_level = 0
 const LEVELS = [
 	"res://scenes/levels/title_screen.tscn",
+	"res://scenes/levels/level_1.tscn",
 	"res://scenes/levels/level_2.tscn",
 	"res://scenes/levels/level_3_1.tscn",
 	"res://scenes/levels/level_4_2.tscn",

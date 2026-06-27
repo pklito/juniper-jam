@@ -42,6 +42,8 @@ class_name Game
 var undo_stack = []
 
 func undo_move():
+	if undo_stack.size() == 0:
+		return
 	var move = undo_stack.pop_front()
 	square.pos = move[0]
 	square.ground_dir = move[1]
@@ -50,13 +52,14 @@ func undo_move():
 	square.update_graphics()
 	triangle.update_graphics()
 	audio.prev_verse()
+	triangle.drop_if_floating()
 	# AUDIO
 
 
 var _tc : TileSetConfig
 
-var square : Player
-var triangle : Player
+var square : PlayerSquare
+var triangle : PlayerTriangle
 
 func _update_locals():
 	move_rule = Globals.MOVE_RULE
@@ -348,12 +351,8 @@ class PlayerTriangle extends Player:
 	func drop_if_floating():
 		var pre_pos := pos
 		var pre_dir := ground_dir
-		if Globals.CLIMB_RULE == Globals.ClimbRules.FALL_DOWN:
-			var dist := _drop_down()
-			_do_fall_animation(pre_pos, pre_dir, pos, ground_dir, dist)
-		if Globals.CLIMB_RULE == Globals.ClimbRules.FALL_GROUND_DIR:
-			var dist := _drop_ground_dir()
-			_do_fall_animation(pre_pos, pre_dir, pos, ground_dir, dist)
+		var dist := _drop_down()
+		_do_fall_animation(pre_pos, pre_dir, pos, ground_dir, dist)
 
 	
 	func _do_fall_animation(_a_pos : Vector2i, a_dir : Utils.Dirs, b_pos : Vector2i, b_dir : Utils.Dirs, fall : int):
@@ -373,7 +372,7 @@ class PlayerTriangle extends Player:
 		tween.set_trans(Tween.TRANS_SPRING)
 		tween.parallel().tween_property(player_node, "rotation_degrees", anim_floor_angle, rotate_time).from(a_dir * 90).set_delay(rotate_delay)
 
-
+var init_drop : float = 0
 	
 # Special func
 func _ready() -> void:
@@ -404,7 +403,6 @@ func _ready() -> void:
 	square.update_graphics()
 	triangle.update_graphics()
 
-	undo_stack.push_front([square.pos, square.ground_dir, triangle.pos, triangle.ground_dir])
 	triangle.drop_if_floating()
 	undo_stack.push_front([square.pos, square.ground_dir, triangle.pos, triangle.ground_dir])
 
@@ -418,6 +416,9 @@ func _process(delta: float) -> void:
 		reset_held += delta
 	else:
 		reset_held = 0
+
+	if reset_held > 2:
+		Globals.reset_level()
 
 	if Input.is_action_pressed("skip"):
 		skip_held += delta
