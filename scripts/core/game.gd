@@ -27,6 +27,9 @@ class_name Game
 @export var tiles: TileMapLayer
 @export var player_sq_node: Node2D
 @export var player_tri_node: Node2D
+@export var goal_sq_node: Node2D
+@export var goal_tri_node: Node2D
+
 @export var audio: AudioScript
 @export var need_scaling: Array[Node2D]
 
@@ -367,6 +370,12 @@ func _ready() -> void:
 	tiles.scale = _tc.pixel_scale * Vector2(1,1)
 	player_sq_node.scale = 9 * Vector2(1,1) / target_tiles_wide
 	player_tri_node.scale = 9 * 2 * Vector2(1,1) / target_tiles_wide
+	goal_sq_node.scale = 9 * Vector2(1,1) / target_tiles_wide
+	goal_tri_node.scale = 9 * Vector2(1,1) / target_tiles_wide
+	
+	goal_sq_node.position = _tc.pos_to_pixel(square_goal_pos)
+	goal_tri_node.position = _tc.pos_to_pixel(triangle_goal_pos)
+
 
 	for node in need_scaling:
 		node.scale = _tc.pixel_scale * Vector2(1,1)
@@ -374,9 +383,9 @@ func _ready() -> void:
 	square = PlayerSquare.new(_tc, tiles, player_sq_node, square_start_pos, square_start_dir)
 	triangle = PlayerTriangle.new(_tc, tiles, player_tri_node, triangle_start_pos, triangle_start_dir)
 	square.link(triangle)
-	audio._test_music()
 	square.update_graphics()
 	triangle.update_graphics()
+	
 
 
 # # # # MOVE LOGIC # # # #
@@ -446,7 +455,9 @@ func _physics_process(delta: float) -> void:
 
 func check_win():
 	if square.pos == square_goal_pos and triangle.pos == triangle_goal_pos:
-		print("WIN!")
+		Globals.level_int_manual_update()
+		audio._test_music()
+		Globals.next_level()
 	pass
 
 func _player_moved(player : Player, drag_dir : Utils.Dirs):
