@@ -112,7 +112,7 @@ func play_blip():
 	var temporary_player = AudioStreamPlayer.new()
 	add_child(temporary_player)
 	temporary_player.stream = preload("res://assets/audio/blip.wav")
-	temporary_player.volume_db = -40
+	temporary_player.volume_db = -30
 	
 	temporary_player.play()
 	

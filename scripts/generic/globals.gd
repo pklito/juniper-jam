@@ -21,12 +21,16 @@ var MOVE_RULE = MoveRules.FREE_MOVEMENT
 var curr_level = 0
 const LEVELS = [
 	"res://scenes/levels/title_screen.tscn",
+	"res://scenes/levels/level_0.tscn",
 	"res://scenes/levels/level_1.tscn",
 	"res://scenes/levels/level_2.tscn",
 	"res://scenes/levels/level_3_1.tscn",
 	"res://scenes/levels/level_drop.tscn",
 	"res://scenes/levels/level_4_2.tscn",
-	"res://scenes/levels/level_last.tscn"
+	"res://scenes/levels/level_last.tscn",
+	"res://scenes/levels/hard/level_drop.tscn",
+	"res://scenes/levels/hard/level_4_2.tscn",
+	"res://scenes/levels/hard/level_last.tscn"
 
 ]
 
@@ -35,6 +39,8 @@ func current_level_path() -> String:
 
 func next_level():
 	curr_level += 1
+	if curr_level >= LEVELS.size():
+		curr_level = 0
 	get_tree().change_scene_to_file(LEVELS[curr_level])
 
 func level_int_manual_update():

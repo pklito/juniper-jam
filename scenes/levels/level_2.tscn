@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/peripheral/updater.gd" id="3_l37oo"]
 [ext_resource type="Texture2D" uid="uid://cwf3fvk4xj12p" path="res://assets/backgrounds/background_clouds.png" id="5_qpwj6"]
 [ext_resource type="Texture2D" uid="uid://cn0otd6hw8tbh" path="res://assets/backgrounds/background_fade_hills.png" id="6_ibugp"]
+[ext_resource type="FontFile" uid="uid://eo23eygiatd3" path="res://assets/pixelsport.ttf" id="7_ibugp"]
 
 [node name="level" type="Node2D" unique_id=2085040009]
 
@@ -60,3 +61,31 @@ texture_filter = 2
 position = Vector2(1432.5, 1035.5)
 scale = Vector2(1.8964844, 1.8964844)
 texture = ExtResource("6_ibugp")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="." unique_id=873583235]
+offset_left = 1.0000005
+offset_top = 0.9999995
+offset_right = 178.0
+offset_bottom = 64.0
+scale = Vector2(1.4, 1.4)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("7_ibugp")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[color=#ddffee]Level 3/6[/color]"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="RichTextLabel2" unique_id=2088210757]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 39.0
+offset_right = 124.285706
+offset_bottom = 88.48453
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("7_ibugp")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[outline_color=#222][color=#aabbaa]Check your corners[/color]"

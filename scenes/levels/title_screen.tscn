@@ -69,6 +69,7 @@ offset_top = 582.0
 offset_right = 756.70105
 offset_bottom = 663.787
 scale = Vector2(1.455, 1.455)
+mouse_filter = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_fonts/normal_font = ExtResource("6_jiqe5")

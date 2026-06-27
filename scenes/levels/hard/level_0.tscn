@@ -1,0 +1,70 @@
+[gd_scene format=4 uid="uid://bkvdustqfii80"]
+
+[ext_resource type="TileSet" uid="uid://b74258bt24i7j" path="res://assets/tilesets/world_18.tres" id="1_pk4wq"]
+[ext_resource type="PackedScene" uid="uid://62yfwwiwcwao" path="res://scenes/game.tscn" id="2_oxg51"]
+[ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/peripheral/updater.gd" id="3_gwkda"]
+[ext_resource type="TileSet" uid="uid://hert11wmnp0r" path="res://assets/tilesets/bg.tres" id="4_fh5su"]
+[ext_resource type="FontFile" uid="uid://eo23eygiatd3" path="res://assets/pixelsport.ttf" id="5_k1f7w"]
+
+[node name="level" type="Node2D" unique_id=2085040009]
+texture_filter = 1
+
+[node name="cosmetics" type="TileMapLayer" parent="." unique_id=1005286185]
+self_modulate = Color(0.66218436, 0.5407247, 0.6722941, 1)
+scale = Vector2(4.266667, 4.266667)
+tile_map_data = PackedByteArray("AAAPAAEABAAKAAMAAFA=")
+tile_set = ExtResource("1_pk4wq")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=805806671]
+scale = Vector2(4.266667, 4.266667)
+tile_map_data = PackedByteArray("AAD//wUABAANAAIAAAD//wYABAANAAMAAAD//wcABAANAAMAAAD//wgABAACAAYAAAAAAAUABAANAAIAAAAAAAYABAANAAMAAAAAAAcABQACAAIAAAAAAAgABAACAAYAAAABAAUABAACAAEAAAABAAYABAACAAYAAAABAAcABQACAAIAAAABAAgABAACAAYAAAACAAUABAACAAEAAAACAAYABAACAAYAAAACAAcABAAEAAUAAAACAAgABAACAAYAAAADAAUABAACAAEAAAADAAYABAAEAAUAAAADAAcABAAEAAUAAAADAAgABAACAAYAAAAEAAUABAACAAEAAAAEAAYABAACAAYAAAAEAAcABAAEAAUAAAAEAAgABAAEAAUAAAAFAAUABAACAAEAAAAFAAYABAACAAYAACAFAAcABAAEAAUAAAAFAAgABAACAAYAAHAGAAUABAACAAEAAAAGAAYABAACAAYAACAGAAcABAAEAAUAAAAHAAYABAACAAYAAAAHAAcABAACAAYAAAAIAAcABAACAAYAAAAJAAcABAAEAAUAAAAKAAcABAAEAAUAAAALAAcABAAEAAUAAAAMAAcABAAEAAUAAAAGAAgABAAEAAUAAAAHAAUABAACAAEAAAAHAAgABAACAAYAAAANAAcABAACAAYAAAAOAAEACAAAAAMAAAAOAAIACAADAAcAAAAOAAMACAADAAcAAAAOAAQABAABAAMAAAAOAAUABAABAAMAAAAOAAYABAAFAAEAAAAOAAcABAACAAYAAAAPAP//CAADAAYAAAAPAAAACAADAAcAAAAPAAEACAABAAMAAAAPAAIACAAHAAcAAAAPAAMACAAEAAQAAAAPAAQABAACAAMAAAAPAAUABAACAAYAACAPAAYABAACAAYAACAHAAQABQAKAAIAAAAIAAgABAACAAYAAAAJAAgABAACAAYAAAAKAAgABAACAAYAAAALAAgABAACAAYAAAAMAAgABAACAAYAAAANAAgABAACAAYAAAAOAAgABAACAAYAAAAPAAgABAACAAYAAAAPAAcABAACAAYAAAAQAAcABAACAAYAAAAQAAgABAACAAYAAAAJAAYABAAEAAEAAAAKAAYABAACAAMAAAALAAYABAACAAMAAAAMAAYABAACAAMAAAANAAYABAACAAMAAAAJAAUABAADAAEAAAAIAAUABAACAAEAAAAIAAYABAACAAYAAAANAAMABwAJAAYAAGA=")
+tile_set = ExtResource("1_pk4wq")
+
+[node name="Game" parent="." unique_id=1530119459 node_paths=PackedStringArray("tiles", "need_scaling") instance=ExtResource("2_oxg51")]
+move_rule = 0
+square_start_pos = Vector2i(4, 4)
+triangle_start_pos = Vector2i(11, 5)
+target_tiles_wide = 15
+square_goal_pos = Vector2i(5, 4)
+triangle_goal_pos = Vector2i(10, 5)
+tiles = NodePath("../TileMapLayer")
+need_scaling = [NodePath("../cosmetics")]
+tile_size = 18
+
+[node name="updater" type="Node2D" parent="." unique_id=1571433443 node_paths=PackedStringArray("game")]
+script = ExtResource("3_gwkda")
+game = NodePath("../Game")
+
+[node name="background" type="TileMapLayer" parent="." unique_id=1085033515]
+z_index = -10
+position = Vector2(0, 100)
+tile_map_data = PackedByteArray("AAAAAAAAAgACAAEAAAABAAAAAgADAAEAAAACAAAAAgACAAEAAAACAAEAAgABAAMAAAABAAEAAgABAAMAAAAAAAEAAgABAAMAAAACAP//AgAAAAAAAAABAP//AgAAAAAAAAAAAP//AgAAAAAAAAA=")
+tile_set = ExtResource("4_fh5su")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="." unique_id=487724915]
+offset_left = 1.0000005
+offset_top = 0.9999995
+offset_right = 178.0
+offset_bottom = 64.0
+scale = Vector2(1.4, 1.4)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("5_k1f7w")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[color=#ddffee]Level 1/6[/color]"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="RichTextLabel2" unique_id=1812043503]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 39.0
+offset_right = 100.281784
+offset_bottom = 88.48453
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("5_k1f7w")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[outline_color=#222][color=#aabbaa]Pit stop[/color]"

@@ -21,11 +21,11 @@ tile_set = ExtResource("1_lydwu")
 
 [node name="Game" parent="." unique_id=1530119459 node_paths=PackedStringArray("tiles") instance=ExtResource("2_hj5q1")]
 move_rule = 0
-square_start_pos = Vector2i(5, 3)
+square_start_pos = Vector2i(7, 3)
 triangle_start_pos = Vector2i(11, 6)
 target_tiles_wide = 16
-square_goal_pos = Vector2i(-10, 3)
-triangle_goal_pos = Vector2i(-10, 7)
+square_goal_pos = Vector2i(4, 3)
+triangle_goal_pos = Vector2i(5, 3)
 tiles = NodePath("../TileMapLayer")
 tile_size = 18
 

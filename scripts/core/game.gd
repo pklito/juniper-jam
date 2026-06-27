@@ -54,6 +54,7 @@ func undo_move():
 	audio.prev_verse()
 	try_drop_and_audio()
 	# AUDIO
+	audio.play_note(12, audio.INSTRUMENTS.b, -20)
 
 func try_drop_and_audio():
 	if triangle.drop_if_floating() >= 0:
@@ -408,7 +409,7 @@ func _ready() -> void:
 	triangle.update_graphics()
 
 	try_drop_and_audio()
-	undo_stack.push_front([square.pos, square.ground_dir, triangle.pos, triangle.ground_dir])
+	# undo_stack.push_front([square.pos, square.ground_dir, triangle.pos, triangle.ground_dir])
 
 var skip_held : float = 0
 var reset_held : float = 0

@@ -1,0 +1,68 @@
+[gd_scene format=4 uid="uid://cquectjm7qllm"]
+
+[ext_resource type="TileSet" uid="uid://b74258bt24i7j" path="res://assets/tilesets/world_18.tres" id="1_25epk"]
+[ext_resource type="PackedScene" uid="uid://62yfwwiwcwao" path="res://scenes/game.tscn" id="2_34rcf"]
+[ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/peripheral/updater.gd" id="3_k3e2n"]
+[ext_resource type="TileSet" uid="uid://hert11wmnp0r" path="res://assets/tilesets/bg.tres" id="4_682yh"]
+[ext_resource type="FontFile" uid="uid://eo23eygiatd3" path="res://assets/pixelsport.ttf" id="5_m4btt"]
+
+[node name="level" type="Node2D" unique_id=2085040009]
+texture_filter = 1
+
+[node name="cosmetics" type="TileMapLayer" parent="." unique_id=1005286185]
+self_modulate = Color(0.66218436, 0.5407247, 0.6722941, 1)
+scale = Vector2(4, 4)
+tile_map_data = PackedByteArray("AAAIAAMAAgAJAAcAAAAFAAcAAgAKAAgAAAA=")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=805806671]
+scale = Vector2(4, 4)
+tile_map_data = PackedByteArray("AAAAAAgACQABAAQAAAABAAgACQABAAQAAAACAAgACQABAAQAAAADAAgACQABAAQAAAAEAAgACQABAAQAAAAFAAgACQABAAYAAAADAAcACQABAAYAAAACAAcACQABAAQAAAABAAcACQABAAQAAAAHAAcACQABAAYAAAAHAAgACQAEAAcAAAAGAAgACQAEAAcAAAAIAAgACQABAAcAAAAJAAgACQABAAcAAAAKAAgACQABAAQAAAALAAgACQABAAQAAAALAAcACQABAAMAAAAKAAcACQABAAMAAAAJAAcACQABAAMAAAAIAAcACQABAAMAAAAMAAgACQAEAAcAAAANAAgACQABAAQAAAAOAAgACQABAAQAAAANAAcACQABAAYAAAAMAAcACQABAAYAAAAPAAgACQABAAQAAAAPAAcACQABAAcAAAAOAAcACQABAAQAAAAOAAYACQAAAAcAAAAPAAYACQABAAQAAAAPAAUACQABAAQAAAAOAAUACQAAAAcAAAAOAAQACQABAAQAAAANAAQACQAAAAgAAAAPAAQACQABAAQAAAAOAAMACQABAAQAAAANAAMACQAAAAQAAAAOAAIACQABAAQAAAAPAAIACQAEAAcAAAANAAIACQAAAAQAAAAPAAMACQAEAAcAAAAPAAEACQAEAAcAAAAOAAEACQABAAQAAAANAAEACQABAAQAAAAOAAAACQAEAAcAAAAPAAAACQABAAQAAAANAAAACQABAAQAAAAMAAAACQABAAQAAAALAAAACQABAAgAAAAKAAAACQABAAgAAAAJAAAACQABAAgAAAAIAAAACQABAAgAAAAHAAAACQABAAgAAAAGAAAACQABAAgAAAAFAAAACQABAAgAAAAEAAAACQABAAQAAAADAAAACQABAAQAAAACAAAACQAEAAcAAAABAAAACQABAAQAAAAAAAAACQABAAQAAAAAAAEACQABAAQAAAABAAEACQABAAQAAAABAAIACQABAAQAAAAAAAIACQABAAQAAAAAAAMACQABAAQAAAAAAAQACQABAAQAAAABAAQACQAEAAcAAAAAAAUACQABAAQAAAABAAUACQABAAQAAAAAAAYACQABAAQAAAABAAYACQABAAQAAAAAAAcACQABAAQAAAACAAYACQACAAcAAAAEAAEACQAAAAgAAGADAAEACQABAAQAAAACAAEACQABAAQAAAABAAMACQABAAQAAAAJAAQABwADAAAAAAAIAAQABwACAAAAAAAHAAQABwACAAIAAAAGAAQABwACAAAAAAAHAAUABwAAAAMAAAAEAAcACQACAAYAAAAGAAcACQAAAAYAAAACAAUACQACAAcAAAACAAQACQACAAcAAAACAAMACQACAAcAAAACAAIACQABAAQAAAADAAIACQACAAgAAAAHAAMABwAAAAEAAAAFAAQABwABAAAAAAAMAAEACQACAAgAAFA=")
+tile_set = ExtResource("1_25epk")
+
+[node name="Game" parent="." unique_id=1530119459 node_paths=PackedStringArray("tiles") instance=ExtResource("2_34rcf")]
+move_rule = 0
+square_start_pos = Vector2i(5, 3)
+triangle_start_pos = Vector2i(11, 6)
+target_tiles_wide = 16
+square_goal_pos = Vector2i(8, 3)
+triangle_goal_pos = Vector2i(6, 6)
+tiles = NodePath("../TileMapLayer")
+tile_size = 18
+
+[node name="updater" type="Node2D" parent="." unique_id=1571433443 node_paths=PackedStringArray("game")]
+script = ExtResource("3_k3e2n")
+game = NodePath("../Game")
+
+[node name="background" type="TileMapLayer" parent="." unique_id=1085033515]
+z_index = -10
+position = Vector2(0, 100)
+tile_map_data = PackedByteArray("AAAAAAAAAgACAAEAAAABAAAAAgADAAEAAAACAAAAAgACAAEAAAACAAEAAgABAAMAAAABAAEAAgABAAMAAAAAAAEAAgABAAMAAAACAP//AgAAAAAAAAABAP//AgAAAAAAAAAAAP//AgAAAAAAAAA=")
+tile_set = ExtResource("4_682yh")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="." unique_id=229788076]
+offset_left = 1.0000005
+offset_top = 0.9999995
+offset_right = 178.0
+offset_bottom = 64.0
+scale = Vector2(1.4, 1.4)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("5_m4btt")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[color=#aaffaa]Level 6[color=#aa9966]+[/color]"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="RichTextLabel2" unique_id=290109975]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 39.0
+offset_right = 100.281784
+offset_bottom = 88.48453
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("5_m4btt")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[outline_color=#222][color=#aabbaa]Island[/color]"

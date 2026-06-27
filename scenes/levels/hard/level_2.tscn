@@ -1,0 +1,91 @@
+[gd_scene format=4 uid="uid://mc20yluxpmd0"]
+
+[ext_resource type="TileSet" uid="uid://bxraeyfwyfb56" path="res://assets/tilesets/world.tres" id="1_wfgw6"]
+[ext_resource type="TileSet" uid="uid://cdhxw33mexips" path="res://assets/tilesets/big_set.tres" id="2_ildbu"]
+[ext_resource type="PackedScene" uid="uid://62yfwwiwcwao" path="res://scenes/game.tscn" id="3_27cpy"]
+[ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/peripheral/updater.gd" id="4_1564k"]
+[ext_resource type="Texture2D" uid="uid://cwf3fvk4xj12p" path="res://assets/backgrounds/background_clouds.png" id="5_5fwbh"]
+[ext_resource type="Texture2D" uid="uid://cn0otd6hw8tbh" path="res://assets/backgrounds/background_fade_hills.png" id="6_tmogb"]
+[ext_resource type="FontFile" uid="uid://eo23eygiatd3" path="res://assets/pixelsport.ttf" id="7_qr2vr"]
+
+[node name="level" type="Node2D" unique_id=2085040009]
+
+[node name="cosmetics" type="TileMapLayer" parent="." unique_id=1005286185]
+self_modulate = Color(0.66218436, 0.5407247, 0.6722941, 1)
+scale = Vector2(0.4090909, 0.4090909)
+tile_set = ExtResource("1_wfgw6")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=805806671]
+scale = Vector2(0.4090909, 0.4090909)
+tile_map_data = PackedByteArray("AAACAAQAAAAFAA4AAAADAAQAAAAFAA4AAAAEAAQAAAAFAA4AAAAFAAQAAAAFAA4AAAABAAQAAAAGAA4AAAAGAAQAAAAHAA4AAAAGAAUAAAAAAAsAAAAGAAYAAAAAAAsAAAAGAAcAAAAAAAsAAAAFAAcAAAAAAAsAAAAEAAcAAAAAAAsAAAADAAcAAAAAAAsAAAACAAcAAAAAAAsAAAABAAcAAAADAA4AAAABAAYAAAADAA4AAAABAAUAAAADAA4AAAACAAUAAAAAAAsAAAADAAUAAAAAAAsAAAAEAAUAAAAAAAsAAAAFAAUAAAAAAAsAAAAFAAYAAAAAAAsAAAAEAAYAAAAAAAsAAAADAAYAAAAAAAsAAAACAAYAAAAAAAsAAAAAAAQAAAAFABEAAAAAAAUAAAADABEAAAAAAAYAAAADABEAAAAAAAcAAAADABEAAAAAAAgAAAADAAsAAAABAAgAAAAAAAsAAAACAAgAAAAAAAsAAAADAAgAAAAAAAsAAAAEAAgAAAAAAAsAAAAFAAgAAAAAAAsAAAAGAAgAAAAAAAsAAAAHAAUAAAAFAA4AAAAHAAYAAAAAAAsAAAAHAAcAAAAAAAsAAAAHAAgAAAAAAAsAAAAHAAkAAAAAAAsAAAAIAAYAAAAFABEAAAAIAAcAAAADABEAAAAIAAgAAAADABEAAAAIAAkAAAADABEAAAAIAAoAAAADABEAAAALAAUAAAAAAAsAAAALAAYAAAAAAAsAAAALAAcAAAAAAAsAAAALAAgAAAAAAAsAAAALAAkAAAAAAAsAAAALAAoAAAAAAAsAAAAMAAUAAAAPAA8AAAAMAAYAAAAAAAsAAAAMAAcAAAAAAAsAAAAMAAgAAAAAAAsAAAAMAAkAAAAAAAsAAAAMAAoAAAAAAAsAAAANAAYAAAAAAAsAAAANAAcAAAAAAAsAAAANAAgAAAAAAAsAAAANAAkAAAAAAAsAAAANAAoAAAAAAAsAAAAOAAYAAAAPAA8AAAAOAAcAAAAAAAsAAAAOAAgAAAAAAAsAAAAOAAkAAAAAAAsAAAAOAAoAAAAAAAsAAAAPAAYAAAAPAA8AAAAPAAcAAAAAAAsAAAAPAAgAAAAAAAsAAAAPAAkAAAAAAAsAAAAPAAoAAAAAAAsAAAAQAAYAAAAPAA8AAAAQAAcAAAAAAAsAAAAQAAgAAAAAAAsAAAAQAAkAAAAAAAsAAAAQAAoAAAAAAAsAAAARAAYAAAAPAAoAAAARAAcAAAAAAAsAAAARAAgAAAAAAAsAAAARAAkAAAAAAAsAAAARAAoAAAAAAAsAAAASAAYAAAAFABEAAAASAAcAAAAAAAsAAAASAAgAAAAAAAsAAAASAAkAAAAAAAsAAAASAAoAAAAAAAsAAAATAAYAAAAFABEAAAATAAcAAAADABEAAAATAAgAAAADABEAAAATAAkAAAADABEAAAATAAoAAAAAAAsAAAAUAAYAAAAFABEAAAAUAAcAAAADABEAAAAUAAgAAAADABEAAAAUAAkAAAADABEAAAAUAAoAAAADABEAAAANAAUAAAAAAAsAAAAVAAYAAAAFABEAAAAVAAcAAAADABEAAAAVAAgAAAADABEAAAAVAAkAAAADABEAAAAVAAoAAAADABEAAAAGAAkAAAAAAAsAAAAHAAoAAAAAAAsAAAAFAAkAAAAAAAsAAAAEAAkAAAAAAAsAAAADAAkAAAAAAAsAAAACAAkAAAAAAAsAAAAEAAoAAAAAAAsAAAAFAAoAAAAAAAsAAAAGAAoAAAAAAAsAAAADAAoAAAAAAAsAAAACAAoAAAAAAAsAAAABAAoAAAAAAAsAAAAAAAoAAAAAAAsAAAAAAAkAAAAAAAsAAAABAAkAAAAAAAsAAAAAAAsAAAAAAAsAAAABAAsAAAAAAAsAAAACAAsAAAAAAAsAAAADAAsAAAAAAAsAAAAEAAsAAAAAAAsAAAAFAAsAAAAAAAsAAAAGAAsAAAAAAAsAAAAHAAsAAAAAAAsAAAAHAAwAAAAAAAsAAAAGAAwAAAAAAAsAAAAFAAwAAAAAAAsAAAAEAAwAAAAAAAsAAAADAAwAAAAAAAsAAAACAAwAAAAAAAsAAAABAAwAAAAAAAsAAAAAAAwAAAAAAAsAAAAIAAwAAAAAAAsAAAAIAAsAAAAAAAsAAAAJAAwAAAAAAAsAAAAJAAsAAAAAAAsAAAAKAAoAAAAAAAsAAAAKAAsAAAAAAAsAAAAKAAwAAAAAAAsAAAALAAsAAAAAAAsAAAALAAwAAAAAAAsAAAAMAAwAAAAAAAsAAAANAAwAAAAAAAsAAAAOAAsAAAAAAAsAAAANAAsAAAAAAAsAAAAMAAsAAAAAAAsAAAAOAAwAAAAAAAsAAAAPAAsAAAAAAAsAAAAPAAwAAAAAAAsAAAAPAA0AAAAAAAsAAAAQAAwAAAAAAAsAAAARAAwAAAAAAAsAAAASAAwAAAAAAAsAAAATAAwAAAAAAAsAAAAUAAwAAAAAAAsAAAAVAAwAAAAAAAsAAAARAAsAAAAAAAsAAAAQAAsAAAAAAAsAAAASAAsAAAAAAAsAAAATAAsAAAAAAAsAAAAUAAsAAAAAAAsAAAAVAAsAAAAAAAsAAAAJAAYAAAAFABEAAAAJAAcAAAADABEAAAAJAAgAAAADABEAAAAJAAkAAAADABEAAAAJAAoAAAADABEAAAAKAAcAAAADABEAAAAKAAYAAAAFABEAAAAKAAgAAAADABEAAAAKAAkAAAADABEAAAAIAAUAAAARAA4AAAAIAAQAAAAKAAMAAAAIAAMAAAAKAAMAAAAIAAIAAAAMAAMAAAA=")
+tile_set = ExtResource("2_ildbu")
+
+[node name="Game" parent="." unique_id=1530119459 node_paths=PackedStringArray("tiles", "need_scaling") instance=ExtResource("3_27cpy")]
+move_rule = 0
+square_start_pos = Vector2i(3, 3)
+triangle_start_pos = Vector2i(17, 5)
+target_tiles_wide = 22
+square_goal_pos = Vector2i(2, 3)
+triangle_goal_pos = Vector2i(13, 4)
+tiles = NodePath("../TileMapLayer")
+need_scaling = [NodePath("../cosmetics"), NodePath("../TileMapLayer")]
+
+[node name="updater" type="Node2D" parent="." unique_id=1571433443 node_paths=PackedStringArray("game")]
+script = ExtResource("4_1564k")
+game = NodePath("../Game")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1906178935]
+z_index = -10
+texture_filter = 2
+position = Vector2(466, 74.000015)
+scale = Vector2(1.8964844, 1.8964844)
+texture = ExtResource("5_5fwbh")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=2014392337]
+z_index = -10
+texture_filter = 2
+position = Vector2(466, 1035)
+scale = Vector2(1.8964844, 1.8964844)
+texture = ExtResource("6_tmogb")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=178172596]
+z_index = -10
+texture_filter = 2
+position = Vector2(1432.5, 74.500015)
+scale = Vector2(1.8964844, 1.8964844)
+texture = ExtResource("5_5fwbh")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=985113193]
+z_index = -10
+texture_filter = 2
+position = Vector2(1432.5, 1035.5)
+scale = Vector2(1.8964844, 1.8964844)
+texture = ExtResource("6_tmogb")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="." unique_id=873583235]
+offset_left = 1.0000005
+offset_top = 0.9999995
+offset_right = 178.0
+offset_bottom = 64.0
+scale = Vector2(1.4, 1.4)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("7_qr2vr")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[color=#ddffee]Level 3/6[/color]"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="RichTextLabel2" unique_id=2088210757]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 39.0
+offset_right = 124.285706
+offset_bottom = 88.48453
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("7_qr2vr")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[outline_color=#222][color=#aabbaa]Check your corners[/color]"

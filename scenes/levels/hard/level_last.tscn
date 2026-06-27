@@ -1,0 +1,54 @@
+[gd_scene format=4 uid="uid://bus77u40jvl7q"]
+
+[ext_resource type="TileSet" uid="uid://b74258bt24i7j" path="res://assets/tilesets/world_18.tres" id="1_bbqu3"]
+[ext_resource type="PackedScene" uid="uid://62yfwwiwcwao" path="res://scenes/game.tscn" id="2_nrnnt"]
+[ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/peripheral/updater.gd" id="3_kj8vb"]
+[ext_resource type="TileSet" uid="uid://hert11wmnp0r" path="res://assets/tilesets/bg.tres" id="4_umguq"]
+[ext_resource type="FontFile" uid="uid://eo23eygiatd3" path="res://assets/pixelsport.ttf" id="5_22m12"]
+
+[node name="level" type="Node2D" unique_id=2085040009]
+texture_filter = 1
+
+[node name="cosmetics" type="TileMapLayer" parent="." unique_id=1005286185]
+self_modulate = Color(0.66218436, 0.5407247, 0.6722941, 1)
+scale = Vector2(4, 4)
+tile_map_data = PackedByteArray("AAAIAAMAAgAJAAcAAAAFAAcAAgAKAAgAAAA=")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=805806671]
+scale = Vector2(4, 4)
+tile_map_data = PackedByteArray("AAAAAAgABwAGAAEAAAABAAgABwAGAAEAAAACAAgABwAGAAEAAAADAAgABwAGAAEAAAAEAAgABwAHAAQAAAAFAAgABwAHAAQAAAABAAcABwADAAIAAAAHAAgABwAGAAEAAAAGAAgABwAHAAQAAAAIAAgABwAGAAEAAAAJAAgABwAHAAQAAAAKAAgABwAHAAQAAAALAAgABwAGAAEAAAAMAAgABwAGAAEAAAANAAgABwAGAAMAAAAOAAgABwAGAAMAAAAPAAgABwAGAAMAAAAPAAcABwAGAAEAAAAOAAcABwAGAAEAAAAOAAYACAAAAAQAAAAPAAYACAAEAAcAAAAPAAUACAABAAQAAAAOAAUACAAAAAQAAAAOAAQACAAAAAQAAAAPAAQACAABAAQAAAAOAAMACAAAAAQAAAAOAAIACAAAAAQAAAAPAAIACAAHAAcAAAAPAAMACAAHAAcAAAAPAAEACAABAAQAAAAOAAEACAABAAQAAAANAAEACAABAAUAAAAOAAAACAAEAAcAAAAPAAAACAABAAQAAAANAAAACAABAAQAAAAMAAAACAABAAQAAAALAAAACAAHAAcAAAAKAAAACAABAAQAAAAJAAAACAABAAQAAAAIAAAACAABAAQAAAAHAAAACAABAAQAAAAGAAAACAAEAAcAAAAFAAAACAABAAQAAAAEAAAACAABAAQAAAADAAAACAABAAQAAAACAAAACAAEAAcAAAABAAAACAABAAQAAAAAAAAACAABAAQAAAAAAAEACAABAAQAAAABAAEACAABAAQAAAABAAIACAACAAQAAAAAAAIACAABAAQAAAAAAAMACAABAAQAAAAAAAQACAABAAcAAAABAAQACAACAAQAAAAAAAUABwACAAEAAAABAAUABwADAAEAAAAAAAYABwACAAIAAAABAAYABwADAAIAAAAAAAcABwACAAIAAAAMAAEACAABAAUAAAALAAEACAABAAUAAAAKAAEACAABAAUAAAAJAAEACAABAAUAAAAIAAEACAABAAUAAAAHAAEACAABAAUAAAAGAAEACAABAAUAAAAFAAEACAABAAUAAAAEAAEACAABAAUAAAADAAEACAABAAUAAAACAAEACAABAAUAAAABAAMACAACAAQAAAAFAAQACgAEAAMAAAAGAAQACgAEAAMAAAAHAAQACgAEAAMAAAAIAAQACgAEAAMAAAAJAAQACgAEAAMAAAAKAAQACgAEAAMAAAALAAQACgAEAAMAAAAMAAQACgAFAAYAAAAMAAUACgAFAAUAAAALAAUACgAEAAUAAAAKAAUACgAEAAUAAAAJAAUACgAEAAUAAAAIAAUACgAEAAUAAAAHAAUACgAEAAUAAAAGAAUACgAEAAUAAAAEAAUACgADAAgAAAAEAAQACgADAAMAAAAFAAUACgAEAAUAAAACAAcABwAFAAYAAAACAAYABwAGAAUAAAANAAcABwAFAAEAAAAGAAcABwALAAYAAAAFAAcABwAJAAUAAAALAAMABwAHAAUAAAAKAAMABwAIAAUAAAD//wUABwACAAEAAAD//wYABwACAAIAAAD//wcABwACAAIAAAA=")
+tile_set = ExtResource("1_bbqu3")
+
+[node name="Game" parent="." unique_id=1530119459 node_paths=PackedStringArray("tiles") instance=ExtResource("2_nrnnt")]
+move_rule = 0
+square_start_pos = Vector2i(5, 3)
+triangle_start_pos = Vector2i(11, 6)
+target_tiles_wide = 16
+square_goal_pos = Vector2i(-10, 3)
+triangle_goal_pos = Vector2i(-10, 7)
+tiles = NodePath("../TileMapLayer")
+tile_size = 18
+
+[node name="updater" type="Node2D" parent="." unique_id=1571433443 node_paths=PackedStringArray("game")]
+script = ExtResource("3_kj8vb")
+game = NodePath("../Game")
+
+[node name="background" type="TileMapLayer" parent="." unique_id=1085033515]
+modulate = Color(0.11795717, 0.35192, 0.4396073, 1)
+z_index = -10
+position = Vector2(0, 100)
+tile_map_data = PackedByteArray("AAAAAAAAAgAAAAAAAAAAAAEAAgACAAEAAAABAAAAAgAAAAAAAAABAAEAAgADAAEAAAACAAAAAgAAAAAAAAACAAEAAgACAAEAAAAAAAIAAgABAAMAAAABAAIAAgABAAMAAAACAAIAAgABAAMAAAACAP//AgABAAEAAAABAP//AgABAAEAAAAAAP//AgABAAEAAAA=")
+tile_set = ExtResource("4_umguq")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="." unique_id=931782136]
+offset_left = 388.99997
+offset_top = 306.0
+offset_right = 709.96216
+offset_bottom = 382.97595
+scale = Vector2(1.455, 1.455)
+theme_override_fonts/normal_font = ExtResource("5_22m12")
+theme_override_font_sizes/normal_font_size = 64
+theme_override_font_sizes/bold_font_size = 16
+bbcode_enabled = true
+text = "[rainbow]YOU WIN (again)[/rainbow]"
+tab_size = 10

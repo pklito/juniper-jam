@@ -52,3 +52,31 @@ theme_override_fonts/normal_font = ExtResource("5_7nd5b")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[outline_color=#222][color=#afbbff][pulse]Hold R to restart the level[/pulse][/color]"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="." unique_id=1168378502]
+offset_left = 1.0000005
+offset_top = 0.9999995
+offset_right = 178.0
+offset_bottom = 64.0
+scale = Vector2(1.4, 1.4)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("5_7nd5b")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[color=#ddffee]Level 5/6[/color]"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="RichTextLabel3" unique_id=1374833778]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 39.0
+offset_right = 100.281784
+offset_bottom = 88.48453
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("5_7nd5b")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[outline_color=#222][color=#aabbaa]Drop off[/color]"
