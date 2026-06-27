@@ -386,6 +386,9 @@ func _ready() -> void:
 	goal_sq_node.scale = 9 * Vector2(1,1) / target_tiles_wide
 	goal_tri_node.scale = 9 * Vector2(1,1) / target_tiles_wide
 	
+	goal_sq_node.rotation_degrees = 90 * square_goal_dir
+	goal_tri_node.rotation_degrees = 90 * triangle_goal_dir
+	
 	goal_sq_node.position = _tc.pos_to_pixel(square_goal_pos)
 	goal_tri_node.position = _tc.pos_to_pixel(triangle_goal_pos)
 
