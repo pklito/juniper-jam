@@ -405,6 +405,8 @@ func _ready() -> void:
 	triangle.update_graphics()
 
 	undo_stack.push_front([square.pos, square.ground_dir, triangle.pos, triangle.ground_dir])
+	triangle.drop_if_floating()
+	undo_stack.push_front([square.pos, square.ground_dir, triangle.pos, triangle.ground_dir])
 
 var skip_held : float = 0
 var reset_held : float = 0

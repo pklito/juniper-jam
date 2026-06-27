@@ -26,18 +26,19 @@ func _on_button_pressed():
 	game.player_tri_node.scale = 9 * 2 *  Vector2(1,1) / _tc.target_width
 	game.goal_sq_node.scale = 9 * Vector2(1,1) / game.target_tiles_wide
 	game.goal_tri_node.scale = 9 * Vector2(1,1) / game.target_tiles_wide
-	game.goal_sq_node.rotation = 90 * game.square_goal_dir
-	game.goal_tri_node.rotation = 90 * game.triangle_goal_dir
+	game.goal_sq_node.rotation_degrees = 90 * game.square_goal_dir
+	game.goal_tri_node.rotation_degrees = 90 * game.triangle_goal_dir
 	
 	
 	game.goal_sq_node.position = _tc.pos_to_pixel(game.square_goal_pos)
 	game.goal_tri_node.position = _tc.pos_to_pixel(game.triangle_goal_pos)
-	#var array := []
-	#for a in tiles.get_used_cells():
-		#var res = tiles.get_cell_atlas_coords(a)
-		#array.append(res)
-	#
-	#print(array)
+	var array := []
+	for a in tiles.get_used_cells():
+		var res = tiles.get_cell_atlas_coords(a)
+		var atlas = tiles.get_cell_source_id(a)
+		array.append([res, atlas])
+	
+	print(array)
 	
 	
 	for node in game.need_scaling:

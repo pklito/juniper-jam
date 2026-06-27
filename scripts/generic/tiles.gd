@@ -23,6 +23,9 @@ func get_tile_type(layer : TileMapLayer, pos: Vector2i) -> Utils.TileType:
 	var tile_id = layer.get_cell_atlas_coords(pos)
 	# print("Tile ID at position ", pos, ": ", tile_id)
 	# layer.draw_string(ThemeDB.fallback_font, 128*pos,"%d" % tile_id.x)
+
+	var triangles := [[13, 1, 4], [14, 1, 4], [13, 2, 4], [13, 3, 4], [14, 2, 4], [14, 3, 4], [6, 6, 4], [7, 6, 4], [5, 7, 4], [10, 2, 5], [9, 3, 5], [9, 4, 5], [11, 2, 7], [9, 6, 7], [10, 6, 7], [11, 6, 7], [12, 6, 7], [10, 2, 7]]
+
 	var slanted_floors := [[0, 9], [0, 15], [1, 15], [2, 12], [4, 15], [6, 10], [7, 10], [8, 13], [9, 13], [10, 10], [10, 16], [11, 16], [12, 13], [14, 16], [14, 8], [15, 8], [16, 11], [17, 11]]
 	for fl in slanted_floors:
 		if tile_id.x == fl[0] and tile_id.y == fl[1]:
@@ -32,6 +35,9 @@ func get_tile_type(layer : TileMapLayer, pos: Vector2i) -> Utils.TileType:
 	elif layer.get_cell_source_id(pos) == 0 and ( range(8,16).has(tile_id.y) or (tile_id.x >= 12 and tile_id.y == 7)):
 		return Utils.TileType.GROUND
 	elif layer.get_cell_source_id(pos) != 0:
+		for t in triangles:
+			if layer.get_cell_source_id(pos) == t[2] and tile_id.x == t[0] and tile_id.y == t[1]:
+				return Utils.TileType.OBSTACLE
 		return Utils.TileType.GROUND
 	else:
 		return Utils.TileType.OBSTACLE
