@@ -9,12 +9,19 @@ class_name Game
 @export var tempo : float = 0.25
 
 @export_group("Level config")
+@export_subgroup("start")
 @export var square_start_pos : Vector2i = Vector2i(6,4)
 @export var square_start_dir : Utils.Dirs = Utils.Dirs.DOWN
 
 @export var triangle_start_pos : Vector2i = Vector2i(7,4)
 @export var triangle_start_dir : Utils.Dirs = Utils.Dirs.DOWN
 @export var target_tiles_wide: int = 18
+@export_subgroup("goal")
+@export var square_goal_pos: Vector2i = Vector2i(7,4)
+@export var square_goal_dir : Utils.Dirs = Utils.Dirs.DOWN
+
+@export var triangle_goal_pos : Vector2i = Vector2i(7,4)
+@export var triangle_goal_dir : Utils.Dirs = Utils.Dirs.DOWN
 
 @export_group("Connections")
 @export var tiles: TileMapLayer
@@ -435,7 +442,12 @@ func _physics_process(delta: float) -> void:
 	
 	if square.move_count == 0 and triangle.move_count == 0:
 		audio.next_verse()
+		check_win()
 
+func check_win():
+	if square.pos == square_goal_pos and triangle.pos == triangle_goal_pos:
+		print("WIN!")
+	pass
 
 func _player_moved(player : Player, drag_dir : Utils.Dirs):
 	reset_inputs()

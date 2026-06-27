@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://ds5ji7ik64ggv" path="res://assets/audio/blip.wav" id="8_0tnpc"]
 [ext_resource type="Script" uid="uid://bw0bjmadlnh81" path="res://scripts/peripheral/audio.gd" id="8_vtaks"]
 [ext_resource type="AudioStream" uid="uid://b5rtctiwnv8c6" path="res://assets/audio/mb_e6_1.wav" id="9_vtaks"]
+[ext_resource type="Script" uid="uid://da6u4yyxk5mye" path="res://scenes/goal_effect.gd" id="12_dinhu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w10v"]
 size = Vector2(160, 160)
@@ -92,6 +93,26 @@ stream = ExtResource("8_0tnpc")
 
 [node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="Audio" unique_id=1216982752]
 stream = ExtResource("9_vtaks")
+
+[node name="goal_square" type="Marker2D" parent="." unique_id=858692617 node_paths=PackedStringArray("goal", "effect", "player")]
+script = ExtResource("12_dinhu")
+goal = NodePath("goal")
+effect = NodePath("effect")
+player = NodePath("../pl_square")
+
+[node name="goal" type="Sprite2D" parent="goal_square" unique_id=1824432243]
+
+[node name="effect" type="Sprite2D" parent="goal_square" unique_id=138836115]
+
+[node name="goal_triangle" type="Marker2D" parent="." unique_id=1927540182 node_paths=PackedStringArray("goal", "effect", "player")]
+script = ExtResource("12_dinhu")
+goal = NodePath("goal")
+effect = NodePath("effect")
+player = NodePath("../pl_triangle")
+
+[node name="goal" type="Sprite2D" parent="goal_triangle" unique_id=1723000830]
+
+[node name="effect" type="Sprite2D" parent="goal_triangle" unique_id=721069415]
 
 [connection signal="dragged_successfully" from="SquareDrag" to="." method="_square_dragged"]
 [connection signal="dragged_successfully" from="TriangleDrag" to="." method="_triangle_dragged"]

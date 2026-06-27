@@ -23,6 +23,8 @@ move_rule = 0
 square_start_pos = Vector2i(5, 3)
 triangle_start_pos = Vector2i(11, 6)
 target_tiles_wide = 16
+square_goal_pos = Vector2i(5, 3)
+triangle_goal_pos = Vector2i(13, 6)
 tiles = NodePath("../TileMapLayer")
 tile_size = 18
 
