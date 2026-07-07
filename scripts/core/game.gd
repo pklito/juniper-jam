@@ -548,8 +548,8 @@ func next_level():
 	Globals.next_level()
 
 func win():
-	audio._win()
-	fanfare_timer.start(1.5)
+	# audio._win()
+	fanfare_timer.start(0.4)
 
 	
 func check_win():
