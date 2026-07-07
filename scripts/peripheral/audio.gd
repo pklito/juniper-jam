@@ -91,6 +91,25 @@ var INSTRUMENTS = {
 func _test_music():
 	play_major_chord()
 
+var tween : Tween = null
+func _win():
+	if tween != null:
+		tween.kill()
+	tween = get_tree().create_tween()
+	tween.tween_interval(0.15)
+
+	tween.tween_callback(play_note.bind(1, INSTRUMENTS.b,-20))
+	tween.tween_interval(0.2)
+	tween.tween_callback(play_note.bind(3, INSTRUMENTS.b,-20))
+	tween.tween_interval(0.2)
+	tween.tween_callback(play_note.bind(5, INSTRUMENTS.b,-20))
+	tween.tween_callback(play_note.bind(8, INSTRUMENTS.b,-20))
+	tween.tween_interval(0.2)
+	tween.tween_callback(play_note.bind(6, INSTRUMENTS.b,-20))
+	tween.tween_callback(play_note.bind(10, INSTRUMENTS.b,-20))
+
+	tween.play()
+
 func play_note(semitones: float, notes : Array[Instrument] ,volume_db: float = 0.0) -> void:
 	var temporary_player = AudioStreamPlayer.new()
 	add_child(temporary_player)

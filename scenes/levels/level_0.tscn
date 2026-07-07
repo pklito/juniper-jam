@@ -5,6 +5,69 @@
 [ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/peripheral/updater.gd" id="3_3mnpy"]
 [ext_resource type="TileSet" uid="uid://hert11wmnp0r" path="res://assets/tilesets/bg.tres" id="4_6ayib"]
 [ext_resource type="FontFile" uid="uid://eo23eygiatd3" path="res://assets/pixelsport.ttf" id="5_65guy"]
+[ext_resource type="Texture2D" uid="uid://nek7krspbba7" path="res://assets/tiles/UI.png" id="6_jjvta"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3mnpy"]
+texture = ExtResource("6_jjvta")
+texture_region_size = Vector2i(18, 18)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/terrains_peering_bit/right_side = 0
+1:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0/terrains_peering_bit/left_side = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/terrains_peering_bit/bottom_side = 0
+2:0/0/terrains_peering_bit/left_side = 0
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+0:1/0/terrains_peering_bit/right_side = 0
+0:1/0/terrains_peering_bit/bottom_side = 0
+0:1/0/terrains_peering_bit/top_side = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/terrains_peering_bit/right_side = 0
+1:1/0/terrains_peering_bit/bottom_side = 0
+1:1/0/terrains_peering_bit/left_side = 0
+1:1/0/terrains_peering_bit/top_side = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/terrains_peering_bit/bottom_side = 0
+2:1/0/terrains_peering_bit/left_side = 0
+2:1/0/terrains_peering_bit/top_side = 0
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 0
+0:2/0/terrains_peering_bit/right_side = 0
+0:2/0/terrains_peering_bit/top_side = 0
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 0
+1:2/0/terrains_peering_bit/right_side = 0
+1:2/0/terrains_peering_bit/left_side = 0
+1:2/0/terrains_peering_bit/top_side = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 0
+2:2/0/terrains_peering_bit/left_side = 0
+2:2/0/terrains_peering_bit/top_side = 0
+
+[sub_resource type="TileSet" id="TileSet_8w10v"]
+tile_size = Vector2i(18, 18)
+terrain_set_0/mode = 2
+terrain_set_0/terrain_0/name = "ui"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_3mnpy")
 
 [node name="level" type="Node2D" unique_id=2085040009]
 texture_filter = 1
@@ -68,3 +131,9 @@ theme_override_fonts/normal_font = ExtResource("5_65guy")
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "[outline_color=#222][color=#aabbaa]Pit stop[/color]"
+
+[node name="ui" type="TileMapLayer" parent="." unique_id=261599518]
+visible = false
+scale = Vector2(4, 4)
+tile_map_data = PackedByteArray("AAADAAAAAAACAAIAAAADAP//AAACAAEAAAADAP7/AAACAAAAAAACAAAAAAABAAIAAAACAP//AAABAAEAAAACAP7/AAABAAAAAAABAAAAAAABAAIAAAABAP//AAABAAEAAAABAP7/AAABAAAAAAAAAAAAAAABAAIAAAAAAP//AAABAAEAAAAAAP7/AAABAAAAAAD//wAAAAABAAIAAAD/////AAABAAEAAAD///7/AAABAAAAAAD+/wAAAAABAAIAAAD+////AAABAAEAAAD+//7/AAABAAAAAAD9/wAAAAABAAIAAAD9////AAABAAEAAAD9//7/AAABAAAAAAD8/wAAAAAAAAIAAAD8////AAAAAAEAAAD8//7/AAAAAAAAAAA=")
+tile_set = SubResource("TileSet_8w10v")

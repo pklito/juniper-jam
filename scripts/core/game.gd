@@ -48,6 +48,9 @@ class_name Game
 @export var canvas_width: int = 1152
 @export var canvas_height: int = 648
 
+
+@onready var fanfare_timer : Timer
+
 # (0,11), (12, 15)
 var undo_stack = []
 
@@ -421,6 +424,10 @@ func _ready() -> void:
 	goal_sq_node.position = _tc.pos_to_pixel(square_goal_pos)
 	goal_tri_node.position = _tc.pos_to_pixel(triangle_goal_pos)
 
+	fanfare_timer = Timer.new()
+	add_child(fanfare_timer)
+	fanfare_timer.timeout.connect(next_level)
+
 	if Globals.curr_level != 0:
 		audio._test_music()
 		
@@ -536,9 +543,15 @@ func _physics_process(delta: float) -> void:
 		audio.next_verse()
 		check_win()
 
-func win():
+func next_level():
 	Globals.level_int_manual_update()
 	Globals.next_level()
+
+func win():
+	audio._win()
+	fanfare_timer.start(1.5)
+
+	
 func check_win():
 	if square.pos == square_goal_pos and triangle.pos == triangle_goal_pos:
 		win()
