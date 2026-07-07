@@ -1,0 +1,106 @@
+[gd_scene format=4 uid="uid://casc2mu3kie5y"]
+
+[ext_resource type="TileSet" uid="uid://cdhxw33mexips" path="res://assets/tilesets/big_set.tres" id="1_7v6u3"]
+[ext_resource type="TileSet" uid="uid://b74258bt24i7j" path="res://assets/tilesets/world_18.tres" id="2_vimgw"]
+[ext_resource type="PackedScene" uid="uid://62yfwwiwcwao" path="res://scenes/game.tscn" id="3_klm78"]
+[ext_resource type="Script" uid="uid://c3hb72ky5ucac" path="res://scripts/peripheral/updater.gd" id="4_hh04y"]
+[ext_resource type="Texture2D" uid="uid://cwf3fvk4xj12p" path="res://assets/backgrounds/background_clouds.png" id="5_lnec4"]
+[ext_resource type="Texture2D" uid="uid://cn0otd6hw8tbh" path="res://assets/backgrounds/background_fade_hills.png" id="6_bpkiy"]
+[ext_resource type="FontFile" uid="uid://eo23eygiatd3" path="res://assets/pixelsport.ttf" id="7_hpqgk"]
+
+[node name="level" type="Node2D" unique_id=2085040009]
+texture_filter = 1
+
+[node name="cosmetics" type="TileMapLayer" parent="." unique_id=1005286185]
+self_modulate = Color(0.66218436, 0.5407247, 0.6722941, 1)
+scale = Vector2(4.571429, 4.571429)
+tile_set = ExtResource("1_7v6u3")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=805806671]
+scale = Vector2(4.571429, 4.571429)
+tile_map_data = PackedByteArray("AAD0/wIABwAJAAYAAAASAAUABAADAAcAAAASAAQABAADAAYAAAASAAMABAADAAYAAAASAAIABAABAAcAAQARAAUABAACAAcAAAARAAQABAACAAYAAAARAAMABAACAAYAAAARAAIABAACAAcAAQAQAAUABAACAAcAAAAQAAQABAACAAYAAAAQAAMABAACAAYAAAAQAAIABAACAAcAAQAPAAUABAACAAcAAAAPAAQABAACAAYAAAAPAAMABAACAAYAAAAPAAIABAAEAAEAAAAOAAUABAACAAcAAAAOAAQABAACAAYAAAAOAAMABAACAAYAAAAOAAIABAACAAYAAAANAAUABAACAAcAAAANAAQABAACAAYAAAANAAMABAACAAYAAAAMAAUABAACAAcAAAAMAAQABAACAAYAAAAMAAMABAACAAYAAAAMAAIABAACAAYAAAALAAQABAACAAYAAAALAAMABAACAAYAAAALAAIABAACAAYAAAAKAAQABAACAAYAAAAKAAMABAACAAYAAAAKAAIABAACAAYAAAAJAAQABAACAAYAAAAJAAMABAACAAYAAAAJAAIABAACAAYAAAALAAUABAACAAcAAAAKAAUABAACAAcAAAANAAEABAACAAYAAAANAAIABAACAAYAAAAOAAEABAACAAYAAAAPAAEABAADAAYAAAAQAAAABAADAAcAAAAPAAAABAAEAAAAAAAQAP//BAADAAYAAAAPAP//BAACAAYAAAANAP//BAACAAYAAAAMAP//BAACAAYAAAAMAP7/BAAFAAEAAAANAP7/BAACAAYAAAAIAP7/BAACAAYAAAAHAP3/BAABAAMAAAAKAP7/BAAEAAEAAAAJAP7/BAACAAYAAAAOAPz/BAACAAYAAAAOAPv/BAACAAYAAAANAPz/BAACAAYAAAANAPv/BAACAAYAAAAQAPz/BAADAAYAAAAPAPz/BAACAAYAAAAQAPv/BAADAAYAAAAPAPv/BAACAAYAAAAQAPr/BAADAAEAAAAPAPr/BAACAAEAAAAOAPr/BAAEAAEAAAANAPr/BAAFAAEAAAAOAPn/BAADAAEAAAANAPn/BAABAAEAAAAQAP3/BAADAAYAAAAPAP3/BAACAAYAAAAOAP3/BAACAAYAAAANAP3/BAACAAYAAAAQAP7/BAADAAYAAAAPAP7/BAACAAYAAAAOAP7/BAACAAYAAAALAP7/BAACAAMAAAAJAP3/BAACAAMAAAAIAP3/BAACAAMAAAAOAP//BAACAAYAAAALAP//BAACAAYAAAAKAP//BAACAAYAAAAJAP//BAACAAYAAAAIAP//BAACAAYAAAAHAP//BAACAAYAAAAKAP3/BAADAAMAAAAHAP7/BAAFAAEAAAAGAP7/BAACAAMAAAAFAP3/BAADAAMAAAAEAP3/BAACAAMAAAADAP3/BAACAAMAAAACAP3/BAACAAMAAAD///3/BAABAAMAAAAAAP3/BAACAAMAAAABAP3/BAACAAMAAAACAP//BAAFAAAAAAACAP7/BAACAAYAAAABAP//BAACAAcAAAABAP7/BAACAAYAAAAAAP//BAACAAcAAAAAAP7/BAACAAYAAAADAP//BAACAAYAAAADAP7/BAACAAYAAAAEAP//BAACAAYAAAAEAP7/BAACAAYAAAAFAP//BAACAAYAAAAFAP7/BAAEAAEAAAD/////BAABAAcAAAD///7/BAABAAYAAAAGAP//BAACAAYAAAAMAP3/BAABAAYAAAAMAPz/BAABAAYAAAAMAPv/BAABAAYAAAAMAPr/BAABAAEAAAAOAAAABAACAAYAAAANAAAABAACAAYAAAAGAAUABAACAAcAAAAGAAQABAACAAYAAAAGAAMABAACAAYAAAAGAAIABAACAAYAAAAFAAUABAACAAcAAAAFAAQABAACAAYAAAAFAAMABAACAAYAAAAFAAIABAACAAYAAAAEAAUABAACAAcAAAAEAAQABAACAAYAAAAEAAMABAACAAYAAAAEAAIABAACAAYAAAADAAUABAACAAcAAAADAAQABAACAAYAAAADAAMABAACAAYAAAADAAIABAACAAYAAAACAAUABAACAAcAAAACAAQABAACAAYAAAACAAMABAACAAYAAAACAAIABAAFAAEAAAABAAUABAACAAcAAAABAAQABAACAAYAAAABAAMABAACAAYAAAABAAIABAACAAcAAQAAAAUABAABAAcAAAAAAAQABAABAAYAAAAAAAMABAABAAYAAAAAAAIABAADAAcAAQAFAAEABAACAAYAAAAFAAAABAACAAYAAAAEAAEABAACAAYAAAAEAAAABAACAAYAAAADAAEABAACAAYAAAADAAAABAACAAYAAAACAAEABAABAAYAAAACAAAABAABAAYAAAAJAAUABAACAAcAAAAIAAUABAACAAcAAAAIAAQABAACAAYAAAAHAAUABAACAAcAAAAHAAQABAACAAYAAAAMAAEABAACAAYAAAAMAAAABAACAAYAAAALAAEABAACAAYAAAALAAAABAACAAYAAAAKAAEABAACAAYAAAAKAAAABAACAAYAAAAJAAEABAACAAYAAAAJAAAABAACAAYAAAAIAAMABAACAAYAAAAIAAIABAACAAYAAAAIAAEABAACAAYAAAAIAAAABAACAAYAAAAHAAMABAACAAYAAAAHAAIABAACAAYAAAAHAAEABAACAAYAAAAHAAAABAACAAYAAAAGAAEABAACAAYAAAAGAAAABAACAAYAAAAPAAoABQADAAMAAAAPAAkABQADAAIAAAAPAAgABQADAAIAAAAPAAcABQADAAEAAAAOAAoABQACAAMAAAAOAAkABQACAAIAAAAOAAgABQACAAIAAAAOAAcABQACAAEAAAANAAoABQACAAMAAAANAAkABQACAAIAAAANAAgABQACAAIAAAANAAcABQACAAEAAAAMAAoABQACAAMAAAAMAAkABQACAAIAAAAMAAgABQACAAIAAAAMAAcABQACAAEAAAALAAoABQABAAMAAAALAAkABQABAAIAAAALAAgABQABAAIAAAALAAcABQABAAEAAAA=")
+tile_set = ExtResource("2_vimgw")
+
+[node name="Game" parent="." unique_id=1530119459 node_paths=PackedStringArray("tiles", "need_scaling") instance=ExtResource("3_klm78")]
+move_rule = 0
+square_start_pos = Vector2i(2, 3)
+triangle_start_pos = Vector2i(9, 4)
+target_tiles_wide = 14
+square_goal_pos = Vector2i(12, 3)
+triangle_goal_pos = Vector2i(1, 3)
+tiles = NodePath("../TileMapLayer")
+need_scaling = [NodePath("../cosmetics"), NodePath("../TileMapLayer")]
+tile_size = 18
+
+[node name="updater" type="Node2D" parent="." unique_id=1571433443 node_paths=PackedStringArray("game")]
+script = ExtResource("4_hh04y")
+game = NodePath("../Game")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2008760954]
+z_index = -10
+texture_filter = 2
+position = Vector2(374.5, -753.49994)
+scale = Vector2(1.8964844, 1.8964844)
+texture = ExtResource("5_lnec4")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1472299911]
+z_index = -10
+texture_filter = 2
+position = Vector2(374.5, 207.50006)
+scale = Vector2(1.8964844, 1.8964844)
+texture = ExtResource("6_bpkiy")
+
+[node name="Sprite2D3" type="Sprite2D" parent="." unique_id=1687672906]
+z_index = -10
+texture_filter = 2
+position = Vector2(1341, -752.99994)
+scale = Vector2(1.8964844, 1.8964844)
+texture = ExtResource("5_lnec4")
+
+[node name="Sprite2D4" type="Sprite2D" parent="." unique_id=1224245341]
+z_index = -10
+texture_filter = 2
+position = Vector2(1341, 208.00006)
+scale = Vector2(1.8964844, 1.8964844)
+texture = ExtResource("6_bpkiy")
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="." unique_id=1682867024]
+offset_left = 426.0
+offset_top = 537.0
+offset_right = 782.70105
+offset_bottom = 618.787
+scale = Vector2(1.455, 1.455)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("7_hpqgk")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[outline_color=#222][color=#afbbff][pulse]Press Q to undo[/pulse][/color]"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="." unique_id=403976049]
+offset_left = 1.0000005
+offset_top = 0.9999995
+offset_right = 178.0
+offset_bottom = 64.0
+scale = Vector2(1.4, 1.4)
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("7_hpqgk")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[color=#ddffee]Level 4/6[/color]"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="RichTextLabel3" unique_id=1917054534]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 39.0
+offset_right = 124.99999
+offset_bottom = 88.48453
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("7_hpqgk")
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[outline_color=#222][color=#aabbaa]Passing  through![/color]"
