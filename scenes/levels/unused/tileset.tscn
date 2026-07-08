@@ -104,6 +104,3 @@ theme_override_fonts/normal_font = ExtResource("7_hpqgk")
 theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "[outline_color=#222][color=#aabbaa]Passing  through![/color]"
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=735541036]
-position = Vector2(874, 1036)
