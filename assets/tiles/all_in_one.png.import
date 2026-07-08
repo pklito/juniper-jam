@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdh7tbcmcndnq"
-path="res://.godot/imported/pixel_platformer.png-e5c865fa2377f96ee09f8b8d47ffcb79.ctex"
+uid="uid://co8ymunirtml4"
+path="res://.godot/imported/all_in_one.png-02532c35b8a6aa4b0c698606be999ab3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/pixel_platformer.png"
-dest_files=["res://.godot/imported/pixel_platformer.png-e5c865fa2377f96ee09f8b8d47ffcb79.ctex"]
+source_file="res://assets/tiles/all_in_one.png"
+dest_files=["res://.godot/imported/all_in_one.png-02532c35b8a6aa4b0c698606be999ab3.ctex"]
 
 [params]
 
