@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://6awxtoi4qaup" path="res://scripts/core/move_handler.gd" id="2_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://b4sb6vvj7kuog" path="res://assets/players/red_body_square.png" id="3_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://c1t00sitjliu1" path="res://assets/players/face_h.png" id="4_gee14"]
+[ext_resource type="Shader" uid="uid://djyu3dxkm8iit" path="res://assets/players/player.gdshader" id="5_5newe"]
 [ext_resource type="Script" uid="uid://bngll6a7v7v64" path="res://scripts/peripheral/triangle.gd" id="5_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://c2fbggl765ov2" path="res://assets/players/face_b.png" id="6_ssvqc"]
 [ext_resource type="Texture2D" uid="uid://cgfmp0mbm6ndg" path="res://assets/players/triangle_body.png" id="6_u5sy4"]
@@ -21,11 +22,27 @@
 [ext_resource type="Texture2D" uid="uid://dyb5fmyl2k3x1" path="res://assets/door_triangle_128.png" id="14_trtic"]
 [ext_resource type="Texture2D" uid="uid://dykmddooq3342" path="res://assets/Speaker_Icon.svg" id="16_ca42v"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jrxxl"]
+shader = ExtResource("5_5newe")
+shader_parameter/_mouse_pos = Vector2(0, 0)
+shader_parameter/_hover_color = Color(1, 1, 1, 1)
+shader_parameter/_hover_speed = 7.754000368315
+shader_parameter/_hover_strength = 0.2250000106875
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vkgwr"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8w10v"]
 size = Vector2(160, 160)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bbk5w"]
 radius = 82.53787
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_37s47"]
+shader = ExtResource("5_5newe")
+shader_parameter/_mouse_pos = Vector2(0, 0)
+shader_parameter/_hover_color = Color(1, 1, 1, 1)
+shader_parameter/_hover_speed = 4.0
+shader_parameter/_hover_strength = 0.5
 
 [node name="Game" type="Node2D" unique_id=1530119459 node_paths=PackedStringArray("player_sq_node", "player_tri_node", "goal_sq_node", "goal_tri_node", "face_sq_main", "face_sq_alt", "face_sq_goal", "face_tri_main", "face_tri_alt", "face_tri_goal", "audio")]
 script = ExtResource("1_u5sy4")
@@ -70,10 +87,13 @@ scale = Vector2(0.4, 0.4)
 [node name="base" type="Sprite2D" parent="pl_square/pivot" unique_id=1977819106]
 z_index = -1
 texture_filter = 1
+material = SubResource("ShaderMaterial_jrxxl")
+instance_shader_parameters/_hovered = true
 scale = Vector2(2, 2)
 texture = ExtResource("3_u5sy4")
 
 [node name="bummed" type="Sprite2D" parent="pl_square/pivot/base" unique_id=351056123]
+material = SubResource("ShaderMaterial_vkgwr")
 position = Vector2(0, 11.249999)
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("6_ssvqc")
@@ -115,6 +135,8 @@ scale = Vector2(0.125, 0.125)
 [node name="player2" type="Sprite2D" parent="pl_triangle/pivot" unique_id=1567448684]
 z_index = -1
 texture_filter = 1
+material = SubResource("ShaderMaterial_37s47")
+instance_shader_parameters/_hovered = true
 scale = Vector2(2.05, 2.109)
 texture = ExtResource("6_u5sy4")
 
