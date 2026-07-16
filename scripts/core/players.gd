@@ -71,7 +71,9 @@ class Player:
 	
 	func _pos_open(test_pos: Vector2i) -> bool:
 		return tile_config.get_tile_type(tiles, test_pos) == Utils.TileType.NONE \
-		 and other_player.pos != test_pos
+		 and other_player.pos != test_pos \
+		 and clampi(test_pos.x, 0, tile_config.canvas_size.x - 1) == test_pos.x \
+		 and clampi(test_pos.y, 0, tile_config.canvas_size.y - 1) == test_pos.y
 
 	func _move_internal(move_vec: Vector2i) -> bool:
 		var wall_state := checkWallState(move_vec)
